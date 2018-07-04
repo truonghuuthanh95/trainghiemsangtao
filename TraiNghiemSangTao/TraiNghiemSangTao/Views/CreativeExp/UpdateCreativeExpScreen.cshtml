@@ -1,0 +1,423 @@
+﻿@model TraiNghiemSangTao.Models.DTO.CreativeExpOneViewModel
+@{
+    ViewBag.Title = "UpdateCreativeExpScreen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default" id="creativeExpForm">
+        <div class="panel-heading">
+            <h4>Trải nghiệm sáng tạo</h4>
+        </div><div class="panel-body">
+            <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
+            <form>
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label for="formControlsSelect" class="control-label">
+                        1.Nội dung đăng kí
+                        <span class="text-danger text-danger-default"><span class="glyphicon glyphicon-star"></span></span>
+                    </label><select placeholder="select" name="activityIdSelected" id="activityIdSelected" class="form-control">
+                        ]
+                        @{
+                            foreach (var item in Model.Programs)
+                            {
+                                if (item.Id == Model.RegistrationCreativeExp.ProgramId)
+                                {
+                                    <option value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+                            }
+                        }
+
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                2.Cấp trường tham gia <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <select name="schoolDegreeSlected" id="schoolDegreeSlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.SchoolDegrees)
+                                    {
+                                        if (item.Id == Model.RegistrationCreativeExp.SchoolDegreeId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div><div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                3.Quận <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <select name="districtSlected" id="districtSlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.District)
+                                    {
+                                        if (item.Id == Model.RegistrationCreativeExp.School.DistrictId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Type @item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Type @item.Name</option>
+                                        }
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                4.Trường <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <select name="schoolNameSelected" id="schoolNameSelected" class="form-control">
+                                @{
+                                    foreach (var item in Model.Schools)
+                                    {
+                                        if (item.Id == Model.RegistrationCreativeExp.SchoolId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                5.Khối lớp <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <select name="gradeSlected" id="gradeSlected" class="form-control">
+                                @{ foreach (var item in Model.Classes)
+                                    {
+                                        if (item.Id == Model.RegistrationCreativeExp.ClassId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="formControlsSelect" class="control-label">
+                                6.Tham gia vào buổi <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+
+                                    </span>
+                                </span>
+                            </label>
+                            <select placeholder="select" name="sectionADaySlected" id="sectionADaySlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.SessionADays)
+                                    {
+                                        if (item.Id == Model.RegistrationCreativeExp.DaySessionId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div><div class="col-sm-4">
+                        <div class="form-group has-feedback" id="errorDateGo">
+                            <label for="exampleInputEmail1" class="control-label">
+                                7.Ngày tham gia <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+
+                                    </span>
+                                </span>
+                            </label>
+                            <input type="text" class="form-control datepicker" id="dateGo">
+                            <span class="help-block" id="errorDateGoMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback" id="errorValidStudentQuantity">
+                            <label for="formBasicText" class="control-label">
+                                8.Số lượng hoc sinh tham gia <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="number" placeholder="Số lượng" name="studentQuantity" value="@Model.RegistrationCreativeExp.StudentQuantity" id="studentQuantity" class="form-control">
+                            <span class="text-warning" id="validStudentQuantity"> </span><span class="help-block" id="errorValidStudentQuantityMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group has-feedback" id="errorTeacherName">
+                            <label for="formBasicText" class="control-label">
+                                9.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                                <span class="text-danger text-danger-default"><span class="glyphicon glyphicon-star"></span></span>
+                            </label><input type="text" placeholder="Người phụ trách" name="teacherName" value="@Model.RegistrationCreativeExp.Creator" id="teacherName" class="form-control">
+                            <span class="help-block help-block-true" id="errorTeacherNameMessage"></span>
+                        </div>
+                    </div><div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                10.Chức vụ <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star">
+                                    </span>
+                                </span>
+                            </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
+    @{
+        foreach (var item in Model.Jobtitles)
+        {
+            if (item.Id == Model.RegistrationCreativeExp.JobTiteId)
+            {
+                <option value="@item.Id" selected>@item.Name</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+
+        }
+    }
+</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorEmail">
+                            <label for="formBasicText" class="control-label">
+                                11.Email <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="email" placeholder="Email" value="@Model.RegistrationCreativeExp.Email" name="emailEntered" id="emailEntered" class="form-control">
+                            <span class="help-block help-block-true" id="errorEmailMessage"></span>
+                        </div>
+                    </div><div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorPhoneNumber">
+                            <label for="formBasicText" class="control-label">
+                                12.Số điện thoại <span class="text-danger text-danger-default">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </span>
+                            </label>
+                            <input type="number" placeholder="Số điện thoại" name="phoneNumber" value="@Model.RegistrationCreativeExp.PhoneNumber" id="phoneNumber" class="form-control">
+                            <span class="help-block help-block-true" id="errorPhoneNumberMessage"></span>
+                        </div>
+                    </div>
+                </div><div class="form-group has-feedback" id="errorActivityTitle">
+                    <label for="formBasicText" class="control-label">
+                        13.Tên chủ đề đăng kí <span class="text-danger text-danger-default">
+                            <span class="glyphicon glyphicon-star"></span>
+                        </span>
+                    </label>
+                    <input type="text" placeholder="Tên chủ đề đăng kí" name="activityTitle" value="@Model.RegistrationCreativeExp.ActivitiTitle" id="activityTitle" class="form-control"><span class="help-block help-block-true" id="errorActivityTitleMessage"></span>
+                </div>
+            </form>
+        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">Đăng kí</button></div>
+    </div>
+    <span hidden class="loader" id="loader"></span>
+    <h3 class="text-center text-success checkIDBox" id="updateSuccess" hidden>CẬP NHẬT THÀNH CÔNG</h3>
+</div>
+<input type="hidden" value="@Model.RegistrationCreativeExp.Id" id="registrationCreativeId"/>
+
+<script>
+    $(document).ready(function () {
+        @*//console.log('@Model.RegistrationCreativeExp.DateRegisted.Value.Day.ToString().PadLeft(2, "0")' + '/@Model.RegistrationCreativeExp.DateRegisted.Value.Month.ToString().PadLeft(2, "0")' + '/@Model.RegistrationCreativeExp.DateRegisted.Value.Year');*@
+        $('#dateGo').datepicker({
+            format: 'dd-mm-yyyy',            
+            autoclose: true,           
+
+        }).on('changeDate', function (ev) {
+            var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
+                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+            })
+        });
+    $('#dateGo').val('@Model.RegistrationCreativeExp.DateRegisted.Value.Day' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Month' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Year')
+    })
+    $('#schoolDegreeSlected').change(function () {
+        $.get('/getSchoolBySchoolDegreeAndDistrict/' + $(this).val() + '/' + $('#districtSlected').val(), function (data, status) {
+
+            var schools = JSON.parse(data);
+
+            $('#schoolNameSelected').children().remove().end();
+            for (var i = 0; i < schools.length; i++) {
+
+                $('#schoolNameSelected').append('<option value=' + schools[i].Id + '>' + schools[i].Name + '</option>')
+            }
+        })
+        $.get('/getClassBySchoolDegree/' + $(this).val(), function (data, status) {
+
+            var classes = JSON.parse(data);
+
+            $('#gradeSlected').children().remove().end();
+            for (var i = 0; i < classes.length; i++) {
+
+                $('#gradeSlected').append('<option value=' + classes[i].Id + '>' + classes[i].Name + '</option>')
+            }
+        })
+    })
+    $('#districtSlected').change(function () {
+        $.get('/getSchoolBySchoolDegreeAndDistrict/' + $('#schoolDegreeSlected').val() + '/' + $(this).val(), function (data, status) {
+
+            var schools = JSON.parse(data);
+
+            $('#schoolNameSelected').children().remove().end();
+            for (var i = 0; i < schools.length; i++) {
+
+                $('#schoolNameSelected').append('<option value=' + schools[i].Id + '>' + schools[i].Name + '</option>')
+            }
+        })
+    })
+    $('#sectionADaySlected').change(function () {
+        if ($('#dateGo').val() != '') {
+            var dateGo = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + dateGo, function (data, status) {
+                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+            })
+        }
+    })
+    function submitCreativeExp() {
+        if ($('#dateGo').val() == '') {
+            $('#errorDateGo').addClass('has-error');
+            $('#errorDateGoMessage').text('Vui lòng nhập ngày tham gia');
+        }
+        else {
+            $('#errorDateGo').removeClass('has-error');
+            $('#errorDateGoMessage').text('');
+        }
+        //if ($('#studentQuantity').val() == '') {
+        //    $('#errorValidStudentQuantity').addClass('has-error');
+        //    $('#errorValidStudentQuantityMessage').text('Vui lòng nhập số lượng học sinh tham gia');
+        //}
+        //else {
+        //    $('#errorValidStudentQuantity').removeClass('has-error');
+        //    $('#errorValidStudentQuantityMessage').text('');
+        //}
+        //if ($('#studentQuantity').val() < 1) {
+        //    $('#errorValidStudentQuantity').addClass('has-error');
+        //    $('#errorValidStudentQuantityMessage').text('Số lượng học sinh tham gia không hợp lệ');
+        //}
+        //else {
+        //    $('#errorValidStudentQuantity').removeClass('has-error');
+        //    $('#errorValidStudentQuantityMessage').text('');
+        //}
+        if ($('#teacherName').val() == '') {
+            $('#errorTeacherName').addClass('has-error');
+            $('#errorTeacherNameMessage').text('Vui lòng nhập tên người phụ trách');
+        }
+        else {
+            $('#errorTeacherName').removeClass('has-error');
+            $('#errorTeacherNameMessage').text('');
+        }
+        if ($('#emailEntered').val() == '') {
+            $('#errorEmail').addClass('has-error');
+            $('#errorEmailMessage').text('Vui lòng nhập địa chỉ email');
+        }
+        else {
+            $('#errorEmail').removeClass('has-error');
+            $('#errorEmailMessage').text('');
+        }
+        if ($('#phoneNumber').val() == '') {
+            $('#errorPhoneNumber').addClass('has-error');
+            $('#errorPhoneNumberMessage').text('Vui lòng nhập địa chỉ email');
+        }
+        else {
+            $('#errorPhoneNumber').removeClass('has-error');
+            $('#errorPhoneNumberMessage').text('');
+        }
+
+        if ($('#activityTitle').val() == '') {
+            $('#errorActivityTitle').addClass('has-error');
+            $('#errorActivityTitleMessage').text('Vui lòng nhập tên chủ đề');
+        }
+        else {
+            $('#errorActivityTitle').removeClass('has-error');
+            $('#errorActivityTitleMessage').text('');
+        }
+
+        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {
+            var date = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
+                if (parseInt($('#studentQuantity').val()) > parseInt(data) || $('#studentQuantity').val() == '' || $('#studentQuantity').val() < 1) {
+                    $('#errorValidStudentQuantity').addClass('has-error');
+                    $('#errorValidStudentQuantityMessage').text('Số lượng hoc sinh tham gia không hợp lệ');
+                    $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
+                }
+                else {
+                    $('#errorValidStudentQuantity').removeClass('has-error');
+                    $('#loader').show();
+                    $('#submitCreativeExp').addClass('disable');
+                    $.post('/postCaphattrainghiemsangtao', {
+                        SchoolId: $('#schoolNameSelected').val(),
+                        StudentQuantity: $('#studentQuantity').val(),
+                        Creator: $('#teacherName').val(),
+                        JobTiteId: $('#jobTitleSelected').val(),
+                        ProgramId: $('#activityIdSelected').val(),
+                        DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                        SchoolDegreeId: $('#schoolDegreeSlected').val(),
+                        ClassId: $('#gradeSlected').val(),
+                        DaySessionId: $('#sectionADaySlected').val(),
+                        Email: $('#emailEntered').val(),
+                        PhoneNumber: $('#phoneNumber').val(),
+                        ActivitiTitle: $('#activityTitle').val(),
+                        id: $('#registrationCreativeId').val(),
+                        __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    }, function (data, status) {
+
+                        if (status == 'success') {
+                            $('#loader').hide();
+                            $('#creativeExpForm').hide();
+                            $('#updateSuccess').show();    
+                        }
+                    })
+                }
+            })
+        }
+    }
+
+
+</script>
