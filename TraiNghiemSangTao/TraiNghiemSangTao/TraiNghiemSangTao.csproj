@@ -203,6 +203,7 @@
     <Compile Include="Models\DAO\Ward.cs" />
     <Compile Include="Models\DTO\CreativeExpDTO.cs" />
     <Compile Include="Models\DTO\CreativeExpOneViewModel.cs" />
+    <Compile Include="Models\DTO\NoiDungKhacOneViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\ClassesRepository.cs" />
     <Compile Include="Repositories\Implements\DistrictRepository.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Repositories\Implements\SchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Implements\SchoolRepository.cs" />
     <Compile Include="Repositories\Implements\SessionADayRepository.cs" />
+    <Compile Include="Repositories\Implements\SubjectRepository.cs" />
     <Compile Include="Repositories\Interfaces\IClassesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDistrictRepository.cs" />
     <Compile Include="Repositories\Interfaces\IJobTitleRepository.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Repositories\Interfaces\ISchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISchoolRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISessionADayRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISubjectRepository.cs" />
     <Compile Include="Utils\RandomCodeRegisted.cs" />
     <Compile Include="Utils\SendMailService.cs" />
   </ItemGroup>
@@ -289,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

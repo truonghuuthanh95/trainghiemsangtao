@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using TraiNghiemSangTao.Models.DAO;
@@ -11,6 +12,7 @@ namespace TraiNghiemSangTao.Utils
     {
         public static bool SendMailToTeacher(RegistrationCreativeExp registrationCreativeExp)
         {
+            
             try
             {
                 //Configuring webMail class to send email  

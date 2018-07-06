@@ -59,7 +59,7 @@ namespace TraiNghiemSangTao.Controllers
         {
             
             RegistrationCreativeExp registrationCreativeExp =  registrationCreativeExpRepository.SaveRegistrationCreativeExp(creativeExpDTO);
-            Utils.SendMailService.SendMailToTeacher(registrationCreativeExp);
+            //Utils.SendMailService.SendMailToTeacher(registrationCreativeExp);
             return Json(registrationCreativeExp);
         }
         [Route("getSchoolBySchoolDegreeAndDistrict/{schoolDegreeId}/{districtId}")]
@@ -128,8 +128,8 @@ namespace TraiNghiemSangTao.Controllers
             }
             List<Program> programs = programRepository.GetPrograms();
 
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(registrationCreativeExp.School.DistrictId, registrationCreativeExp.SchoolDegreeId);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(registrationCreativeExp.SchoolDegreeId);
             List<District> districts = districtRepository.GetDistricts();
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();
@@ -149,6 +149,7 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult UpdateCreativeExpSuccessfull(CreativeExpDTO creativeExpDTO)
         {
+
             return View();
         }
     }

@@ -8,6 +8,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
 {
     public interface ISchoolRepository
     {
-        List<School> GetSchoolByDistrictAndSchoolDegree(int districtId, int schoolDegreeId);
+        List<School> GetSchoolByDistrictAndSchoolDegree(int? districtId, int? schoolDegreeId);
     }
 }

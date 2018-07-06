@@ -6,8 +6,8 @@ using TraiNghiemSangTao.Models.DAO;
 
 namespace TraiNghiemSangTao.Repositories.Interfaces
 {
-    public interface IClassesRepository
+    public interface ISubjectRepository
     {
-        List<Class> GetClassBySchoolDegree(int? id);
+        List<Subject> GetSubjects();
     }
 }

@@ -7,19 +7,19 @@ using TraiNghiemSangTao.Repositories.Interfaces;
 
 namespace TraiNghiemSangTao.Repositories.Implements
 {
-    public class ProvinceRepository : IProvinceRepository
+    public class SubjectRepository : ISubjectRepository
     {
         CreativeExpDB _db;
 
-        public ProvinceRepository(CreativeExpDB db)
+        public SubjectRepository(CreativeExpDB db)
         {
             _db = db;
         }
 
-        public List<Province> GetProvinces()
+        public List<Subject> GetSubjects()
         {
-            List<Province> provinces = _db.Provinces.Where(s => s.CountryId == 237).OrderBy(s => s.Name).ToList();
-            return provinces;
+            List<Subject> subjects = _db.Subjects.Where(s => s.IsActive == true).ToList();
+            return subjects;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
             _db = db;
         }
 
-        public List<School> GetSchoolByDistrictAndSchoolDegree(int districtId, int schoolDegreeId)
+        public List<School> GetSchoolByDistrictAndSchoolDegree(int? districtId, int? schoolDegreeId)
         {
             List<School> schools = null;
             if (schoolDegreeId == 4)
