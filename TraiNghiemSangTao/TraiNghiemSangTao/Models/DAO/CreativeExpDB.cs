@@ -8,7 +8,7 @@ namespace TraiNghiemSangTao.Models.DAO
     public partial class CreativeExpDB : DbContext
     {
         public CreativeExpDB()
-            : base("name=CreativeExpDB3")
+            : base("name=CreativeExpDB5")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -47,8 +47,12 @@ namespace TraiNghiemSangTao.Models.DAO
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Registration>()
-                .Property(e => e.Creator)
-                .IsFixedLength();
+                .Property(e => e.ViTriKienThuc)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Registration>()
+                .Property(e => e.TomTatNoiDungCT)
+                .IsUnicode(false);
 
             modelBuilder.Entity<SessionADay>()
                 .HasMany(e => e.RegistrationCreativeExps)

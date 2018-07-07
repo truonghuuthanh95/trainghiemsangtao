@@ -286,14 +286,7 @@
             }
         })
     })
-    $('#sectionADaySlected').change(function () {
-        if ($('#dateGo').val() != '') {
-            var dateGo = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + dateGo, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
-            })
-        }
-    })
+
     var selected = [];
     $('#subject input:checked').each(function () {
         selected.push($(this).attr('value'));
@@ -394,7 +387,7 @@
         }
         else {
             var fileExtention = $('#filekehoach').val().split('.').pop();
-            if (fileExtention != 'pdf') {               
+            if (fileExtention != 'pdf') {
                 $('#errorfilekehoach').addClass('has-error');
                 $('#errorfilekehoachMessage').text('File sai định dạng bắt buộc phải là file .pdf');
             }
@@ -402,14 +395,14 @@
                 $('#errorfilekehoach').removeClass('has-error');
                 $('#errorfilekehoachMessage').text('');
             }
-            
+
         }
         if ($('#filebaikiemtra').val() == '') {
             $('#errorFilebaikiemtra').addClass('has-error');
             $('#errorFilebaikiemtraMessage').text('Vui lòng chọn file');
         }
         else {
-            var fileExtention = $('#filekehoach').val().split('.').pop();
+            var fileExtention = $('#filebaikiemtra').val().split('.').pop();
             if (fileExtention != 'pdf') {
                 $('#errorFilebaikiemtra').addClass('has-error');
                 $('#errorFilebaikiemtraMessage').text('File sai định dạng bắt buộc phải là file .pdf');
@@ -418,14 +411,14 @@
                 $('#errorFilebaikiemtra').removeClass('has-error');
                 $('#errorFilebaikiemtraMessage').text('');
             }
-           
+
         }
         if ($('#filetailieuchohocsinh').val() == '') {
             $('#errorFiletailieuchohocsinh').addClass('has-error');
             $('#errorFiletailieuchohocsinhMessage').text('Vui lòng chọn file');
         }
         else {
-            var fileExtention = $('#filekehoach').val().split('.').pop();
+            var fileExtention = $('#filetailieuchohocsinh').val().split('.').pop();
             if (fileExtention != 'pdf') {
                 $('#errorFiletailieuchohocsinh').addClass('has-error');
                 $('#errorFiletailieuchohocsinhMessage').text('File sai định dạng bắt buộc phải là file .pdf');
@@ -434,32 +427,59 @@
                 $('#errorFiletailieuchohocsinh').removeClass('has-error');
                 $('#errorFiletailieuchohocsinhMessage').text('');
             }
-            
+
         }
-        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {           
+        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {
             $('#loader').show();
             $('#submitCreativeExp').addClass('disable');
-            $.post('/dangkitrainghiemsangtao', {
-                SchoolId: $('#schoolNameSelected').val(),
-                StudentQuantity: $('#studentQuantity').val(),
-                Creator: $('#teacherName').val(),
-                JobTiteId: $('#jobTitleSelected').val(),
-                ProgramId: $('#activityIdSelected').val(),
-                DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
-                SchoolDegreeId: $('#schoolDegreeSlected').val(),
-                ClassId: $('#gradeSlected').val(),
-                DaySessionId: $('#sectionADaySlected').val(),
-                Email: $('#emailEntered').val(),
-                PhoneNumber: $('#phoneNumber').val(),
-                ActivitiTitle: $('#activityTitle').val(),
-                __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
-            }, function (data, status) {
+            var formData = new FormData();
+            var filekehoach = $('#filekehoach')[0];
+            formData.append('filekehoach', filekehoach.files[0]);
+            var filebaikiemtra = $('#filebaikiemtra')[0];
+            formData.append('filebaikiemtra', filebaikiemtra.files[0]);
+            var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
+            formData.append('filetailieuchohocsinh', filetailieuchohocsinh.files[0]);
+            //formData.append('___RequestVerificationToken', $("input[name=__RequestVerificationToken]").val());
+            $.ajax({
+                url: '/uploadFileNoiDungKhac',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == '200') {
+                        $.post('/postNoiDungKhac', {
+                            SchoolId: $('#schoolNameSelected').val(),
+                            StudentQuantity: $('#studentQuantity').val(),
+                            Creator: $('#teacherName').val(),
+                            JobTitleId: $('#jobTitleSelected').val(),
+                            ProgramName: $('#activityTitle').val(),
+                            DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                            SchoolDegreeId: $('#schoolDegreeSlected').val(),
+                            ClassId: $('#gradeSlected').val(),
+                            ProvinceId: $('#province').val(),
+                            Email: $('#emailEntered').val(),
+                            PhoneNumber: $('#phoneNumber').val(),
+                            //PhuongAnChoHsThamGia: $('#PhuongAnChoHsThamGia').val(),
+                            ViTriKienThuc: $('#vitrikienthuc').val(),
+                            TomTatNoiDungCT: $('#tomtatnoidungthuchien').val(),
+                            SubjectSelected: selectedSubject.join(),
+                            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                        }, function (data, status) {
 
-                if (status == 'success') {
-                    window.location.replace('/dangkitrainghiemthanhcong/' + data.CodeRegisted);
+                            if (status == 'success') {
+                                window.location.replace('/dangkitrainghiemthanhcong/' + data.Id);
 
+                            }
+                        })
+                    }
+                },
+                error: function () {
+                    console.log('error');
                 }
-            })
+            });
+
+
         }
     }
 

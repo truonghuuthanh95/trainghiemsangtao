@@ -33,7 +33,7 @@ namespace TraiNghiemSangTao.App_Start
             container.RegisterType<ISchoolDegreeRepository, SchoolDegreeRepository>();           
             container.RegisterType<IProgramRepository, ProgramRepository>();
             container.RegisterType<ISubjectRepository, SubjectRepository>();
-           
+            container.RegisterType<IRegistrationRepository, RegistrationRepository>();
         }
     }
 }

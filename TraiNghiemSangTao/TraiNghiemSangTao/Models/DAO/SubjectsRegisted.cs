@@ -9,21 +9,13 @@ namespace TraiNghiemSangTao.Models.DAO
     [Table("SubjectsRegisted")]
     public partial class SubjectsRegisted
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SubjectsRegisted()
-        {
-            Registrations = new HashSet<Registration>();
-        }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public int? RegistrationId { get; set; }
 
         public int? SubjectId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Registration> Registrations { get; set; }
+        public virtual Registration Registration { get; set; }
 
         public virtual Subject Subject { get; set; }
     }

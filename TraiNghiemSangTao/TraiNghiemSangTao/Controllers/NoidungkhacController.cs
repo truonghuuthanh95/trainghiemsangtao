@@ -19,8 +19,9 @@ namespace TraiNghiemSangTao.Controllers
         IDistrictRepository districtRepository;
         ISchoolDegreeRepository schoolDegreeRepository;
         IClassesRepository classesRepository;
+        IRegistrationRepository registrationRepository;
 
-        public NoidungkhacController(ISchoolRepository schoolRepository, ISubjectRepository subjectRepository, IJobTitleRepository jobTitleRepository, IProvinceRepository provinceRepository, IDistrictRepository districtRepository, ISchoolDegreeRepository schoolDegreeRepository, IClassesRepository classesRepository)
+        public NoidungkhacController(ISchoolRepository schoolRepository, ISubjectRepository subjectRepository, IJobTitleRepository jobTitleRepository, IProvinceRepository provinceRepository, IDistrictRepository districtRepository, ISchoolDegreeRepository schoolDegreeRepository, IClassesRepository classesRepository, IRegistrationRepository registrationRepository)
         {
             this.schoolRepository = schoolRepository;
             this.subjectRepository = subjectRepository;
@@ -29,7 +30,9 @@ namespace TraiNghiemSangTao.Controllers
             this.districtRepository = districtRepository;
             this.schoolDegreeRepository = schoolDegreeRepository;
             this.classesRepository = classesRepository;
+            this.registrationRepository = registrationRepository;
         }
+
 
 
 
@@ -52,8 +55,10 @@ namespace TraiNghiemSangTao.Controllers
         }
         [Route("uploadFileNoiDungKhac")]
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public ActionResult UploadFile(HttpPostedFileBase filekehoach, HttpPostedFileBase filebaikiemtra, HttpPostedFileBase filetailieuchohocsinh)
         {
+
             try
             {
                 if (filekehoach.ContentLength > 0 && filebaikiemtra.ContentLength > 0 && filetailieuchohocsinh.ContentLength > 0)
@@ -74,6 +79,15 @@ namespace TraiNghiemSangTao.Controllers
             {
                 return Json("400");
             }
+        }
+
+        [HttpPost]
+        [Route("postNoiDungKhac")]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostNoiDungKhac(RegistrationDTO registrationDTO)
+        {
+            Registration registration = registrationRepository.SaveRegistration(registrationDTO);
+            return Json(registration);
         }
     }
 }
