@@ -8,7 +8,7 @@ namespace TraiNghiemSangTao.Models.DAO
     public partial class CreativeExpDB : DbContext
     {
         public CreativeExpDB()
-            : base("name=CreativeExpDB6")
+            : base("name=CreativeExpDB7")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;

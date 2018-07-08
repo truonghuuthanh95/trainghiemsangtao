@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TraiNghiemSangTao.Models.DAO.Registration>
+@{
+    ViewBag.Title = "NoiDungKhac";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center text-primary">DANH SÁCH NỘI DUNG KHÁC</h3>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tên trường</th>
+                        <th>Lớp</th>
+                        <th>Số lượng</th>
+                        <th>Ngày tham gia</th>
+                        <th>Tên người phụ trách</th>
+                        <th>Số điện thoại</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+        foreach (var item in Model)
+        {
+                    <tr>
+                        <td>@item.School.Name</td>
+                        <td>@item.ClassId</td>
+                        <td>@item.StudentQuantity</td>
+                        <td>@item.DateRegisted.Value.Day/@item.DateRegisted.Value.Month/@item.DateRegisted.Value.Year</td>
+                        <td>@item.Creator</td>
+                        <td>@item.PhoneNumber</td>
+                        <td><button class="btn btn-sm btn-success">CHI TIẾT</button></td>
+                    </tr>
+}
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

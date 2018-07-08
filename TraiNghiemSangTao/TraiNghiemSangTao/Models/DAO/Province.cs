@@ -13,6 +13,7 @@ namespace TraiNghiemSangTao.Models.DAO
         public Province()
         {
             Districts = new HashSet<District>();
+            Registrations = new HashSet<Registration>();
         }
 
         public int Id { get; set; }
@@ -44,5 +45,8 @@ namespace TraiNghiemSangTao.Models.DAO
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<District> Districts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registration> Registrations { get; set; }
     }
 }

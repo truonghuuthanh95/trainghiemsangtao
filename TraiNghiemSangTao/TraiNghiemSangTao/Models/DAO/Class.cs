@@ -13,6 +13,7 @@ namespace TraiNghiemSangTao.Models.DAO
         public Class()
         {
             RegistrationCreativeExps = new HashSet<RegistrationCreativeExp>();
+            Registrations = new HashSet<Registration>();
         }
 
         public int Id { get; set; }
@@ -29,5 +30,8 @@ namespace TraiNghiemSangTao.Models.DAO
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistrationCreativeExp> RegistrationCreativeExps { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Registration> Registrations { get; set; }
     }
 }

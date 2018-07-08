@@ -49,6 +49,15 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return true;
         }
 
+        public List<Registration> GetRegistrations()
+        {
+            List<Registration> registrations = _db.Registrations.Include("School")
+                .Include("Jobtitle")
+                .Include("Province")
+                .Where(s => s.DateRegisted >= DateTime.Now).ToList();
+            return registrations;
+        }
+
         public Registration SaveFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh)
         {
             Registration registration = new Registration();

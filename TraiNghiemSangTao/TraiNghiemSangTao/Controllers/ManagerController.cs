@@ -15,11 +15,13 @@ namespace TraiNghiemSangTao.Controllers
     {
         IRegistrationCreativeExpRepository registrationCreativeExpRepository;
         IProgramRepository programRepository;
+        IRegistrationRepository registrationRepository;
 
-        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository)
+        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository)
         {
             this.registrationCreativeExpRepository = registrationCreativeExpRepository;
             this.programRepository = programRepository;
+            this.registrationRepository = registrationRepository;
         }
 
         // GET: Manager 
@@ -53,6 +55,15 @@ namespace TraiNghiemSangTao.Controllers
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             });
             return Json(jsonRegistrationCreativeExps, JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("noidungkhac")]
+        [HttpGet]
+        public ActionResult NoiDungKhac()
+        {
+            List<Registration> registrations = registrationRepository.GetRegistrations();
+            
+            return View(registrations);
         }
     }
 }

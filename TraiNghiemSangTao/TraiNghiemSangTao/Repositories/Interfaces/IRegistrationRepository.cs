@@ -15,5 +15,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         bool CheckExistedFileKeHoach(string filekehoach);
         bool CheckExistedFileBaikiemtra(string filebaikiemtra);
         bool CheckExistedFiletailieuhocsinh(string filetailieuchohocsinh);
+        List<Registration> GetRegistrations();
     }
 }

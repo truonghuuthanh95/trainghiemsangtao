@@ -72,6 +72,14 @@ namespace TraiNghiemSangTao.Models.DAO
         [StringLength(50)]
         public string CodeRegisted { get; set; }
 
+        public virtual Class Class { get; set; }
+
+        public virtual Jobtitle Jobtitle { get; set; }
+
+        public virtual Province Province { get; set; }
+
+        public virtual School School { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubjectsRegisted> SubjectsRegisteds { get; set; }
     }
