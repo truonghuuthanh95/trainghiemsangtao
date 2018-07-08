@@ -12,7 +12,6 @@ namespace TraiNghiemSangTao.Models.DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public School()
         {
-            Registrations = new HashSet<Registration>();
             RegistrationCreativeExps = new HashSet<RegistrationCreativeExp>();
         }
 
@@ -32,9 +31,6 @@ namespace TraiNghiemSangTao.Models.DAO
         public string SchoolCode { get; set; }
 
         public int? SchoolDegreeId { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Registration> Registrations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistrationCreativeExp> RegistrationCreativeExps { get; set; }

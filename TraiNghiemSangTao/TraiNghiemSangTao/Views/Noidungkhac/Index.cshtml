@@ -1,6 +1,6 @@
 ﻿@model TraiNghiemSangTao.Models.DTO.NoiDungKhacOneViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Nội dung khác";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -244,12 +244,7 @@
             format: 'dd-mm-yyyy',
             autoclose: true,
 
-        }).on('changeDate', function (ev) {
-            var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
-            })
-        });
+        })
 
     })
     $('#schoolDegreeSlected').change(function () {
@@ -349,7 +344,7 @@
             $('#errorTomtatnoidungthuchienMessage').text('Vui lòng nhập');
         }
         else {
-            $('#errorTomtatnoidungthuchien').remove('has-error');
+            $('#errorTomtatnoidungthuchien').removeClass('has-error');
             $('#errorTomtatnoidungthuchienMessage').text('');
         }
         if ($('#vitrikienthuc').val() == '') {
@@ -357,7 +352,7 @@
             $('#errorVitrikienthucMessage').text('Vui lòng nhập');
         }
         else {
-            $('#errorVitrikienthuc').remove('has-error');
+            $('#errorVitrikienthuc').removeClass('has-error');
             $('#errorVitrikienthucMessage').text('');
         }
         if ($('#activityTitle').val() == '') {
@@ -387,9 +382,14 @@
         }
         else {
             var fileExtention = $('#filekehoach').val().split('.').pop();
+            var filekehoach = $('#filekehoach')[0];
             if (fileExtention != 'pdf') {
                 $('#errorfilekehoach').addClass('has-error');
                 $('#errorfilekehoachMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filekehoach.files[0].size / (1024 * 1024) > 2) {
+                $('#errorfilekehoach').addClass('has-error');
+                $('#errorfilekehoachMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
             }
             else {
                 $('#errorfilekehoach').removeClass('has-error');
@@ -403,9 +403,14 @@
         }
         else {
             var fileExtention = $('#filebaikiemtra').val().split('.').pop();
+            var filebaikiemtra = $('#filebaikiemtra')[0];
             if (fileExtention != 'pdf') {
                 $('#errorFilebaikiemtra').addClass('has-error');
                 $('#errorFilebaikiemtraMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filebaikiemtra.files[0].size / (1024 * 1024) > 2) {
+                $('#errorFilebaikiemtra').addClass('has-error');
+                $('#errorFilebaikiemtraMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
             }
             else {
                 $('#errorFilebaikiemtra').removeClass('has-error');
@@ -419,9 +424,14 @@
         }
         else {
             var fileExtention = $('#filetailieuchohocsinh').val().split('.').pop();
+            var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
             if (fileExtention != 'pdf') {
                 $('#errorFiletailieuchohocsinh').addClass('has-error');
                 $('#errorFiletailieuchohocsinhMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filetailieuchohocsinh.files[0].size / (1024*1024) > 2) {
+                $('#errorFiletailieuchohocsinh').addClass('has-error');
+                $('#errorFiletailieuchohocsinhMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
             }
             else {
                 $('#errorFiletailieuchohocsinh').removeClass('has-error');
@@ -429,7 +439,19 @@
             }
 
         }
-        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {
+        if (!$('#errorActivityTitle').hasClass('has-error')
+            && !$('#errorPhoneNumber').hasClass('has-error')
+            && !$('#errorEmail').hasClass('has-error')
+            && !$('#errorDateGo').hasClass('has-error')           
+            && !$('#errorValidStudentQuantity').hasClass('has-error')
+            && !$('#errorVitrikienthuc').hasClass('has-error')
+            && !$('#tomtatnoidungthuchien').hasClass('has-error')
+            && !$('#errorSubject').hasClass('has-error')
+            && !$('#errorfilekehoach').hasClass('has-error')
+            && !$('#errorFilebaikiemtra').hasClass('has-error')
+            && !$('#errorFiletailieuchohocsinh').hasClass('has-error')
+            && !$('#errorTeacherName').hasClass('has-error')
+        ) {
             $('#loader').show();
             $('#submitCreativeExp').addClass('disable');
             var formData = new FormData();
@@ -447,8 +469,36 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    if (data == '200') {
+                    if (data == 'failedfiletailieuchohocsinh') {
+                        $('#loader').hide();
+                        $('#errorFiletailieuchohocsinh').addClass('has-error');
+                        $('#errorFiletailieuchohocsinhMessage').text('Tên file ' + $('#filetailieuchohocsinh').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorFiletailieuchohocsinh').removeClass('has-error');
+                        $('#errorFiletailieuchohocsinhMessage').text('')
+                    }
+                    if (data == 'failedfilebaikiemtra') {
+                        $('#loader').hide();
+                        $('#errorFilebaikiemtra').addClass('has-error');
+                        $('#errorFilebaikiemtraMessage').text('Tên file ' + $('#filebaikiemtra').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorFilebaikiemtra').removeClass('has-error');
+                        $('#errorFilebaikiemtraMessage').text('');
+                    }
+                    if (data == 'failedfilekehoach') {
+                        $('#loader').hide();
+                        $('#errorfilekehoach').addClass('has-error');
+                        $('#errorfilekehoachMessage').text('Tên file ' + $('#filekehoach').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorfilekehoach').removeClass('has-error');
+                        $('#errorfilekehoachMessage').text('');
+                    }
+                    if (data != 'failedfilebaikiemtra' && data != 'failedfilekehoach' && data != 'failedfiletailieuchohocsinh' && data != 'failed') {
                         $.post('/postNoiDungKhac', {
+                            Id: data,
                             SchoolId: $('#schoolNameSelected').val(),
                             StudentQuantity: $('#studentQuantity').val(),
                             Creator: $('#teacherName').val(),
@@ -466,9 +516,8 @@
                             SubjectSelected: selectedSubject.join(),
                             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
                         }, function (data, status) {
-
                             if (status == 'success') {
-                                window.location.replace('/dangkitrainghiemthanhcong/' + data.Id);
+                                window.location.replace('/dangkitrainghiemthanhcong/' + data);
 
                             }
                         })

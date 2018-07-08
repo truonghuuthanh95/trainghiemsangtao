@@ -13,7 +13,6 @@ namespace TraiNghiemSangTao.Models.DAO
         public SchoolDegree()
         {
             Classes = new HashSet<Class>();
-            Registrations = new HashSet<Registration>();
             Schools = new HashSet<School>();
         }
 
@@ -29,9 +28,6 @@ namespace TraiNghiemSangTao.Models.DAO
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Registration> Registrations { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<School> Schools { get; set; }

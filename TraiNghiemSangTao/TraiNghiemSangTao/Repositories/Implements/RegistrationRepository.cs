@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using TraiNghiemSangTao.Models.DAO;
@@ -17,11 +18,53 @@ namespace TraiNghiemSangTao.Repositories.Implements
             _db = db;
         }
 
-        public Registration SaveRegistration(RegistrationDTO registrationDTO)
+        public bool CheckExistedFileBaikiemtra(string filebaikiemtra)
         {
+            Registration existedFilebaikiemtra = _db.Registrations.Where(s => s.FileBaiKiemTra == filebaikiemtra).FirstOrDefault();
+            if (existedFilebaikiemtra == null)
+            {
+                return false;
+            }
+            return true;
+
+        }
+
+        public bool CheckExistedFileKeHoach(string filekehoach)
+        {
+            Registration existedfilekehoach = _db.Registrations.Where(s => s.FileKeHoach == filekehoach).FirstOrDefault();
+            if (existedfilekehoach == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool CheckExistedFiletailieuhocsinh(string filetailieuchohocsinh)
+        {
+            Registration existedFiletailieuhocsinh = _db.Registrations.Where(s => s.FileTaiLieuChoHS == filetailieuchohocsinh).FirstOrDefault();
+            if (existedFiletailieuhocsinh == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Registration SaveFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh)
+        {
+            Registration registration = new Registration();
+            registration.FileBaiKiemTra = filebaikiemtra;
+            registration.FileKeHoach = filekehoach;
+            registration.FileTaiLieuChoHS = filetailieuchohocsinh;
+            _db.Registrations.Add(registration);
+            _db.SaveChanges();
+            return registration;
+        }
+
+        public Registration SaveRegistration(RegistrationDTO registrationDTO, int id)
+        {
+            Registration registration = _db.Registrations.Where(s => s.Id == id).FirstOrDefault();
             string[] arraySubject = registrationDTO.SubjectSelected.Split(new char[] { ',' });
 
-            Registration registration = new Registration();
             registration.ClassId = registrationDTO.ClassId;
             registration.CreatedAt = DateTime.Now;
             registration.Creator = registrationDTO.Creator;
@@ -36,8 +79,25 @@ namespace TraiNghiemSangTao.Repositories.Implements
             registration.StudentQuantity = registrationDTO.StudentQuantity;
             registration.ViTriKienThuc = registrationDTO.ViTriKienThuc;
             registration.TomTatNoiDungCT = registrationDTO.TomTatNoiDungCT;
-            _db.Registrations.Add(registration);
-            _db.SaveChanges();
+            var existedCodeRegisted = _db.Registrations.Where(s => s.CodeRegisted == registration.CodeRegisted);
+            if (existedCodeRegisted != null)
+            {
+                do
+                {
+                    registration.CodeRegisted = Utils.RandomCodeRegisted.GetRandomString();
+                    var existedCodeRegistedSecond = _db.RegistrationCreativeExps.Where(s => s.CodeRegisted == registration.CodeRegisted);
+                } while (existedCodeRegisted == null);
+            }
+            _db.Entry(registration).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return registration = null;
+            }
+            
             foreach (var item in arraySubject)
             {
                 SubjectsRegisted subjectsRegisted = new SubjectsRegisted();

@@ -58,7 +58,7 @@ namespace TraiNghiemSangTao.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult UploadFile(HttpPostedFileBase filekehoach, HttpPostedFileBase filebaikiemtra, HttpPostedFileBase filetailieuchohocsinh)
         {
-
+           
             try
             {
                 if (filekehoach.ContentLength > 0 && filebaikiemtra.ContentLength > 0 && filetailieuchohocsinh.ContentLength > 0)
@@ -66,28 +66,51 @@ namespace TraiNghiemSangTao.Controllers
                     string _filebaikiemtra = Path.GetFileName(filebaikiemtra.FileName);
                     string _filekehoach = Path.GetFileName(filekehoach.FileName);
                     string _filetailieuchohocsinh = Path.GetFileName(filetailieuchohocsinh.FileName);
+                    bool existedFilebaikiemtra = registrationRepository.CheckExistedFileBaikiemtra(_filebaikiemtra);
+                    bool existedFilekehoach = registrationRepository.CheckExistedFileKeHoach(_filekehoach);
+                    bool existedFiletailieuhs = registrationRepository.CheckExistedFiletailieuhocsinh(_filetailieuchohocsinh);
+
+                    if (existedFilebaikiemtra == true)
+                    {
+                        return Json("failedfilebaikiemtra");
+                    }
+                    if (existedFilekehoach == true)
+                    {
+                        return Json("failedfilekehoach");
+                    }
+                    if (existedFiletailieuhs == true)
+                    {
+                        return Json("failedfiletailieuchohocsinh");
+                    }
                     string _path1 = Path.Combine(Server.MapPath("~/UploadedFiles"), _filebaikiemtra);
                     string _path2 = Path.Combine(Server.MapPath("~/UploadedFiles"), _filekehoach);
                     string _path3 = Path.Combine(Server.MapPath("~/UploadedFiles"), _filetailieuchohocsinh);
+
                     filebaikiemtra.SaveAs(_path1);
                     filekehoach.SaveAs(_path2);
                     filetailieuchohocsinh.SaveAs(_path3);
+                    Registration registration = registrationRepository.SaveFileUpload(_filekehoach, _filebaikiemtra, _filetailieuchohocsinh);
+                    return Json(registration.Id);
                 }
-                return Json("200");
+                else
+                {
+                    return Json("failed");
+                }
+               
             }
             catch
             {
-                return Json("400");
+                return Json("failed");
             }
         }
 
         [HttpPost]
         [Route("postNoiDungKhac")]
         [ValidateAntiForgeryToken]
-        public ActionResult PostNoiDungKhac(RegistrationDTO registrationDTO)
+        public ActionResult PostNoiDungKhac(RegistrationDTO registrationDTO, int Id)
         {
-            Registration registration = registrationRepository.SaveRegistration(registrationDTO);
-            return Json(registration);
+            Registration registration = registrationRepository.SaveRegistration(registrationDTO, Id);
+            return Json(registration.CodeRegisted);
         }
     }
 }
