@@ -77,9 +77,17 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return Convert.ToInt16(maxStudent) - (studentJoinedAllDayNumb + studentJoinedHaftDaynumb);
         }
 
-        public List<RegistrationCreativeExp> GetAllRegistrationCreativeExp()
+        public List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateRegisted, int programId)
         {
-            throw new NotImplementedException();
+            List<RegistrationCreativeExp> registrationCreativeExps = _db.RegistrationCreativeExps
+                .Include("School")               
+                .Include("SessionADay")
+                .Include("Program")
+                .Include("Jobtitle")
+                .Include("Class")
+                .Where(s => s.DateRegisted == dateRegisted).Where(s => s.ProgramId == programId)
+                .ToList();
+            return registrationCreativeExps;
         }
 
         public RegistrationCreativeExp GetRegistrationCreativeExpById(int id)

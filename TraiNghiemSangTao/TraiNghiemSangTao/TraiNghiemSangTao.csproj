@@ -204,6 +204,7 @@
     <Compile Include="Models\DAO\Ward.cs" />
     <Compile Include="Models\DTO\CreativeExpDTO.cs" />
     <Compile Include="Models\DTO\CreativeExpOneViewModel.cs" />
+    <Compile Include="Models\DTO\ListRegistrationCreativeExpOneViewModel.cs" />
     <Compile Include="Models\DTO\NoiDungKhacOneViewModel.cs" />
     <Compile Include="Models\DTO\RegistrationDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,11 +294,12 @@
     <Content Include="Views\CreativeExp\UpdateCreativeExp.cshtml" />
     <Content Include="Views\CreativeExp\UpdateCreativeExpScreen.cshtml" />
     <Content Include="Views\CreativeExp\UpdateCreativeExpSuccessfull.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\TraiNghiemSangTao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
-    <Folder Include="Views\Manager\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

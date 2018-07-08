@@ -9,7 +9,7 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
 {
     public interface IRegistrationCreativeExpRepository
     {
-        List<RegistrationCreativeExp> GetAllRegistrationCreativeExp();
+        List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateRegisted, int programId);
         List<RegistrationCreativeExp> GetRegistrationCreativeExpByProgramId(int id);
         RegistrationCreativeExp GetRegistrationCreativeExpById(int id);
         RegistrationCreativeExp GetRegistrationCreativeExpByRegistedCode(string registedCode);

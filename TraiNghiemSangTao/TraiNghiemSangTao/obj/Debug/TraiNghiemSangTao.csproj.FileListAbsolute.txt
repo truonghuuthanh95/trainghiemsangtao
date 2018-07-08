@@ -219,8 +219,8 @@ C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSang
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\bin\Microsoft.AI.Web.xml
-C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.csprojResolveAssemblyReference.cache
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.csproj.CoreCompileInputs.cache
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.csproj.CopyComplete
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.dll
 C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.pdb
+C:\Users\thanhthse61493\Desktop\ASP.NET MVC\Git\trainghiemsangtao\TraiNghiemSangTao\TraiNghiemSangTao\obj\Debug\TraiNghiemSangTao.csprojResolveAssemblyReference.cache

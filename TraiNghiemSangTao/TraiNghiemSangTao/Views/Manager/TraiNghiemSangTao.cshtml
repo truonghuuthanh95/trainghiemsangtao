@@ -1,0 +1,117 @@
+﻿@model TraiNghiemSangTao.Models.DTO.ListRegistrationCreativeExpOneViewModel
+@{
+    ViewBag.Title = "Danh sách trải nghiệm sáng tạo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var allDay = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 3).Select(s => s.StudentQuantity).Sum();
+    var morning = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 1).Select(s => s.StudentQuantity).Sum();
+    var evening = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 2).Select(s => s.StudentQuantity).Sum();
+}
+
+<h3 class="text-primary text-center">DANH SÁCH TRẢI NGHIỆM SÁNG TẠO</h3>
+
+<form class="form-inline text-center">
+
+    <div class="form-group">
+        <label for="exampleInputName2">Ngày</label>
+        <input type="text" class="form-control" id="dateRegisted" value="@DateTime.Now.Day-@DateTime.Now.Month-@DateTime.Now.Year">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">Địa điểm</label>
+        <select class="form-control" id="programId">
+            @{
+                foreach (var item in Model.Programs)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="button" class="btn btn-success" onclick="getDataRegistrationCreative();">TÌM KIẾM</button>
+</form>
+
+<h4 class="text-center" style="padding-top: 30px;"><span class="text-danger" id="allDay">Cả ngày: @allDay;</span> <span class="text-primary" id="morning"> Buổi sáng: @morning;</span><span class="text-success" id="evening"> Buổi chiều: @evening </span></h4>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-hover table-responsive" id="registrationCreativeExp">
+            <thead>
+                <tr>
+                    <th>Tên trường</th>
+                    <th>Lớp</th>
+                    <th>Số lượng</th>
+                    <th>Ngày tham gia</th>
+                    <th>Buổi</th>
+                    <th>Tên người phụ trách</th>
+                    <th>Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.RegistrationCreativeExps)
+                    {
+                        <tr>
+                            <td>@item.School.Name</td>
+                            <td>@item.ClassId</td>
+                            <td>@item.StudentQuantity</td>
+                            <td>@item.DateRegisted.Value.Day/@item.DateRegisted.Value.Month/@item.DateRegisted.Value.Year</td>
+                            <td>@item.SessionADay.Name</td>
+                            <td>@item.Creator</td>
+                            <td>@item.PhoneNumber</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $('#dateRegisted').datepicker(
+        {
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        }
+    );
+    function getDataRegistrationCreative() {
+        var date = moment($('#dateRegisted').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+        $.get('dulieutrainghiemsangtao/' + date + '/' + $('#programId').val(), function (data, status) {
+            var registrationCreativeExp = JSON.parse(data);
+
+            console.log(registrationCreativeExp);
+            $('#registrationCreativeExp > tbody').empty();
+            if (data != '404') {
+                var allDay = 0;
+                var morning = 0;
+                var evening = 0;
+
+                for (var i = 0; i < registrationCreativeExp.length; i++) {
+
+                    if (registrationCreativeExp[i].DaySessionId == 3) {
+                        allDay += parseInt(registrationCreativeExp[i].StudentQuantity);
+                    }
+                    if (registrationCreativeExp[i].DaySessionId == 1) {
+                        morning += parseInt(registrationCreativeExp[i].StudentQuantity);
+                    }
+                    if (registrationCreativeExp[i].DaySessionId == 2) {
+                        evening += parseInt(registrationCreativeExp[i].StudentQuantity);
+                    }
+
+                }
+                $('#allday').text('Cả ngày: ' + allDay);
+                $('#morning').text(' Buổi sáng: ' + morning);
+                $('#evening').text('; Buổi chiều: ' + evening);
+                for (var i = 0; i < registrationCreativeExp.length; i++) {
+                    $('#registrationCreativeExp > tbody:last-child').append('<tr><td>'
+                        + registrationCreativeExp[i].School.Name + '</td><td>'
+                        + registrationCreativeExp[i].ClassId + '</td><td>'
+                        + registrationCreativeExp[i].StudentQuantity + '</td><td>'
+                        + moment(registrationCreativeExp[i].DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY') + '</td><td>'
+                        + registrationCreativeExp[i].SessionADay.Name + '</td><td>'
+                        + registrationCreativeExp[i].Creator + '</td><td>'
+                        + registrationCreativeExp[i].PhoneNumber
+                        + '</td></tr>')
+                }
+
+            }
+        })
+    }
+</script>
