@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\NoidungkhacController.cs" />
+    <Compile Include="Controllers\SocialLifeSkillController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,8 +206,11 @@
     <Compile Include="Models\DTO\CreativeExpDTO.cs" />
     <Compile Include="Models\DTO\CreativeExpOneViewModel.cs" />
     <Compile Include="Models\DTO\ListRegistrationCreativeExpOneViewModel.cs" />
+    <Compile Include="Models\DTO\ManagerNoiDungKhacOneViewModel.cs" />
+    <Compile Include="Models\DTO\NoiDungKhacJson.cs" />
     <Compile Include="Models\DTO\NoiDungKhacOneViewModel.cs" />
     <Compile Include="Models\DTO\RegistrationDTO.cs" />
+    <Compile Include="Models\DTO\SocialLifeSkillOneViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\ClassesRepository.cs" />
     <Compile Include="Repositories\Implements\DistrictRepository.cs" />
@@ -218,6 +222,7 @@
     <Compile Include="Repositories\Implements\SchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Implements\SchoolRepository.cs" />
     <Compile Include="Repositories\Implements\SessionADayRepository.cs" />
+    <Compile Include="Repositories\Implements\SubjectRegistedRepository.cs" />
     <Compile Include="Repositories\Implements\SubjectRepository.cs" />
     <Compile Include="Repositories\Interfaces\IClassesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDistrictRepository.cs" />
@@ -229,7 +234,9 @@
     <Compile Include="Repositories\Interfaces\ISchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISchoolRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISessionADayRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISubjectRegistedRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISubjectRepository.cs" />
+    <Compile Include="Utils\ExportExcel.cs" />
     <Compile Include="Utils\RandomCodeRegisted.cs" />
     <Compile Include="Utils\SendMailService.cs" />
   </ItemGroup>
@@ -240,6 +247,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\images\hoatdongkhac.jpg" />
+    <Content Include="Content\images\kynangsong.jpg" />
     <Content Include="Content\images\logo_so.png" />
     <Content Include="Content\images\trainghiemsangtao.jpg" />
     <Content Include="favicon.ico" />
@@ -297,6 +305,10 @@
     <Content Include="Views\Manager\Index.cshtml" />
     <Content Include="Views\Manager\TraiNghiemSangTao.cshtml" />
     <Content Include="Views\Manager\NoiDungKhac.cshtml" />
+    <Content Include="Utils\Files\ds-trainghiemsangtao.xlsx" />
+    <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
+    <Content Include="Utils\Files\ds-kynangsong.xlsx" />
+    <Content Include="Views\SocialLifeSkill\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -112,5 +113,6 @@ namespace TraiNghiemSangTao.Controllers
             Registration registration = registrationRepository.SaveRegistration(registrationDTO, Id);
             return Json(registration.CodeRegisted);
         }
+        
     }
 }

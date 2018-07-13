@@ -10,10 +10,16 @@ namespace TraiNghiemSangTao.Models.DTO
     {
         public List<RegistrationCreativeExp> RegistrationCreativeExps { get; set; }
         public List<Program> Programs { get; set; }
-        public ListRegistrationCreativeExpOneViewModel(List<RegistrationCreativeExp> registrationCreativeExps, List<Program> programs)
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
+        public int ProgramId { get; set; }
+        public ListRegistrationCreativeExpOneViewModel(List<RegistrationCreativeExp> registrationCreativeExps, List<Program> programs, DateTime dateFrom, DateTime dateTo, int programId)
         {
             RegistrationCreativeExps = registrationCreativeExps;
             Programs = programs;
+            DateFrom = dateFrom;
+            DateTo = dateTo;
+            ProgramId = programId;
         }
     }
 }

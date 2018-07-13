@@ -76,23 +76,30 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
             return Convert.ToInt16(maxStudent) - (studentJoinedAllDayNumb + studentJoinedHaftDaynumb);
         }
+        
 
-        public List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateRegisted, int programId)
+        public List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateFrom, DateTime dateTo, int programId)
         {
             List<RegistrationCreativeExp> registrationCreativeExps = _db.RegistrationCreativeExps
-                .Include("School")               
-                .Include("SessionADay")
-                .Include("Program")
-                .Include("Jobtitle")
-                .Include("Class")
-                .Where(s => s.DateRegisted == dateRegisted).Where(s => s.ProgramId == programId)
-                .ToList();
+               .Include("School")
+               .Include("SessionADay")
+               .Include("Program")
+               .Include("Jobtitle")
+               .Include("Class")
+               .Where(s => s.DateRegisted >= dateFrom && s.DateRegisted <= dateTo).Where(s => s.ProgramId == programId)
+               .OrderBy(s => s.DateRegisted)
+               .ToList();
             return registrationCreativeExps;
         }
 
         public RegistrationCreativeExp GetRegistrationCreativeExpById(int id)
         {
-            RegistrationCreativeExp registrationCreativeExp = _db.RegistrationCreativeExps.Where(s => s.Id == id).FirstOrDefault();
+            RegistrationCreativeExp registrationCreativeExp = _db.RegistrationCreativeExps
+                .Include("School")
+               .Include("SessionADay")
+               .Include("Program")
+               .Include("Jobtitle")
+               .Include("Class").Where(s => s.Id == id).FirstOrDefault();
             return registrationCreativeExp;
         }
 
@@ -105,6 +112,12 @@ namespace TraiNghiemSangTao.Repositories.Implements
         {
             RegistrationCreativeExp registrationCreativeExp = _db.RegistrationCreativeExps.Include("School").Where(s => s.CodeRegisted == registedCode).FirstOrDefault();
             return registrationCreativeExp;
+        }
+
+        public Program GetRegistrationFirstIndex()
+        {
+            Program program = _db.Programs.OrderBy(s => s.Id).First();
+            return program;
         }
 
         public bool GetValidRegistedCode(string registedCode)

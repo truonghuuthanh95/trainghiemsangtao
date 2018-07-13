@@ -326,25 +326,17 @@
             $('#errorDateGoMessage').text('Vui lòng nhập ngày tham gia');
         }
         else {
-            $('#errorDateGo').removeClass('has-error');
-            $('#errorDateGoMessage').text('');
-        }
-        //if ($('#studentQuantity').val() == '') {
-        //    $('#errorValidStudentQuantity').addClass('has-error');
-        //    $('#errorValidStudentQuantityMessage').text('Vui lòng nhập số lượng học sinh tham gia');
-        //}
-        //else {
-        //    $('#errorValidStudentQuantity').removeClass('has-error');
-        //    $('#errorValidStudentQuantityMessage').text('');
-        //}
-        //if ($('#studentQuantity').val() < 1) {
-        //    $('#errorValidStudentQuantity').addClass('has-error');
-        //    $('#errorValidStudentQuantityMessage').text('Số lượng học sinh tham gia không hợp lệ');
-        //}
-        //else {
-        //    $('#errorValidStudentQuantity').removeClass('has-error');
-        //    $('#errorValidStudentQuantityMessage').text('');
-        //}
+            debugger
+            if (moment($('#dateGo').val(), 'DD-MM-YYYY') < new Date()) {
+                $('#errorDateGo').addClass('has-error');
+                $('#errorDateGoMessage').text('Ngày tham gia không hợp lệ');
+            }
+            else {
+                $('#errorDateGo').removeClass('has-error');
+                $('#errorDateGoMessage').text('');
+            }
+            
+        }       
         if ($('#teacherName').val() == '') {
             $('#errorTeacherName').addClass('has-error');
             $('#errorTeacherNameMessage').text('Vui lòng nhập tên người phụ trách');

@@ -11,10 +11,10 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
     {
         Registration SaveRegistration(RegistrationDTO registrationDTO, int id);
         Registration SaveFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh);
-
         bool CheckExistedFileKeHoach(string filekehoach);
         bool CheckExistedFileBaikiemtra(string filebaikiemtra);
         bool CheckExistedFiletailieuhocsinh(string filetailieuchohocsinh);
-        List<Registration> GetRegistrations();
+        List<Registration> GetRegistrationsByDate(DateTime dateFrom, DateTime dateTo);
+        Registration GetRegistrationById(int id);
     }
 }

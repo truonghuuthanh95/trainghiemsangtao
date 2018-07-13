@@ -20,7 +20,8 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
         public bool CheckExistedFileBaikiemtra(string filebaikiemtra)
         {
-            Registration existedFilebaikiemtra = _db.Registrations.Where(s => s.FileBaiKiemTra == filebaikiemtra).FirstOrDefault();
+            Registration existedFilebaikiemtra = _db.Registrations
+                .Where(s => s.FileBaiKiemTra == filebaikiemtra || s.FileTaiLieuChoHS == filebaikiemtra || s.FileKeHoach == filebaikiemtra).FirstOrDefault();
             if (existedFilebaikiemtra == null)
             {
                 return false;
@@ -31,7 +32,9 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
         public bool CheckExistedFileKeHoach(string filekehoach)
         {
-            Registration existedfilekehoach = _db.Registrations.Where(s => s.FileKeHoach == filekehoach).FirstOrDefault();
+            Registration existedfilekehoach = _db.Registrations
+                .Where(s => s.FileKeHoach == filekehoach || s.FileBaiKiemTra == filekehoach || s.FileTaiLieuChoHS == filekehoach)
+                .FirstOrDefault();
             if (existedfilekehoach == null)
             {
                 return false;
@@ -41,7 +44,8 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
         public bool CheckExistedFiletailieuhocsinh(string filetailieuchohocsinh)
         {
-            Registration existedFiletailieuhocsinh = _db.Registrations.Where(s => s.FileTaiLieuChoHS == filetailieuchohocsinh).FirstOrDefault();
+            Registration existedFiletailieuhocsinh = _db.Registrations
+                .Where(s => s.FileTaiLieuChoHS == filetailieuchohocsinh || s.FileKeHoach == filetailieuchohocsinh || s.FileBaiKiemTra == filetailieuchohocsinh).FirstOrDefault();
             if (existedFiletailieuhocsinh == null)
             {
                 return false;
@@ -49,12 +53,23 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return true;
         }
 
-        public List<Registration> GetRegistrations()
+        public Registration GetRegistrationById(int id)
+        {
+            Registration registration = _db.Registrations
+                .Include("School")
+                .Include("Jobtitle")
+                .Include("Class")
+                .Include("Province").Where(s => s.Id == id).FirstOrDefault();
+            return registration;
+        }
+
+        public List<Registration> GetRegistrationsByDate(DateTime dateFrom, DateTime dateTo)
         {
             List<Registration> registrations = _db.Registrations.Include("School")
                 .Include("Jobtitle")
                 .Include("Province")
-                .Where(s => s.DateRegisted >= DateTime.Now).ToList();
+                .Include("Class")
+                .Where(s => s.DateRegisted >= dateFrom && s.DateRegisted <= dateTo).OrderBy(s => s.DateRegisted).ToList();
             return registrations;
         }
 

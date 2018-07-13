@@ -9,11 +9,12 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
 {
     public interface IRegistrationCreativeExpRepository
     {
-        List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateRegisted, int programId);
+        List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateFrom, DateTime dateTo, int programId);
         List<RegistrationCreativeExp> GetRegistrationCreativeExpByProgramId(int id);
         RegistrationCreativeExp GetRegistrationCreativeExpById(int id);
         RegistrationCreativeExp GetRegistrationCreativeExpByRegistedCode(string registedCode);
         RegistrationCreativeExp SaveRegistrationCreativeExp(CreativeExpDTO creativeExpDTO);
+        Program GetRegistrationFirstIndex();
         int CheckValidQuantityStudent(int programId, int sesstionAdayId, DateTime time);
 
         bool GetValidRegistedCode(string registedCode);

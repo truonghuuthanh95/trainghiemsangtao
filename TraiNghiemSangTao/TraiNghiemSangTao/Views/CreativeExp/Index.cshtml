@@ -269,9 +269,15 @@
                 $('#errorDateGo').addClass('has-error');
                 $('#errorDateGoMessage').text('Vui lòng nhập ngày tham gia');
             }
-            else {
-                $('#errorDateGo').removeClass('has-error');
-                $('#errorDateGoMessage').text('');
+            else {              
+                if (moment($('#dateGo').val(), 'DD-MM-YYYY') < new Date()) {
+                    $('#errorDateGo').addClass('has-error');
+                    $('#errorDateGoMessage').text('Ngày tham gia không hợp lệ');
+                }
+                else {
+                    $('#errorDateGo').removeClass('has-error');
+                    $('#errorDateGoMessage').text('');
+                }
             }           
             if ($('#teacherName').val() == '') {
                 $('#errorTeacherName').addClass('has-error');
