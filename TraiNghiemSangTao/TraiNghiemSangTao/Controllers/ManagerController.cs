@@ -18,14 +18,17 @@ namespace TraiNghiemSangTao.Controllers
         IProgramRepository programRepository;
         IRegistrationRepository registrationRepository;
         ISubjectRegistedRepository subjectRegistedRepository;
+        ISocialLifeSkillRepository socialLifeSkillRepository;
 
-        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository)
+        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository, ISocialLifeSkillRepository socialLifeSkillRepository)
         {
             this.registrationCreativeExpRepository = registrationCreativeExpRepository;
             this.programRepository = programRepository;
             this.registrationRepository = registrationRepository;
             this.subjectRegistedRepository = subjectRegistedRepository;
+            this.socialLifeSkillRepository = socialLifeSkillRepository;
         }
+
 
 
         // GET: Manager 
@@ -132,6 +135,33 @@ namespace TraiNghiemSangTao.Controllers
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/" + fileName.Trim()+".pdf");
             return File(filePath, "application/pdf", fileName.Trim()+".pdf");
         }
-
+        [Route("kynangsong/{dateFrom}/{dateTo}")]
+        [HttpGet]
+        public ActionResult SocialLifeSkills(DateTime dateFrom, DateTime dateTo)
+        {
+            List<SocialLifeSkill> socialLifeSkills = socialLifeSkillRepository.GetSocialLifeSkillsByDate(dateFrom, dateTo);
+            ManagerSocialLifeSkillOneViewModel managerSocialLifeSkillOneViewModel = new ManagerSocialLifeSkillOneViewModel(socialLifeSkills, dateFrom, dateTo);
+            return View(managerSocialLifeSkillOneViewModel);
+        }
+        [Route("chitietkynangsong/{id}")]
+        [HttpGet]
+        public ActionResult GetDetailSocialLifeSkill(int id)
+        {
+            SocialLifeSkill socialLifeSkill = socialLifeSkillRepository.GetSocialLifeSkillById(id);
+            var jsonSocialLifeSkill = JsonConvert.SerializeObject(socialLifeSkill,
+           Formatting.None,
+           new JsonSerializerSettings()
+           {
+               ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           });
+            return Json(jsonSocialLifeSkill, JsonRequestBehavior.AllowGet);
+        }
+        [Route("downloadPDFKynangsong/{fileName}")]
+        [HttpGet]
+        public ActionResult DownloadPDFSocialLifeSkill(string fileName)
+        {
+            string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/SocialSkill/" + fileName.Trim() + ".pdf");
+            return File(filePath, "application/pdf", fileName.Trim() + ".pdf");
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace TraiNghiemSangTao.Models.DAO
     public partial class CreativeExpDB : DbContext
     {
         public CreativeExpDB()
-            : base("name=CreativeExpDB7")
+            : base("name=CreativeExpDB13")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
@@ -25,6 +25,7 @@ namespace TraiNghiemSangTao.Models.DAO
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<SchoolDegree> SchoolDegrees { get; set; }
         public virtual DbSet<SessionADay> SessionADays { get; set; }
+        public virtual DbSet<SocialLifeSkill> SocialLifeSkills { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SubjectsRegisted> SubjectsRegisteds { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }

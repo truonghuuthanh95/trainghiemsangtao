@@ -200,6 +200,7 @@
     <Compile Include="Models\DAO\School.cs" />
     <Compile Include="Models\DAO\SchoolDegree.cs" />
     <Compile Include="Models\DAO\SessionADay.cs" />
+    <Compile Include="Models\DAO\SocialLifeSkill.cs" />
     <Compile Include="Models\DAO\Subject.cs" />
     <Compile Include="Models\DAO\SubjectsRegisted.cs" />
     <Compile Include="Models\DAO\Ward.cs" />
@@ -207,9 +208,11 @@
     <Compile Include="Models\DTO\CreativeExpOneViewModel.cs" />
     <Compile Include="Models\DTO\ListRegistrationCreativeExpOneViewModel.cs" />
     <Compile Include="Models\DTO\ManagerNoiDungKhacOneViewModel.cs" />
+    <Compile Include="Models\DTO\ManagerSocialLifeSkillOneViewModel.cs" />
     <Compile Include="Models\DTO\NoiDungKhacJson.cs" />
     <Compile Include="Models\DTO\NoiDungKhacOneViewModel.cs" />
     <Compile Include="Models\DTO\RegistrationDTO.cs" />
+    <Compile Include="Models\DTO\SocialLifeSkillDTO.cs" />
     <Compile Include="Models\DTO\SocialLifeSkillOneViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\ClassesRepository.cs" />
@@ -222,6 +225,7 @@
     <Compile Include="Repositories\Implements\SchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Implements\SchoolRepository.cs" />
     <Compile Include="Repositories\Implements\SessionADayRepository.cs" />
+    <Compile Include="Repositories\Implements\SocialLifeSkillRepository.cs" />
     <Compile Include="Repositories\Implements\SubjectRegistedRepository.cs" />
     <Compile Include="Repositories\Implements\SubjectRepository.cs" />
     <Compile Include="Repositories\Interfaces\IClassesRepository.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="Repositories\Interfaces\ISchoolDegreeRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISchoolRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISessionADayRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISocialLifeSkillRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISubjectRegistedRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISubjectRepository.cs" />
     <Compile Include="Utils\ExportExcel.cs" />
@@ -309,10 +314,11 @@
     <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
     <Content Include="Utils\Files\ds-kynangsong.xlsx" />
     <Content Include="Views\SocialLifeSkill\Index.cshtml" />
+    <Content Include="Views\Manager\SocialLifeSkills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UploadedFiles\" />
+    <Folder Include="UploadedFiles\SocialSkill\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

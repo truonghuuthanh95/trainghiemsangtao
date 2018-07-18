@@ -1,16 +1,17 @@
-﻿@model TraiNghiemSangTao.Models.DTO.ManagerNoiDungKhacOneViewModel
+﻿@model TraiNghiemSangTao.Models.DTO.ManagerSocialLifeSkillOneViewModel
 @{
-    ViewBag.Title = "Nội dung khác";
+    ViewBag.Title = "SocialLifeSkill";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3 class="text-center text-primary">DANH SÁCH NỘI DUNG KHÁC</h3>
+<h3 class="text-center text-primary">DANH SÁCH KỸ NĂNG XÃ HỘI</h3>
 <form class="form-inline text-center">
 
     <div class="form-group">
         <label for="exampleInputName2">Từ</label>
         <input type="text" class="form-control datepicker" id="dateFrom" value="@Model.DateFrom.Day.ToString("d2")-@Model.DateFrom.Month.ToString("d2")-@Model.DateFrom.Year">
-    </div><div class="form-group">
+    </div>
+    <div class="form-group">
         <label for="exampleInputName2">Đến</label>
         <input type="text" class="form-control datepicker" id="dateTo" value="@Model.DateTo.Day.ToString("d2")-@Model.DateTo.Month.ToString("d2")-@Model.DateTo.Year">
     </div>
@@ -26,9 +27,8 @@
                         <th>STT</th>
                         <th>Tên trường</th>
                         <th>Lớp</th>
-                        <th>Số lượng</th>
-                        <th>Ngày tham gia</th>
-                        <th>Địa điểm</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
                         <th>Tên người phụ trách</th>
                         <th>Số điện thoại</th>
                         <th>Thao tác</th>
@@ -36,17 +36,16 @@
                 </thead>
                 <tbody>
                     @{
-                            int index = 1;
-                            foreach (var item in Model.Registrations)
-                            {
+                        int index = 1;
+                        foreach (var item in Model.SocialLifeSkills)
+                        {
                             <tr>
                                 <td>@index</td>
                                 <td>@item.School.Name</td>
                                 <td>@item.ClassId</td>
-                                <td>@item.StudentQuantity</td>
-                                <td>@item.DateRegisted.Value.Day/@item.DateRegisted.Value.Month/@item.DateRegisted.Value.Year</td>
-                                <td>@item.Province.Type @item.Province.Name</td>
-                                <td>@item.Creator</td>
+                                <td>@item.DateFrom.Value.Day/@item.DateFrom.Value.Month/@item.DateFrom.Value.Year</td>
+                                <td>@item.DateTo.Value.Day/@item.DateTo.Value.Month/@item.DateTo.Value.Year</td>
+                                <td>@item.Creatot</td>
                                 <td>@item.PhoneNumber</td>
                                 <td><button type="button" value="@item.Id" onclick="viewDetail(this);" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bs-example-modal-sm">CHI TIẾT</button></td>
                             </tr>
@@ -81,16 +80,18 @@
                                 <p class="form-control-static" id="class"></p>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Số lượng</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="studentQuantity"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Ngày tham gia</label>
+                            <label class="col-sm-3 control-label">Ngày bắt đầu</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static" id="dateGo"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ngày kết thúc</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="dateEnd"></p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,47 +101,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Vi trí kiến thức</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="vitrikienthuc"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-3 control-label">Tóm tắt nội dung</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static" id="tomtatnoidung"></p>
                             </div>
-                        </div>      
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Môn đăng kí</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="subjectRegisted"></p>
-                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Địa điểm</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static" id="location"></p>
-                            </div>
-                        </div>
+                       
+                       
                         <div class="form-group">
                             <label class="col-sm-3 control-label">File fế hoach</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static"><a onclick="downloadPDF(this);" id="filekehoach"></a></p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">File bài kiểm tra</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filebaikiemtra"></a></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">File tài liệu</label>
-                            <div class="col-sm-9">
-                                <p class="form-control-static"><a onclick="downloadPDF(this);" id="filetailieu"></a></p>
-                            </div>
-                        </div>
+                                              
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tên người phụ trách</label>
                             <div class="col-sm-9">
@@ -198,25 +172,21 @@
         }
     );
     function viewDetail(data) {
-        $.get('/quanly/getNoiDungKhacById/' + data.value, function (data, status) {
-            var registration = JSON.parse(data);            
-            $('#schoolName').text(registration.Registration.School.Name);
-            $('#class').text(registration.Registration.Class.Name);
-            $('#studentQuantity').text(registration.Registration.StudentQuantity);
-            $('#dateGo').text(moment(registration.Registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
-            $('#activityName').text(registration.Registration.ProgramName);
-            $('#vitrikienthuc').text(registration.Registration.ViTriKienThuc);
-            $('#tomtatnoidung').text(registration.Registration.TomTatNoiDungCT);           
-            $('#location').text(registration.Registration.Province.Type + ' ' + registration.Registration.Province.Name);
-            $('#filekehoach').text(registration.Registration.FileKeHoach);
-            $('#filebaikiemtra').text(registration.Registration.FileBaiKiemTra);
-            $('#filetailieu').text(registration.Registration.FileTaiLieuChoHS);
-            $('#teacherName').text(registration.Registration.Creator);
-            $('#jobTitle').text(registration.Registration.Jobtitle.Name);
-            $('#phoneNumber').text(registration.Registration.PhoneNumber);
-            $('#email').text(registration.Registration.Email);
-            $('#subjectRegisted').text(registration.SubjectRegisted);
-            
+        $.get('/quanly/chitietkynangsong/' + data.value, function (data, status) {
+            var registration = JSON.parse(data);           
+            $('#schoolName').text(registration.School.Name);
+            $('#class').text(registration.Class.Name);
+            $('#dateGo').text(moment(registration.DateFrom, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+            $('#dateEnd').text(moment(registration.DateTo, 'YYYY/MM/DD').format('DD/MM/YYYY'));
+            $('#activityName').text(registration.ProgramName); 
+            $('#tomtatnoidung').text(registration.SumaryContent);                
+            $('#filekehoach').text(registration.FileKeHoach);           
+            $('#teacherName').text(registration.Creatot);
+            $('#jobTitle').text(registration.Jobtitle.Name);
+            $('#phoneNumber').text(registration.PhoneNumber);
+            $('#email').text(registration.Email);
+           
+
         })
     }
     function closeModal() {
@@ -225,14 +195,16 @@
     function getDateDetail() {
         var dateFrom = moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
         var dateTo = moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-        window.location.replace('/quanly/noidungkhac/' + dateFrom + '/' + dateTo);
+        window.location.replace('/quanly/kynangsong/' + dateFrom + '/' + dateTo);
     }
     function downloadPDF(data) {
         var fileName = data.text.split('.').shift();
-            window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/downloadPDF/' + fileName;
+            window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/downloadPDFKynangsong/' + fileName;
     }
     function downloadExcel() {
         window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/xuatexcelnoidungkhac/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
 
         }
 </script>
+
+
