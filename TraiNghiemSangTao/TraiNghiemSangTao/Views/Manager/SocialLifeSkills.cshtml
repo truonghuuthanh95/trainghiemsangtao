@@ -1,10 +1,10 @@
 ﻿@model TraiNghiemSangTao.Models.DTO.ManagerSocialLifeSkillOneViewModel
 @{
-    ViewBag.Title = "SocialLifeSkill";
+    ViewBag.Title = "Danh sách kỹ nắng, kỹ năng xã hội";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3 class="text-center text-primary">DANH SÁCH KỸ NĂNG XÃ HỘI</h3>
+<h3 class="text-center text-primary">DANH SÁCH KỸ NĂNG XÃ HỘI, KỸ NĂNG SỐNG</h3>
 <form class="form-inline text-center">
 
     <div class="form-group">
@@ -106,15 +106,31 @@
                                 <p class="form-control-static" id="tomtatnoidung"></p>
                             </div>
                         </div>
-                       
-                       
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Kỹ năng</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="kynang"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Đơn Vị phối hợp</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="donviphoihop"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Giấy phép hoạt động</label>
+                            <div class="col-sm-9">
+                                <p class="form-control-static" id="giayphephoatdong"></p>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">File fế hoach</label>
                             <div class="col-sm-9">
                                 <p class="form-control-static"><a onclick="downloadPDF(this);" id="filekehoach"></a></p>
                             </div>
                         </div>
-                                              
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tên người phụ trách</label>
                             <div class="col-sm-9">
@@ -185,7 +201,9 @@
             $('#jobTitle').text(registration.Jobtitle.Name);
             $('#phoneNumber').text(registration.PhoneNumber);
             $('#email').text(registration.Email);
-           
+            $('#donviphoihop').text(registration.CompanyContact == '' ? 'Không' : registration.CompanyContact);
+            $('#giayphephoatdong').text(registration.License == '' ? 'Không' : registration.License);
+            $('#kynang').text(registration.IsKyNangThucHanhXH == 'true'? 'Kỹ năng thực hành' : 'Kỹ năng sống');
 
         })
     }
@@ -202,7 +220,7 @@
             window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/downloadPDFKynangsong/' + fileName;
     }
     function downloadExcel() {
-        window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/xuatexcelnoidungkhac/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+        window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/xuatexcelkinangsong/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
 
         }
 </script>

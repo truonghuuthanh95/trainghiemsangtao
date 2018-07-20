@@ -35,12 +35,22 @@ namespace TraiNghiemSangTao.Controllers
         [Route("")]
         public ActionResult Index()
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             return View();
         }
         [Route("trainghiemsangtao/{dateFrom}/{dateTo}/{programId}")]
         [HttpGet]
         public ActionResult TraiNghiemSangTao(DateTime dateFrom, DateTime dateTo, int programId)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             //Program registrationCreativeExp = registrationCreativeExpRepository.GetRegistrationFirstIndex(); 
             List<RegistrationCreativeExp> registrationCreativeExps = registrationCreativeExpRepository.GetAllRegistrationCreativeExpByDateAndProgramId(dateFrom, dateTo, programId);
             List<Program> programs = programRepository.GetPrograms();
@@ -52,6 +62,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult NoiDungKhac(DateTime dateFrom, DateTime dateTo)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             List<Registration> registrations = registrationRepository.GetRegistrationsByDate(dateFrom, dateTo);
             ManagerNoiDungKhacOneViewModel managerNoiDungKhacOneViewModel = new ManagerNoiDungKhacOneViewModel(registrations, dateFrom, dateTo);
             return View(managerNoiDungKhacOneViewModel);
@@ -60,6 +75,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult GetNoiDungKhacById(int id)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             Registration registration = registrationRepository.GetRegistrationById(id);
             string subjectRegisted = string.Join(", " ,subjectRegistedRepository.GetSubjectsRegistedsByRegistrationId(registration.Id).Select(s => s.Subject.Name));
             NoiDungKhacJson noiDungKhacJson = new NoiDungKhacJson(registration, subjectRegisted);
@@ -75,6 +95,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult GetDetailCreativeExp(int id)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             RegistrationCreativeExp registrationCreativeExp = registrationCreativeExpRepository.GetRegistrationCreativeExpById(id);
             var jsonRegistrationCreativeExp = JsonConvert.SerializeObject(registrationCreativeExp,
            Formatting.None,
@@ -89,6 +114,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public async Task<ActionResult> ExportExcelCreativeExp(DateTime dateFrom, DateTime dateTo, int programId)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             List<RegistrationCreativeExp> registrationCreativeExps = registrationCreativeExpRepository.GetAllRegistrationCreativeExpByDateAndProgramId(dateFrom, dateTo, programId);
             string fileName = string.Concat("ds-trainghiemsangtao.xlsx");
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
@@ -100,6 +130,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public async Task<ActionResult> ExportExcelRegistration(DateTime dateFrom, DateTime dateTo)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             List<Registration> registrations = registrationRepository.GetRegistrationsByDate(dateFrom, dateTo);
             string fileName = string.Concat("ds-noidungkhac.xlsx");
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
@@ -117,21 +152,31 @@ namespace TraiNghiemSangTao.Controllers
             await Utils.ExportExcel.GenerateXLSRegistration(registrations, subjectsRegisteds, dateFrom, dateTo, filePath);
             return File(filePath, "application/vnd.ms-excel", fileName);
         }
-        [Route("xuatexcelkinangsong/{dateFrom}/{dateTo}/{programId}")]
+        [Route("xuatexcelkinangsong/{dateFrom}/{dateTo}")]
         [HttpGet]
-        public async Task<ActionResult> ExportSocialLifeSkill(DateTime dateFrom, DateTime dateTo, int programId)
+        public async Task<ActionResult> ExportSocialLifeSkill(DateTime dateFrom, DateTime dateTo)
         {
-            List<RegistrationCreativeExp> registrationCreativeExps = registrationCreativeExpRepository.GetAllRegistrationCreativeExpByDateAndProgramId(dateFrom, dateTo, programId);
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
+            List<SocialLifeSkill> socialLifeSkills = socialLifeSkillRepository.GetSocialLifeSkillsByDate(dateFrom, dateTo);
             string fileName = string.Concat("ds-kynangsong.xlsx");
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
-            await Utils.ExportExcel.GenerateXLSRegistrationCreativeExp(registrationCreativeExps, dateFrom, dateTo, filePath);
+            await Utils.ExportExcel.GenerateXLSSocialLifeSkill(socialLifeSkills, dateFrom, dateTo, filePath);
             return File(filePath, "application/vnd.ms-excel", fileName);
         }
 
         [Route("downloadPDF/{fileName}")]
         [HttpGet]
         public ActionResult DownloadPDF(string fileName)
-        {            
+        {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/" + fileName.Trim()+".pdf");
             return File(filePath, "application/pdf", fileName.Trim()+".pdf");
         }
@@ -147,6 +192,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult GetDetailSocialLifeSkill(int id)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             SocialLifeSkill socialLifeSkill = socialLifeSkillRepository.GetSocialLifeSkillById(id);
             var jsonSocialLifeSkill = JsonConvert.SerializeObject(socialLifeSkill,
            Formatting.None,
@@ -160,6 +210,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult DownloadPDFSocialLifeSkill(string fileName)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null)
+            {
+                return RedirectToRoute("login");
+            }
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/SocialSkill/" + fileName.Trim() + ".pdf");
             return File(filePath, "application/pdf", fileName.Trim() + ".pdf");
         }

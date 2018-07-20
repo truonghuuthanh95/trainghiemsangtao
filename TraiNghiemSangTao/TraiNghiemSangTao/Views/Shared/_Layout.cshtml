@@ -1,9 +1,14 @@
-﻿<!DOCTYPE html>
+﻿
+@{ 
+    TraiNghiemSangTao.Models.DAO.Account account = (TraiNghiemSangTao.Models.DAO.Account)Session[TraiNghiemSangTao.Utils.CommonConstant.USER_SESSION];
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Hoạt động ngoại khóa</title>
+    <link rel="shortcut icon" href="~/Content/images/logo_so.png">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -28,7 +33,31 @@
                         <a href="/"><span class="glyphicon glyphicon-home"></span> Trang Chủ</a>
                     </li>
                 </ul>
-                <ul class="nav-link nav navbar-nav navbar-right">                        
+                <ul class="nav-link nav navbar-nav navbar-right">
+                    @{
+                        if (account != null)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chào, Thành <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/quanly">Quản lý chung</a></li>
+
+
+
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/logout">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li role="presentation" class="">
+                                <a href="/login" role="button">
+                                    <span class="glyphicon glyphicon-log-in"></span> Đăng nhập
+                                </a>
+                            </li>
+                        }
+                    }
 
                     <li role="presentation" class="">
                         <a href="/lienhe" role="button">
@@ -37,6 +66,7 @@
                     </li>
 
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -45,9 +75,16 @@
     @RenderSection("scripts", required: false)
     <div class="container">
         @RenderBody()
-       
-    </div>
 
+    </div>
+    @*<footer style="background-color:#242729; bottom:0; width:100%;">
+            <div class="container">
+                <div class="row">
+                    <h5 style="color:#99979c;">Phát triển bởi Trung tâm thông tin và chương trình giáo dục - Sở giáo dục & đào tạo TP.HCM</h5>
+                </div>
+            </div>
+
+        </footer>*@
 
 </body>
 </html>

@@ -36,6 +36,7 @@ namespace TraiNghiemSangTao.App_Start
             container.RegisterType<IRegistrationRepository, RegistrationRepository>();
             container.RegisterType<ISubjectRegistedRepository, SubjectRegistedRepository>();
             container.RegisterType<ISocialLifeSkillRepository, SocialLifeSkillRepository>();
+            container.RegisterType<IAccountRepository, AccountRepository>();
         }
     }
 }

@@ -120,7 +120,8 @@ namespace TraiNghiemSangTao.Utils
                     ws.Cells[6, 12].Value = "SỐ ĐIỆN THOẠI";
                     ws.Cells[6, 13].Value = "EMAIL";
                     ws.Cells[6, 14].Value = "NGÀY TẠO";
-
+                    string subject = "";
+                    List<SubjectsRegisted> subjectsRegistedBelongTo = new List<SubjectsRegisted>();
                     for (int i = 0; i < registrations.Count(); i++)
                     {
                         ws.Cells[i + 7, 1].Value = i + 1;
@@ -132,9 +133,8 @@ namespace TraiNghiemSangTao.Utils
                         ws.Cells[i + 7, 7].Value = registrations.ElementAt(i).ViTriKienThuc;
                         ws.Cells[i + 7, 8].Value = registrations.ElementAt(i).TomTatNoiDungCT;
                         ws.Cells[i + 7, 9].Value = registrations.ElementAt(i).Province.Type + " " + registrations.ElementAt(i).Province.Name;
-                        string subject = "";
-                        List<SubjectsRegisted> subjectsRegistedBelongTo = subjectsRegisteds.Where(s => s.RegistrationId == registrations.ElementAt(i).Id).ToList();
-                        for (int j = 0; i < subjectsRegistedBelongTo.Count(); j++)
+                        subjectsRegistedBelongTo = subjectsRegisteds.Where(s => s.RegistrationId == registrations.ElementAt(i).Id).ToList();
+                        for (int j = 0; j < subjectsRegistedBelongTo.Count(); j++)
                         {
                             subject = string.Join(", ", subjectsRegistedBelongTo.Select(s => s.Subject.Name));
                         }
@@ -180,5 +180,84 @@ namespace TraiNghiemSangTao.Utils
                 }
             });
         }
+        public static Task GenerateXLSSocialLifeSkill(List<SocialLifeSkill> socialLifeSkills, DateTime dateFrom, DateTime dateTo, string filePath)
+        {
+            return Task.Run(() =>
+            {
+                using (ExcelPackage pck = new ExcelPackage())
+                {
+                    //Create the worksheet 
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("kynangxahoi,kynangsong");
+                    ws.Cells[2, 1].Value = "DANH SÁCH KỸ NĂNG SỐNG, KỸ NĂNG XÃ HỘI";
+                    ws.Cells["A2:I2"].Merge = true;                  
+                    ws.Cells[4, 1].Value = "Từ ngày " + dateFrom.Day.ToString("d2") + "/" + dateFrom.Month.ToString("d2") + "/" + dateFrom.Year + " tới ngày " + dateTo.Day.ToString("d2") + "/" + dateTo.Month.ToString("d2") + "/" + dateTo.Year;
+                    ws.Cells["A4:I4"].Merge = true;
+                    ws.Cells[6, 1].Value = "STT";
+                    ws.Cells[6, 2].Value = "TÊN TRƯỜNG";
+                    ws.Cells[6, 3].Value = "LỚP";
+                    ws.Cells[6, 4].Value = "NGÀY BẮT ĐẦU";
+                    ws.Cells[6, 5].Value = "NGÀY KẾT THÚC";
+                    ws.Cells[6, 6].Value = "NỘI DUNG THỰC HIỆN HOẠT ĐỘNG";
+                    ws.Cells[6, 7].Value = "TÓM TẮT NỘI DUNG THỰC HIỆN";
+                    ws.Cells[6, 8].Value = "KỸ NĂNG";
+                    ws.Cells[6, 9].Value = "ĐƠN VỊ PHỐI HỢP";
+                    ws.Cells[6, 10].Value = "GIẤY PHÉP HOẠT ĐỘNG";
+                    ws.Cells[6, 11].Value = "TÊN NGƯỜI PHỤ TRÁCH";
+                    ws.Cells[6, 12].Value = "CHỨC VỤ";
+                    ws.Cells[6, 13].Value = "SỐ ĐIỆN THOẠI";
+                    ws.Cells[6, 14].Value = "EMAIL";
+                    
+                    for (int i = 0; i < socialLifeSkills.Count(); i++)
+                    {
+                        ws.Cells[i + 7, 1].Value = i + 1;
+                        ws.Cells[i + 7, 2].Value = socialLifeSkills.ElementAt(i).School.Name;
+                        ws.Cells[i + 7, 3].Value = socialLifeSkills.ElementAt(i).Class.Name;
+                        ws.Cells[i + 7, 4].Value = socialLifeSkills.ElementAt(i).DateFrom.Value.Day.ToString("d2") + "/" + socialLifeSkills.ElementAt(i).DateFrom.Value.Month.ToString("d2") + "/" + socialLifeSkills.ElementAt(i).DateFrom.Value.Year;
+                        ws.Cells[i + 7, 5].Value = socialLifeSkills.ElementAt(i).DateTo.Value.Day.ToString("d2") + "/" + socialLifeSkills.ElementAt(i).DateTo.Value.Month.ToString("d2") + "/" + socialLifeSkills.ElementAt(i).DateTo.Value.Year;
+                        ws.Cells[i + 7, 6].Value = socialLifeSkills.ElementAt(i).ProgramName;
+                        ws.Cells[i + 7, 7].Value = socialLifeSkills.ElementAt(i).SumaryContent;
+                        ws.Cells[i + 7, 8].Value = socialLifeSkills.ElementAt(i).IsKyNangThucHanhXH == true? "Kỹ năng sống" : "Kỹ năng khác";
+                        ws.Cells[i + 7, 9].Value = socialLifeSkills.ElementAt(i).CompanyContact;
+                        ws.Cells[i + 7, 10].Value = socialLifeSkills.ElementAt(i).License;
+                        ws.Cells[i + 7, 11].Value = socialLifeSkills.ElementAt(i).Creatot;
+                        ws.Cells[i + 7, 12].Value = socialLifeSkills.ElementAt(i).Jobtitle.Name;
+                        ws.Cells[i + 7, 13].Value = socialLifeSkills.ElementAt(i).PhoneNumber;
+                        ws.Cells[i + 7, 14].Value = socialLifeSkills.ElementAt(i).Email;
+                    }
+                    using (ExcelRange rng = ws.Cells["A2:I2"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 18;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A3:I3"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 14;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A4:I4"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Font.Size = 14;
+                        rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        rng.Style.Font.Color.SetColor(Color.Red);
+                    }
+                    using (ExcelRange rng = ws.Cells["A6:N6"])
+                    {
+                        rng.Style.Font.Bold = true;
+                        rng.Style.Fill.PatternType = ExcelFillStyle.Solid;        //Set Pattern for the background to Solid 
+                        rng.Style.Fill.BackgroundColor.SetColor(Color.SkyBlue);  //Set color to blue 
+                        rng.Style.Font.Color.SetColor(Color.Black);
+                        rng.AutoFitColumns();
+                    }
+
+
+                    pck.SaveAs(new FileInfo(filePath));
+                }
+            });
         }
+    }
 }
