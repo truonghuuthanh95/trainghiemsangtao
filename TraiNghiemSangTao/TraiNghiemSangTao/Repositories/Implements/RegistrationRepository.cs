@@ -12,10 +12,12 @@ namespace TraiNghiemSangTao.Repositories.Implements
     public class RegistrationRepository : IRegistrationRepository
     {
         CreativeExpDB _db;
+        SubjectRegistedRepository SubjectRegistedRepository;
 
-        public RegistrationRepository(CreativeExpDB db)
+        public RegistrationRepository(CreativeExpDB db, SubjectRegistedRepository subjectRegistedRepository)
         {
             _db = db;
+            SubjectRegistedRepository = subjectRegistedRepository;
         }
 
         public bool CheckExistedFileBaikiemtra(string filebaikiemtra)
@@ -51,6 +53,26 @@ namespace TraiNghiemSangTao.Repositories.Implements
                 return false;
             }
             return true;
+        }
+
+        public bool CheckValidCodeRegisted(string codeRegisted)
+        {
+            var isValid = _db.Registrations.Where(s => s.CodeRegisted == codeRegisted).FirstOrDefault();
+            if (isValid != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Registration GetRegistrationByCodeRegisted(string codeRegisted)
+        {
+            Registration registration = _db.Registrations
+                .Include("School")
+                .Include("Jobtitle")
+                .Include("Province")
+                .Include("Class").Where(s => s.CodeRegisted == codeRegisted).SingleOrDefault();
+            return registration;
         }
 
         public Registration GetRegistrationById(int id)
@@ -103,6 +125,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
             registration.StudentQuantity = registrationDTO.StudentQuantity;
             registration.ViTriKienThuc = registrationDTO.ViTriKienThuc;
             registration.TomTatNoiDungCT = registrationDTO.TomTatNoiDungCT;
+            registration.CodeRegisted = Utils.RandomCodeRegisted.GetRandomString();
             var existedCodeRegisted = _db.Registrations.Where(s => s.CodeRegisted == registration.CodeRegisted);
             if (existedCodeRegisted != null)
             {
@@ -133,5 +156,69 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return registration;
 
         }
+
+        public Registration UpdateFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh, int id)
+        {
+            Registration registration = GetRegistrationById(id);
+            registration.FileBaiKiemTra = filebaikiemtra;
+            registration.FileKeHoach = filekehoach;
+            registration.FileTaiLieuChoHS = filetailieuchohocsinh;
+            _db.Entry(registration).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                return registration = null;
+
+            }
+            return registration;
+        }
+
+        public Registration UpdateRegistration(RegistrationDTO registrationDTO, int id)
+        {
+            SubjectRegistedRepository.RemoveSunjectRegistedByRegistrationId(id);
+            Registration registration = _db.Registrations.Where(s => s.Id == id).FirstOrDefault();
+            string[] arraySubject = registrationDTO.SubjectSelected.Split(new char[] { ',' });
+            registration.ClassId = registrationDTO.ClassId;
+            registration.CreatedAt = DateTime.Now;
+            registration.Creator = registrationDTO.Creator;
+            registration.DateRegisted = registrationDTO.DateRegisted;
+            registration.Email = registrationDTO.Email;
+            registration.JobTitleId = registrationDTO.JobTitleId;
+            registration.PhoneNumber = registrationDTO.PhoneNumber;
+            registration.ProgramName = registrationDTO.ProgramName;
+            registration.ProvinceId = registrationDTO.ProvinceId;
+            registration.SchoolDegreeId = registrationDTO.SchoolDegreeId;
+            registration.SchoolId = registrationDTO.SchoolId;
+            registration.StudentQuantity = registrationDTO.StudentQuantity;
+            registration.ViTriKienThuc = registrationDTO.ViTriKienThuc;
+            registration.TomTatNoiDungCT = registrationDTO.TomTatNoiDungCT;
+            
+            _db.Entry(registration).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return registration = null;
+            }
+            
+            foreach (var item in arraySubject)
+            {
+                SubjectsRegisted subjectsRegisted = new SubjectsRegisted();
+                subjectsRegisted.RegistrationId = registration.Id;
+                subjectsRegisted.SubjectId = Convert.ToInt32(item);
+                _db.SubjectsRegisteds.Add(subjectsRegisted);
+                _db.SaveChanges();
+            }
+            return registration;
+
+        }
+
+       
     }
 }

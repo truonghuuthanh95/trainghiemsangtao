@@ -1,0 +1,594 @@
+﻿@model TraiNghiemSangTao.Models.DTO.NoiDungKhacOneViewModel
+@{
+    ViewBag.Title = "Cập nhật nội dung khác";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Nội dung khác</h4>
+        </div><div class="panel-body">
+            <p class="text-waring text-warning">Lưu ý! Vui lòng điền thông tin theo thứ tự</p>
+            <form>
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                1.Cấp trường tham gia
+                            </label>
+                            <select name="schoolDegreeSlected" id="schoolDegreeSlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.SchoolDegrees)
+                                    {
+                                        if (item.Id == Model.Registration.SchoolDegreeId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div><div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                2.Quận
+                            </label>
+                            <select name="districtSlected" id="districtSlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.Districts)
+                                    {
+                                        if (item.Id == Model.Registration.School.DistrictId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Type @item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Type @item.Name</option>
+                                        }
+
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div><div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                3.Trường
+                            </label>
+                            <select name="schoolNameSelected" id="schoolNameSelected" class="form-control">
+                                @{
+                                    foreach (var item in Model.Schools)
+                                    {
+                                        if (item.Id == Model.Registration.School.Id)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                4.Khối lớp
+                            </label>
+                            <select name="gradeSlected" id="gradeSlected" class="form-control">
+                                @{
+                                    foreach (var item in Model.Classes)
+                                    {
+                                        if (item.Id == Model.Registration.ClassId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorActivityTitle">
+                            <label for="formControlsSelect" class="control-label">
+                                5.Nội dung thực hiện hoạt động
+                            </label>
+                            <input type="text" placeholder="Nội dung thực hiện" name="activityTitle" value="@Model.Registration.ProgramName" id="activityTitle" class="form-control">
+                            <span class="help-block help-block-true" id="errorActivityTitleMessage"></span>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback">
+                            <label for="formBasicText" class="control-label">
+                                6.Địa điểm
+                            </label>
+                            <select name="province" id="province" class="form-control">
+                                @{
+                                    foreach (var item in Model.Province)
+                                    {
+                                        if (item.Id == Model.Registration.ProvinceId)
+                                        {
+                                            <option value="@item.Id" selected>@item.Type @item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Type @item.Name</option>
+                                        }
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group has-feedback" id="errorDateGo">
+                            <label for="exampleInputEmail1" class="control-label">
+                                7.Ngày thực hiện
+                            </label>
+                            <input type="text" class="form-control datepicker" id="dateGo" value="@Model.Registration.DateRegisted.Value.Day.ToString("d2")/@Model.Registration.DateRegisted.Value.Month.ToString("d2")/@Model.Registration.DateRegisted.Value.Year">
+                            <span class="help-block" id="errorDateGoMessage"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback" id="errorValidStudentQuantity">
+                            <label for="formBasicText" class="control-label">
+                                8.Số lượng hoc sinh tham gia
+                            </label>
+                            <input type="number" placeholder="Số lượng" name="studentQuantity" value="@Model.Registration.StudentQuantity" id="studentQuantity" class="form-control">
+                            <span class="text-warning" id="validStudentQuantity"> </span><span class="help-block" id="errorValidStudentQuantityMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorVitrikienthuc">
+                            <label for="comment" class="control-label">9.Vị trí kiến thức trong chương trình phổ thông</label>
+                            <textarea class="form-control" rows="5" id="vitrikienthuc">@Model.Registration.ViTriKienThuc</textarea>
+                            <span class="help-block help-block-true" id="errorVitrikienthucMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorTomtatnoidungthuchien">
+                            <label for="comment" class="control-label">10.Tóm tắt nội dung kiến thức</label>
+                            <textarea class="form-control" rows="5" id="tomtatnoidungthuchien">@Model.Registration.TomTatNoiDungCT</textarea>
+                            <span class="help-block help-block-true" id="errorTomtatnoidungthuchienMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group" id="errorSubject">
+                            <label for="comment" class="control-label">11.Xin chọn môn</label>
+                            <div id="subject">
+                                @{
+                                    foreach (TraiNghiemSangTao.Models.DAO.Subject item in Model.Subjects)
+                                    {
+                                        if (Model.SubjectsRegisteds.Where(s => s.SubjectId == item.Id).Count() > 0)
+                                        {
+                                            <label class="checkbox-inline"><input type="checkbox" value="@item.Id" id="subject" checked>@item.Name</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="checkbox-inline"><input type="checkbox" value="@item.Id" id="subject">@item.Name</label>
+                                        }
+
+                                    }
+                                }
+                            </div>
+                            <span class="help-block help-block-true" id="errorSubjectMessage"></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorfilekehoach">
+                            <label for="exampleInputFile" class="control-label">12.File kế hoạch (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="filekehoach">
+                            <span class="help-block help-block-true" id="errorfilekehoachMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorFilebaikiemtra">
+                            <label for="exampleInputFile" class="control-label">13.File bài kiểm tra, đánh giá (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB)</label>
+                            <input type="file" id="filebaikiemtra">
+                            <span class="help-block help-block-true" id="errorFilebaikiemtraMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group has-feedback" id="errorFiletailieuchohocsinh">
+                            <label for="exampleInputFile" class="control-label">14.File tài liệu cho học sinh (chỉ chấp nhận file pdf dung lượng nhỏ hơn 2MB) </label>
+                            <input type="file" id="filetailieuchohocsinh">
+                            <span class="help-block help-block-true" id="errorFiletailieuchohocsinhMessage"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group has-feedback" id="errorTeacherName">
+                            <label for="formBasicText" class="control-label">
+                                15.Người phụ trách <i>(Ghi rõ họ và tên)</i>
+                            </label>
+                            <input type="text" placeholder="Người phụ trách" name="teacherName" value="@Model.Registration.Creator" id="teacherName" class="form-control">
+                            <span class="help-block help-block-true" id="errorTeacherNameMessage"></span>
+                        </div>
+                    </div><div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="formBasicText" class="control-label">
+                                16.Chức vụ
+                            </label><select name="jobTitleSelected" id="jobTitleSelected" class="form-control">
+    @{
+        foreach (var item in Model.Jobtitles)
+        {
+            if (item.Id == Model.Registration.JobTitleId)
+            {
+                <option value="@item.Id" selected>@item.Name</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+
+        }
+    }
+</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorEmail">
+                            <label for="formBasicText" class="control-label">
+                                17.Email
+                            </label>
+                            <input type="email" placeholder="Email" value="@Model.Registration.Email" name="emailEntered" id="emailEntered" class="form-control">
+                            <span class="help-block help-block-true" id="errorEmailMessage"></span>
+                        </div>
+                    </div><div class="col-md-6">
+                        <div class="form-group has-feedback" id="errorPhoneNumber">
+                            <label for="formBasicText" class="control-label">
+                                18.Số điện thoại
+                            </label>
+                            <input type="number" placeholder="Số điện thoại" name="phoneNumber" value="@Model.Registration.PhoneNumber" id="phoneNumber" class="form-control">
+                            <span class="help-block help-block-true" id="errorPhoneNumberMessage"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">CẬP NHẬT</button></div>
+    </div>
+    <span hidden class="loader" id="loader"></span>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#dateGo').datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+
+        })
+
+    })
+    $('#schoolDegreeSlected').change(function () {
+        $.get('/getSchoolBySchoolDegreeAndDistrict/' + $(this).val() + '/' + $('#districtSlected').val(), function (data, status) {
+
+            var schools = JSON.parse(data);
+
+            $('#schoolNameSelected').children().remove().end();
+            for (var i = 0; i < schools.length; i++) {
+
+                $('#schoolNameSelected').append('<option value=' + schools[i].Id + '>' + schools[i].Name + '</option>')
+            }
+        })
+        $.get('/getClassBySchoolDegree/' + $(this).val(), function (data, status) {
+
+            var classes = JSON.parse(data);
+
+            $('#gradeSlected').children().remove().end();
+            for (var i = 0; i < classes.length; i++) {
+
+                $('#gradeSlected').append('<option value=' + classes[i].Id + '>' + classes[i].Name + '</option>')
+            }
+        })
+    })
+    $('#districtSlected').change(function () {
+        $.get('/getSchoolBySchoolDegreeAndDistrict/' + $('#schoolDegreeSlected').val() + '/' + $(this).val(), function (data, status) {
+
+            var schools = JSON.parse(data);
+
+            $('#schoolNameSelected').children().remove().end();
+            for (var i = 0; i < schools.length; i++) {
+
+                $('#schoolNameSelected').append('<option value=' + schools[i].Id + '>' + schools[i].Name + '</option>')
+            }
+        })
+    })
+
+    var selected = [];
+    $('#subject input:checked').each(function () {
+        selected.push($(this).attr('value'));
+    });
+    function submitCreativeExp() {
+        if ($('#dateGo').val() == '') {
+            $('#errorDateGo').addClass('has-error');
+            $('#errorDateGoMessage').text('Vui lòng nhập ngày tham gia');
+            $('#dateGo').focus();
+        }
+        else {
+            $('#errorDateGo').removeClass('has-error');
+            $('#errorDateGoMessage').text('');
+        }
+        if ($('#studentQuantity').val() == '' || $('#studentQuantity').val() < 1) {
+            $('#errorValidStudentQuantity').addClass('has-error');
+            $('#errorValidStudentQuantityMessage').text('Vui lòng nhập số lượng học sinh tham gia');
+            $('#studentQuantity').focus();
+        }
+        else {
+            $('#errorValidStudentQuantity').removeClass('has-error');
+            $('#errorValidStudentQuantityMessage').text('');
+        }
+
+        if ($('#teacherName').val() == '') {
+            $('#errorTeacherName').addClass('has-error');
+            $('#errorTeacherNameMessage').text('Vui lòng nhập tên người phụ trách');
+        }
+        else {
+            $('#errorTeacherName').removeClass('has-error');
+            $('#errorTeacherNameMessage').text('');
+        }
+        if ($('#emailEntered').val() == '') {
+            $('#errorEmail').addClass('has-error');
+            $('#errorEmailMessage').text('Vui lòng nhập địa chỉ email');
+        }
+        else {
+            $('#errorEmail').removeClass('has-error');
+            $('#errorEmailMessage').text('');
+        }
+        if ($('#phoneNumber').val() == '') {
+            $('#errorPhoneNumber').addClass('has-error');
+            $('#errorPhoneNumberMessage').text('Vui lòng nhập địa chỉ email');
+        }
+        else {
+            $('#errorPhoneNumber').removeClass('has-error');
+            $('#errorPhoneNumberMessage').text('');
+        }
+
+        if ($('#activityTitle').val() == '') {
+            $('#errorActivityTitle').addClass('has-error');
+            $('#errorActivityTitleMessage').text('Vui lòng nhập');
+        }
+        else {
+            $('#errorActivityTitle').removeClass('has-error');
+            $('#errorActivityTitleMessage').text('');
+        }
+        if ($('#tomtatnoidungthuchien').val() == '') {
+            $('#errorTomtatnoidungthuchien').addClass('has-error');
+            $('#errorTomtatnoidungthuchienMessage').text('Vui lòng nhập');
+        }
+        else {
+            $('#errorTomtatnoidungthuchien').removeClass('has-error');
+            $('#errorTomtatnoidungthuchienMessage').text('');
+        }
+        if ($('#vitrikienthuc').val() == '') {
+            $('#errorVitrikienthuc').addClass('has-error');
+            $('#errorVitrikienthucMessage').text('Vui lòng nhập');
+        }
+        else {
+            $('#errorVitrikienthuc').removeClass('has-error');
+            $('#errorVitrikienthucMessage').text('');
+        }
+        if ($('#activityTitle').val() == '') {
+            $('#errorActivityTitle').addClass('has-error');
+            $('#errorActivityTitleMessage').text('Vui lòng nhập');
+            $('#activityTitle').focus();
+        }
+        else {
+            $('#errorActivityTitle').remove('has-error');
+            $('#errorActivityTitleMessage').text('');
+        }
+        var selectedSubject = [];
+        $('#subject input:checked').each(function () {
+            selectedSubject.push($(this).attr('value'));
+        });
+        if (selectedSubject.length < 1) {
+            $('#errorSubject').addClass('has-error');
+            $('#errorSubjectMessage').text('Vui lòng chọn môn');
+        }
+        else {
+            $('#errorSubject').removeClass('has-error');
+            $('#errorSubjectMessage').text('');
+        }
+        if ($('#filekehoach').val() == '') {
+            $('#errorfilekehoach').addClass('has-error');
+            $('#errorfilekehoachMessage').text('Vui lòng chọn file');
+        }
+        else {
+            var fileExtention = $('#filekehoach').val().split('.').pop();
+            var filekehoach = $('#filekehoach')[0];
+            if (fileExtention != 'pdf') {
+                $('#errorfilekehoach').addClass('has-error');
+                $('#errorfilekehoachMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filekehoach.files[0].size / (1024 * 1024) > 2) {
+                $('#errorfilekehoach').addClass('has-error');
+                $('#errorfilekehoachMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
+            }
+            else {
+                $('#errorfilekehoach').removeClass('has-error');
+                $('#errorfilekehoachMessage').text('');
+            }
+
+        }
+        if ($('#filebaikiemtra').val() == '') {
+            $('#errorFilebaikiemtra').addClass('has-error');
+            $('#errorFilebaikiemtraMessage').text('Vui lòng chọn file');
+        }
+        else {
+            var fileExtention = $('#filebaikiemtra').val().split('.').pop();
+            var filebaikiemtra = $('#filebaikiemtra')[0];
+            if (fileExtention != 'pdf') {
+                $('#errorFilebaikiemtra').addClass('has-error');
+                $('#errorFilebaikiemtraMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filebaikiemtra.files[0].size / (1024 * 1024) > 2) {
+                $('#errorFilebaikiemtra').addClass('has-error');
+                $('#errorFilebaikiemtraMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
+            }
+            else {
+                $('#errorFilebaikiemtra').removeClass('has-error');
+                $('#errorFilebaikiemtraMessage').text('');
+            }
+
+        }
+        if ($('#filetailieuchohocsinh').val() == '') {
+            $('#errorFiletailieuchohocsinh').addClass('has-error');
+            $('#errorFiletailieuchohocsinhMessage').text('Vui lòng chọn file');
+        }
+        else {
+            var fileExtention = $('#filetailieuchohocsinh').val().split('.').pop();
+            var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
+            if (fileExtention != 'pdf') {
+                $('#errorFiletailieuchohocsinh').addClass('has-error');
+                $('#errorFiletailieuchohocsinhMessage').text('File sai định dạng bắt buộc phải là file .pdf');
+            }
+            else if (filetailieuchohocsinh.files[0].size / (1024 * 1024) > 2) {
+                $('#errorFiletailieuchohocsinh').addClass('has-error');
+                $('#errorFiletailieuchohocsinhMessage').text('Vui lòng chọn file nhỏ hơn 2MB');
+            }
+            else {
+                $('#errorFiletailieuchohocsinh').removeClass('has-error');
+                $('#errorFiletailieuchohocsinhMessage').text('');
+            }
+
+        }
+        if (!$('#errorActivityTitle').hasClass('has-error')
+            && !$('#errorPhoneNumber').hasClass('has-error')
+            && !$('#errorEmail').hasClass('has-error')
+            && !$('#errorDateGo').hasClass('has-error')
+            && !$('#errorValidStudentQuantity').hasClass('has-error')
+            && !$('#errorVitrikienthuc').hasClass('has-error')
+            && !$('#tomtatnoidungthuchien').hasClass('has-error')
+            && !$('#errorSubject').hasClass('has-error')
+            && !$('#errorfilekehoach').hasClass('has-error')
+            && !$('#errorFilebaikiemtra').hasClass('has-error')
+            && !$('#errorFiletailieuchohocsinh').hasClass('has-error')
+            && !$('#errorTeacherName').hasClass('has-error')
+        ) {
+            $('#loader').show();
+            $('#submitCreativeExp').addClass('disable');
+            var formData = new FormData();
+            var filekehoach = $('#filekehoach')[0];
+            formData.append('filekehoach', filekehoach.files[0]);
+            var filebaikiemtra = $('#filebaikiemtra')[0];
+            formData.append('filebaikiemtra', filebaikiemtra.files[0]);
+            var filetailieuchohocsinh = $('#filetailieuchohocsinh')[0];
+            formData.append('filetailieuchohocsinh', filetailieuchohocsinh.files[0]);
+            formData.append('id', @Model.Registration.Id);
+            //formData.append('___RequestVerificationToken', $("input[name=__RequestVerificationToken]").val());
+            $.ajax({
+                url: '/uploadFileNoiDungKhac',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data == 'failedfiletailieuchohocsinh') {
+                        $('#loader').hide();
+                        $('#errorFiletailieuchohocsinh').addClass('has-error');
+                        $('#errorFiletailieuchohocsinhMessage').text('Tên file ' + $('#filetailieuchohocsinh').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorFiletailieuchohocsinh').removeClass('has-error');
+                        $('#errorFiletailieuchohocsinhMessage').text('')
+                    }
+                    if (data == 'failedfilebaikiemtra') {
+                        $('#loader').hide();
+                        $('#errorFilebaikiemtra').addClass('has-error');
+                        $('#errorFilebaikiemtraMessage').text('Tên file ' + $('#filebaikiemtra').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorFilebaikiemtra').removeClass('has-error');
+                        $('#errorFilebaikiemtraMessage').text('');
+                    }
+                    if (data == 'failedfilekehoach') {
+                        $('#loader').hide();
+                        $('#errorfilekehoach').addClass('has-error');
+                        $('#errorfilekehoachMessage').text('Tên file ' + $('#filekehoach').val() + ' đã tồn tại, vui lòng đặt tên khác');
+                    }
+                    else {
+                        $('#errorfilekehoach').removeClass('has-error');
+                        $('#errorfilekehoachMessage').text('');
+                    }
+                    if (data != 'failedfilebaikiemtra' && data != 'failedfilekehoach' && data != 'failedfiletailieuchohocsinh' && data != 'failed') {
+                        $.post('/postcapnhatnoidungkhac', {
+                            Id: @Model.Registration.Id,
+                            SchoolId: $('#schoolNameSelected').val(),
+                            StudentQuantity: $('#studentQuantity').val(),
+                            Creator: $('#teacherName').val(),
+                            JobTitleId: $('#jobTitleSelected').val(),
+                            ProgramName: $('#activityTitle').val(),
+                            DateRegisted: moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                            SchoolDegreeId: $('#schoolDegreeSlected').val(),
+                            ClassId: $('#gradeSlected').val(),
+                            ProvinceId: $('#province').val(),
+                            Email: $('#emailEntered').val(),
+                            PhoneNumber: $('#phoneNumber').val(),
+                            //PhuongAnChoHsThamGia: $('#PhuongAnChoHsThamGia').val(),
+                            ViTriKienThuc: $('#vitrikienthuc').val(),
+                            TomTatNoiDungCT: $('#tomtatnoidungthuchien').val(),
+                            SubjectSelected: selectedSubject.join(),
+                            __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                        }, function (data, status) {
+                            if (data == '200') {
+                                window.location.replace('/capnhatthanhcong/');
+
+                            }
+                        })
+                    }
+                },
+                error: function () {
+                    console.log('error');
+                }
+            });
+
+
+        }
+    }
+
+
+
+</script>
+

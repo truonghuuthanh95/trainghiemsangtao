@@ -142,8 +142,14 @@ namespace TraiNghiemSangTao.Controllers
         [HttpPost]
         public ActionResult PostUpdateCreativeExp(CreativeExpDTO creativeExpDTO, int id)
         {
+            registrationCreativeExpRepository.ResetStudentQuantity(id);
+            int validStudent = registrationCreativeExpRepository.CheckValidQuantityStudent(creativeExpDTO.ProgramId, creativeExpDTO.DaySessionId, creativeExpDTO.DateRegisted);
+            if (creativeExpDTO.StudentQuantity > validStudent)
+            {
+                return Json("Số lượng học sinh đang kí tối đa là: " + validStudent);
+            }
             RegistrationCreativeExp registrationCreativeExp = registrationCreativeExpRepository.UpdateRegistrationCreativeExp(creativeExpDTO, id);
-            return Json(registrationCreativeExp);
+            return Json("200");
         }
         [Route("capnhattrainghiemsangtaothanhcong")]
         [HttpGet]

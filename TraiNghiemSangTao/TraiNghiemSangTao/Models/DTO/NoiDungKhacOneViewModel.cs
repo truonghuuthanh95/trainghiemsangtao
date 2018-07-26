@@ -8,7 +8,8 @@ namespace TraiNghiemSangTao.Models.DTO
 {
     public class NoiDungKhacOneViewModel
     {
-        public Registration RegistrationCreativeExp { get; set; }
+        public Registration Registration { get; set; }
+        public List<SubjectsRegisted> SubjectsRegisteds { get; set; }
         public List<SchoolDegree> SchoolDegrees { get; set; }
         public List<Province> Province { get; set; }
         public List<School> Schools { get; set; }
@@ -17,9 +18,10 @@ namespace TraiNghiemSangTao.Models.DTO
         public List<Subject> Subjects { get; set; }
         public List<District> Districts { get; set; }
 
-        public NoiDungKhacOneViewModel(Registration registrationCreativeExp, List<SchoolDegree> schoolDegrees, List<Province> province, List<School> schools, List<Class> classes, List<Jobtitle> jobtitles, List<Subject> subjects, List<District> districts)
+        public NoiDungKhacOneViewModel(Registration registration, List<SubjectsRegisted> subjectsRegisteds, List<SchoolDegree> schoolDegrees, List<Province> province, List<School> schools, List<Class> classes, List<Jobtitle> jobtitles, List<Subject> subjects, List<District> districts)
         {
-            RegistrationCreativeExp = registrationCreativeExp;
+            Registration = registration;
+            SubjectsRegisteds = subjectsRegisteds;
             SchoolDegrees = schoolDegrees;
             Province = province;
             Schools = schools;

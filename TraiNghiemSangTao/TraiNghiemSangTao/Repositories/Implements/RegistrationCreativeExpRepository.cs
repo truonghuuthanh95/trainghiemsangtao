@@ -130,6 +130,23 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return false;
         }
 
+        public void ResetStudentQuantity(int id)
+        {
+            RegistrationCreativeExp registrationCreativeExp = _db.RegistrationCreativeExps.Where(s => s.Id == id).FirstOrDefault();
+            registrationCreativeExp.StudentQuantity = 0;
+            _db.Entry(registrationCreativeExp).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                
+            }                    
+
+        }
+
         public RegistrationCreativeExp SaveRegistrationCreativeExp(CreativeExpDTO creativeExpDTO)
         {
             RegistrationCreativeExp registrationCreativeExp = new RegistrationCreativeExp();

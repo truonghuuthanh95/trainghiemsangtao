@@ -7,7 +7,8 @@ using TraiNghiemSangTao.Models.DAO;
 namespace TraiNghiemSangTao.Models.DTO
 {
     public class SocialLifeSkillOneViewModel
-    {       
+    {
+        public SocialLifeSkill SocialLifeSkill { get; set; }
         public List<SchoolDegree> SchoolDegrees { get; set; }
        
         public List<School> Schools { get; set; }
@@ -16,8 +17,9 @@ namespace TraiNghiemSangTao.Models.DTO
        
         public List<District> Districts { get; set; }
 
-        public SocialLifeSkillOneViewModel(List<SchoolDegree> schoolDegrees, List<School> schools, List<Class> classes, List<Jobtitle> jobtitles, List<District> districts)
+        public SocialLifeSkillOneViewModel(SocialLifeSkill socialLifeSkill, List<SchoolDegree> schoolDegrees, List<School> schools, List<Class> classes, List<Jobtitle> jobtitles, List<District> districts)
         {
+            SocialLifeSkill = socialLifeSkill;
             SchoolDegrees = schoolDegrees;
             Schools = schools;
             Classes = classes;

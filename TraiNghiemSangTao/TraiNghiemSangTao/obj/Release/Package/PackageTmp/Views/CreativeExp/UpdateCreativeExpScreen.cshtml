@@ -256,27 +256,21 @@
                     <input type="text" placeholder="Tên chủ đề đăng kí" name="activityTitle" value="@Model.RegistrationCreativeExp.ActivitiTitle" id="activityTitle" class="form-control"><span class="help-block help-block-true" id="errorActivityTitleMessage"></span>
                 </div>
             </form>
-        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">Đăng kí</button></div>
+        </div><div class="panel-footer"><button type="button" class="btn btn-success btn-block" id="submitCreativeExp" onclick="submitCreativeExp()">CẬP NHẬT</button></div>
     </div>
     <span hidden class="loader" id="loader"></span>
-    <h3 class="text-center text-success checkIDBox" id="updateSuccess" hidden>CẬP NHẬT THÀNH CÔNG</h3>
+    
 </div>
 <input type="hidden" value="@Model.RegistrationCreativeExp.Id" id="registrationCreativeId"/>
 
 <script>
     $(document).ready(function () {
-        @*//console.log('@Model.RegistrationCreativeExp.DateRegisted.Value.Day.ToString().PadLeft(2, "0")' + '/@Model.RegistrationCreativeExp.DateRegisted.Value.Month.ToString().PadLeft(2, "0")' + '/@Model.RegistrationCreativeExp.DateRegisted.Value.Year');*@
         $('#dateGo').datepicker({
-            format: 'dd-mm-yyyy',            
-            autoclose: true,           
+            format: 'dd-mm-yyyy',
+            autoclose: true,
 
-        }).on('changeDate', function (ev) {
-            var date = moment($(this).val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
-            })
         });
-    $('#dateGo').val('@Model.RegistrationCreativeExp.DateRegisted.Value.Day' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Month' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Year')
+    $('#dateGo').val('@Model.RegistrationCreativeExp.DateRegisted.Value.Day.ToString("d2")' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Month.ToString("d2")' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Year')
     })
     $('#schoolDegreeSlected').change(function () {
         $.get('/getSchoolBySchoolDegreeAndDistrict/' + $(this).val() + '/' + $('#districtSlected').val(), function (data, status) {
@@ -311,15 +305,7 @@
                 $('#schoolNameSelected').append('<option value=' + schools[i].Id + '>' + schools[i].Name + '</option>')
             }
         })
-    })
-    $('#sectionADaySlected').change(function () {
-        if ($('#dateGo').val() != '') {
-            var dateGo = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + dateGo, function (data, status) {
-                $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
-            })
-        }
-    })
+    })   
     function submitCreativeExp() {
         if ($('#dateGo').val() == '') {
             $('#errorDateGo').addClass('has-error');
@@ -370,17 +356,15 @@
             $('#errorActivityTitle').removeClass('has-error');
             $('#errorActivityTitleMessage').text('');
         }
-
-        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {
-            var date = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-            $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                if (parseInt($('#studentQuantity').val()) > parseInt(data) || $('#studentQuantity').val() == '' || $('#studentQuantity').val() < 1) {
-                    $('#errorValidStudentQuantity').addClass('has-error');
-                    $('#errorValidStudentQuantityMessage').text('Số lượng hoc sinh tham gia không hợp lệ');
-                    $('#validStudentQuantity').text('Số học sinh có thể đăng kí tối đa là: ' + data);
-                }
-                else {
-                    $('#errorValidStudentQuantity').removeClass('has-error');
+        if ($('#studentQuantity').val() == '') {
+            $('#errorValidStudentQuantity').addClass('has-error');
+            $('#errorValidStudentQuantityMessage').text('Vui lòng nhập số lượng');
+        }
+        else {
+            $('#errorValidStudentQuantity').removeClass('has-error');
+            $('#errorValidStudentQuantityMessage').text('');
+        }
+        if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error') && !$('#errorValidStudentQuantity').hasClass('has-error')) {           
                     $('#loader').show();
                     $('#submitCreativeExp').addClass('disable');
                     $.post('/postCaphattrainghiemsangtao', {
@@ -400,15 +384,19 @@
                         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
                     }, function (data, status) {
 
-                        if (status == 'success') {
+                        if (data == '200') {
                             $('#loader').hide();
                             $('#creativeExpForm').hide();
-                            $('#updateSuccess').show();    
+                            window.location.replace('/capnhatthanhcong');
+                        }
+                        else {
+                            $('#loader').hide();
+                            $('#errorValidStudentQuantity').addClass('has-error');
+                            $('#errorValidStudentQuantityMessage').text('Số lượng học sinh tham gia không hợp lệ');
+                            $('#validStudentQuantity').text(data);
                         }
                     })
-                }
-            })
-        }
+            }        
     }
 
 

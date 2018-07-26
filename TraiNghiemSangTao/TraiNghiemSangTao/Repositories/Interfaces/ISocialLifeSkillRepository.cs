@@ -14,5 +14,9 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         SocialLifeSkill GetSocialLifeSkillById(int id);
         SocialLifeSkill CreateSocialLifeSkillWithFile(string fileKeHoach);
         bool CheckExistedFileKeHoach(string fileKeHoach);
+        SocialLifeSkill UpdateSocialLifeSkillWithoutCode(SocialLifeSkillDTO socialLifeSkillDTO, int id);
+        bool CheckValidCodeRegisted(string codeRegisted);
+        SocialLifeSkill GetSocialLifeSkillByRegistedCode(string registedCode);
+        SocialLifeSkill UpdateSocialLifeSkillFileKeHoachById(int id, string fileKeHoachName);
     }
 }

@@ -187,6 +187,7 @@
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\NoidungkhacController.cs" />
     <Compile Include="Controllers\SocialLifeSkillController.cs" />
+    <Compile Include="Controllers\UpdateSuccessfulController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -326,6 +327,11 @@
     <Content Include="Views\Manager\SocialLifeSkills.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\SocialLifeSkill\CheckCodeRegisted.cshtml" />
+    <Content Include="Views\SocialLifeSkill\UpdateSocialLifeSkill.cshtml" />
+    <Content Include="Views\UpdateSuccessful\Index.cshtml" />
+    <Content Include="Views\Noidungkhac\CheckCodeRegisted.cshtml" />
+    <Content Include="Views\Noidungkhac\UpdateNoiDungKhac.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

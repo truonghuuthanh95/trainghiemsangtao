@@ -16,5 +16,9 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         bool CheckExistedFiletailieuhocsinh(string filetailieuchohocsinh);
         List<Registration> GetRegistrationsByDate(DateTime dateFrom, DateTime dateTo);
         Registration GetRegistrationById(int id);
+        Registration UpdateRegistration(RegistrationDTO registrationDTO, int id);
+        bool CheckValidCodeRegisted(string codeRegisted);
+        Registration GetRegistrationByCodeRegisted(string codeRegisted);
+        Registration UpdateFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh, int id);
     }
 }

@@ -21,5 +21,24 @@ namespace TraiNghiemSangTao.Repositories.Implements
             List<SubjectsRegisted> subjectsRegisteds = _db.SubjectsRegisteds.Include("Subject").Where(s => s.RegistrationId == id).ToList();
             return subjectsRegisteds;
         }
+
+        public bool RemoveSunjectRegistedByRegistrationId(int id)
+        {
+            try
+            {
+                List<SubjectsRegisted> subjectsRegisteds = _db.SubjectsRegisteds.Where(s => s.RegistrationId == id).ToList();
+                foreach (var item in subjectsRegisteds)
+                {
+                    _db.SubjectsRegisteds.Remove(item);
+                }
+                
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult TraiNghiemSangTao(DateTime dateFrom, DateTime dateTo, int programId)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2 || account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -63,7 +63,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult NoiDungKhac(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2)
             {
                 return RedirectToRoute("login");
             }
@@ -76,7 +76,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetNoiDungKhacById(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2)
             {
                 return RedirectToRoute("login");
             }
@@ -96,7 +96,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetDetailCreativeExp(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2 || account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -115,7 +115,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportExcelCreativeExp(DateTime dateFrom, DateTime dateTo, int programId)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2 || account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -131,7 +131,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportExcelRegistration(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2)
             {
                 return RedirectToRoute("login");
             }
@@ -157,7 +157,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportSocialLifeSkill(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2 || account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }
@@ -184,6 +184,11 @@ namespace TraiNghiemSangTao.Controllers
         [HttpGet]
         public ActionResult SocialLifeSkills(DateTime dateFrom, DateTime dateTo)
         {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null || account.RoleId != 2 || account.RoleId != 3)
+            {
+                return RedirectToRoute("login");
+            }
             List<SocialLifeSkill> socialLifeSkills = socialLifeSkillRepository.GetSocialLifeSkillsByDate(dateFrom, dateTo);
             ManagerSocialLifeSkillOneViewModel managerSocialLifeSkillOneViewModel = new ManagerSocialLifeSkillOneViewModel(socialLifeSkills, dateFrom, dateTo);
             return View(managerSocialLifeSkillOneViewModel);
@@ -193,7 +198,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetDetailSocialLifeSkill(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null)
+            if (account == null || account.RoleId != 2 || account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }

@@ -97,5 +97,75 @@ namespace TraiNghiemSangTao.Repositories.Implements
             }
             return true;
         }
+
+        public SocialLifeSkill UpdateSocialLifeSkillWithoutCode(SocialLifeSkillDTO socialLifeSkillDTO, int id)
+        {
+            SocialLifeSkill socialLifeSkill = GetSocialLifeSkillById(id);
+            socialLifeSkill.ClassId = socialLifeSkillDTO.ClassId;
+            socialLifeSkill.CompanyContact = socialLifeSkillDTO.CompanyContact;
+            socialLifeSkill.CreatedAt = DateTime.Now;
+            socialLifeSkill.Creatot = socialLifeSkillDTO.Creatot;
+            socialLifeSkill.DateFrom = socialLifeSkillDTO.DateFrom;
+            socialLifeSkill.DateTo = socialLifeSkillDTO.DateTo;
+            socialLifeSkill.Email = socialLifeSkillDTO.Email;
+            socialLifeSkill.IsKyNangThucHanhXH = socialLifeSkillDTO.IsKyNangThucHanhXH;
+            socialLifeSkill.JobtitleId = socialLifeSkillDTO.JobtitleId;
+            socialLifeSkill.License = socialLifeSkillDTO.License;
+            socialLifeSkill.PhoneNumber = socialLifeSkillDTO.PhoneNumber;
+            socialLifeSkill.SchoolDegreeId = socialLifeSkillDTO.SchoolDegreeId;
+            socialLifeSkill.SchoolId = socialLifeSkillDTO.SchoolId;
+            socialLifeSkill.SumaryContent = socialLifeSkillDTO.SumaryContent;
+            socialLifeSkill.ProgramName = socialLifeSkillDTO.ProgramName;          
+            _db.Entry(socialLifeSkill).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                return socialLifeSkill = null;
+            }
+            return socialLifeSkill;
+        }
+
+        public bool CheckValidCodeRegisted(string codeRegisted)
+        {
+            var isValid = _db.SocialLifeSkills.Where(s => s.CodeRegisted == codeRegisted).FirstOrDefault();
+            if (isValid != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public SocialLifeSkill GetSocialLifeSkillByRegistedCode(string registedCode)
+        {
+            SocialLifeSkill socialLifeSkill = _db.SocialLifeSkills
+                .Include("School")
+                .Include("JobTitle")
+                .Include("Class")
+                .Where(s => s.CodeRegisted == registedCode).FirstOrDefault();
+            return socialLifeSkill;
+        }
+
+        public SocialLifeSkill UpdateSocialLifeSkillFileKeHoachById(int id, string fileKeHoachName)
+        {
+            SocialLifeSkill socialLifeSkill = _db.SocialLifeSkills.Where(s => s.Id == id).SingleOrDefault();
+            socialLifeSkill.FileKeHoach = fileKeHoachName;
+            _db.Entry(socialLifeSkill).State = EntityState.Modified;
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                return socialLifeSkill = null;
+            }
+            return socialLifeSkill;
+        }
+
+        
     }
 }

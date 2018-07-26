@@ -274,6 +274,11 @@
                     $('#errorDateGo').addClass('has-error');
                     $('#errorDateGoMessage').text('Ngày tham gia không hợp lệ');
                 }
+
+                else if ((moment($('#dateGo').val(), 'DD-MM-YYYY').dayOfYear() - moment().dayOfYear()) < 14) {
+                    $('#errorDateGo').addClass('has-error');
+                    $('#errorDateGoMessage').text('Ngày tham gia phải sau 2 tuần kể từ ngày đăng kí');
+                }
                 else {
                     $('#errorDateGo').removeClass('has-error');
                     $('#errorDateGoMessage').text('');
