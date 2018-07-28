@@ -29,8 +29,6 @@ namespace TraiNghiemSangTao.Controllers
             this.socialLifeSkillRepository = socialLifeSkillRepository;
         }
 
-
-
         // GET: Manager 
         [Route("")]
         public ActionResult Index()
@@ -47,7 +45,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult TraiNghiemSangTao(DateTime dateFrom, DateTime dateTo, int programId)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 4)
+            if (account == null || account.RoleId != 2 && account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -96,7 +94,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetDetailCreativeExp(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 4)
+            if (account == null || account.RoleId != 2 && account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -115,7 +113,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportExcelCreativeExp(DateTime dateFrom, DateTime dateTo, int programId)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 4)
+            if (account == null || account.RoleId != 2 && account.RoleId != 4)
             {
                 return RedirectToRoute("login");
             }
@@ -157,7 +155,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportSocialLifeSkill(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 3)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }
@@ -185,7 +183,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult SocialLifeSkills(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 3)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }
@@ -198,7 +196,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetDetailSocialLifeSkill(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2 || account.RoleId != 3)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }

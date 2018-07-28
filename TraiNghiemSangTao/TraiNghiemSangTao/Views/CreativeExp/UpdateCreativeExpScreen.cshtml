@@ -271,6 +271,11 @@
 
         });
     $('#dateGo').val('@Model.RegistrationCreativeExp.DateRegisted.Value.Day.ToString("d2")' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Month.ToString("d2")' + '-@Model.RegistrationCreativeExp.DateRegisted.Value.Year')
+
+        if ((moment($('#dateGo').val(), 'DD-MM-YYYY').dayOfYear()) - (moment.dayOfYear()) < 7) {
+            $("#dateGo").addClass("disabled");
+            $("#studentQuantity").addClass("disabled");
+        }
     })
     $('#schoolDegreeSlected').change(function () {
         $.get('/getSchoolBySchoolDegreeAndDistrict/' + $(this).val() + '/' + $('#districtSlected').val(), function (data, status) {
@@ -311,11 +316,14 @@
             $('#errorDateGo').addClass('has-error');
             $('#errorDateGoMessage').text('Vui lòng nhập ngày tham gia');
         }
-        else {
-            debugger
+        else {         
             if (moment($('#dateGo').val(), 'DD-MM-YYYY') < new Date()) {
                 $('#errorDateGo').addClass('has-error');
                 $('#errorDateGoMessage').text('Ngày tham gia không hợp lệ');
+            }
+            else if ((moment($('#dateGo').val(), 'DD-MM-YYYY').dayOfYear() - moment().dayOfYear()) < 14) {
+                $('#errorDateGo').addClass('has-error');
+                $('#errorDateGoMessage').text('Ngày tham gia phải sau 2 tuần kể từ ngày đăng kí');
             }
             else {
                 $('#errorDateGo').removeClass('has-error');
@@ -366,7 +374,7 @@
         }
         if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error') && !$('#errorValidStudentQuantity').hasClass('has-error')) {           
                     $('#loader').show();
-                    $('#submitCreativeExp').addClass('disable');
+                    $('#submitCreativeExp').addClass('disabled');
                     $.post('/postCaphattrainghiemsangtao', {
                         SchoolId: $('#schoolNameSelected').val(),
                         StudentQuantity: $('#studentQuantity').val(),

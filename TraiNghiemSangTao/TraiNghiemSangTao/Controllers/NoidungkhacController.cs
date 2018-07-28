@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO;
 using TraiNghiemSangTao.Models.DTO;
 using TraiNghiemSangTao.Repositories.Interfaces;
+using TraiNghiemSangTao.Utils;
 
 namespace TraiNghiemSangTao.Controllers
 {
@@ -109,6 +110,9 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult PostNoiDungKhac(RegistrationDTO registrationDTO, int Id)
         {
             Registration registration = registrationRepository.SaveRegistration(registrationDTO, Id);
+            SendMailService sendMailService = new SendMailService();
+            Registration registrationDetail = registrationRepository.GetRegistrationById(Convert.ToInt32(registration.Id));
+            sendMailService.SendMailRegistration(registrationDetail);
             return Json(registration.CodeRegisted);
         }
         [Route("capnhatnoidungkhac", Name = "capnhatnoidungkhac")]

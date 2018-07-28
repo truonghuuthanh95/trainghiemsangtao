@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO;
 using TraiNghiemSangTao.Models.DTO;
 using TraiNghiemSangTao.Repositories.Interfaces;
+using TraiNghiemSangTao.Utils;
 
 namespace TraiNghiemSangTao.Controllers
 {
@@ -81,7 +82,10 @@ namespace TraiNghiemSangTao.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateSocialLifeSkill(SocialLifeSkillDTO socialLifeSkillDTO, int id)
         {
-            SocialLifeSkill socialLifeSkill = socialLifeSkillRepository.UpdateSocialLifeSkill(socialLifeSkillDTO, id);           
+            SocialLifeSkill socialLifeSkill = socialLifeSkillRepository.UpdateSocialLifeSkill(socialLifeSkillDTO, id);
+            SocialLifeSkill socialLifeSkillDetail = socialLifeSkillRepository.GetSocialLifeSkillById(socialLifeSkill.Id);
+            SendMailService sendMailService = new SendMailService();
+            sendMailService.SendMailSocialLifeSkill(socialLifeSkillDetail);
             return Json(socialLifeSkill.CodeRegisted);
         }
 

@@ -41,7 +41,17 @@
 </form>
 
 <h4 class="text-center" style="padding-top: 30px;"><span class="text-danger" id="allDay">Cả ngày: @allDay;</span> <span class="text-primary" id="morning"> Buổi sáng: @morning;</span><span class="text-success" id="evening"> Buổi chiều: @evening </span></h4>
-<p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+@{
+    if (Model.RegistrationCreativeExps.Count > 0)
+    {
+        <p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+    }
+    else
+    {
+        <p><button class="btn btn-primary disabled" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+    }
+}
+
 <div class="panel panel-default table-responsive">
     <div class="panel-body">
         <table class="table table-hover" id="registrationCreativeExp">
@@ -146,7 +156,7 @@
                             <div class="col-sm-9">
                                 <p class="form-control-static" id="updateAt"></p>
                             </div>
-                        </div>                                           
+                        </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tên người phụ trách</label>
                             <div class="col-sm-9">
@@ -192,8 +202,8 @@
 
         </div>
     </div>
-    </div>
-    <script>
+</div>
+<script>
         $('.datepicker').datepicker(
             {
                 format: 'dd-mm-yyyy',
@@ -219,12 +229,12 @@
                 $('#studentQuantity').text(registration.StudentQuantity);
                 $('#dateGo').text(moment(registration.DateRegisted, 'YYYY/MM/DD').format('DD/MM/YYYY'));
                 $('#activityName').text(registration.ActivitiTitle);
-                $('#sessionDay').text(registration.SessionADay.Name);                           
+                $('#sessionDay').text(registration.SessionADay.Name);
                 $('#location').text(registration.Program.Name);
                 $('#createdAt').text(moment(registration.CreatedAt, 'YYYY/MM/DD').format('DD/MM/YYYY'));
                 if (registration.UpdatedAt != null) {
                     $('#updateAt').text(moment(registration.UpdatedAt, 'YYYY/MM/DD').format('DD/MM/YYYY'));
-                }                               
+                }
                 $('#teacherName').text(registration.Creator);
                 $('#jobTitle').text(registration.Jobtitle.Name);
                 $('#phoneNumber').text(registration.PhoneNumber);
@@ -235,5 +245,5 @@
             window.location.href = '@System.Configuration.ConfigurationManager.AppSettings["BASE_URL"]/quanly/xuatexceltrainghiemsangtao/' + moment($('#dateFrom').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + moment($('#dateTo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD') + '/' + $('#programId').val();
 
         }
-    </script>
+</script>
 

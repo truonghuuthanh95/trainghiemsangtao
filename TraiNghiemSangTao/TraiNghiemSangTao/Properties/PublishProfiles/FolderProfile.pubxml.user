@@ -232,10 +232,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.dll">
-      <publishTime>07/24/2018 14:23:11</publishTime>
+      <publishTime>07/28/2018 10:53:04</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.pdb">
-      <publishTime>07/24/2018 14:23:11</publishTime>
+      <publishTime>07/28/2018 10:53:04</publishTime>
     </File>
     <File Include="bin/Unity.Abstractions.dll">
       <publishTime>04/18/2018 19:15:06</publishTime>
@@ -409,37 +409,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2018 20:33:45</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
-      <publishTime>07/18/2018 23:11:42</publishTime>
+      <publishTime>07/27/2018 14:45:55</publishTime>
     </File>
     <File Include="Views/CreativeExp/Index.cshtml">
-      <publishTime>07/13/2018 11:37:58</publishTime>
+      <publishTime>07/27/2018 13:45:13</publishTime>
     </File>
     <File Include="Views/CreativeExp/RegistrationCreativeSuccess.cshtml">
-      <publishTime>07/03/2018 17:29:10</publishTime>
+      <publishTime>07/26/2018 15:25:07</publishTime>
     </File>
     <File Include="Views/CreativeExp/UpdateCreativeExp.cshtml">
       <publishTime>07/21/2018 21:04:44</publishTime>
     </File>
     <File Include="Views/CreativeExp/UpdateCreativeExpScreen.cshtml">
-      <publishTime>07/23/2018 16:33:52</publishTime>
+      <publishTime>07/27/2018 13:43:16</publishTime>
     </File>
     <File Include="Views/CreativeExp/UpdateCreativeExpSuccessfull.cshtml">
       <publishTime>07/04/2018 21:10:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/23/2018 10:18:32</publishTime>
+      <publishTime>07/28/2018 10:38:48</publishTime>
     </File>
     <File Include="Views/Manager/Index.cshtml">
-      <publishTime>07/18/2018 22:14:37</publishTime>
+      <publishTime>07/24/2018 16:05:44</publishTime>
     </File>
     <File Include="Views/Manager/NoiDungKhac.cshtml">
-      <publishTime>07/20/2018 15:57:29</publishTime>
+      <publishTime>07/28/2018 10:50:33</publishTime>
     </File>
     <File Include="Views/Manager/SocialLifeSkills.cshtml">
-      <publishTime>07/22/2018 21:22:10</publishTime>
+      <publishTime>07/28/2018 10:52:21</publishTime>
     </File>
     <File Include="Views/Manager/TraiNghiemSangTao.cshtml">
-      <publishTime>07/12/2018 20:58:24</publishTime>
+      <publishTime>07/28/2018 10:51:36</publishTime>
     </File>
     <File Include="Views/Noidungkhac/CheckCodeRegisted.cshtml">
       <publishTime>07/23/2018 16:44:06</publishTime>
@@ -466,7 +466,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2018 16:33:06</publishTime>
     </File>
     <File Include="Views/UpdateSuccessful/Index.cshtml">
-      <publishTime>07/22/2018 20:59:01</publishTime>
+      <publishTime>07/24/2018 15:15:44</publishTime>
+    </File>
+    <File Include="Views/UpdateSuccessful/SocialLifeSkill/CheckCodeRegisted.cshtml">
+      <publishTime>07/23/2018 10:56:41</publishTime>
+    </File>
+    <File Include="Views/UpdateSuccessful/SocialLifeSkill/Index.cshtml">
+      <publishTime>07/27/2018 13:45:00</publishTime>
+    </File>
+    <File Include="Views/UpdateSuccessful/SocialLifeSkill/UpdateSocialLifeSkill.cshtml">
+      <publishTime>07/27/2018 13:45:40</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/12/2018 20:53:18</publishTime>

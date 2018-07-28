@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO;
 using TraiNghiemSangTao.Models.DTO;
 using TraiNghiemSangTao.Repositories.Interfaces;
+using TraiNghiemSangTao.Utils;
 
 namespace TraiNghiemSangTao.Controllers
 {
@@ -56,11 +58,18 @@ namespace TraiNghiemSangTao.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateCreativeExp(CreativeExpDTO creativeExpDTO)
-        {
-            
+        {          
             RegistrationCreativeExp registrationCreativeExp =  registrationCreativeExpRepository.SaveRegistrationCreativeExp(creativeExpDTO);
-            //Utils.SendMailService.SendMailToTeacher(registrationCreativeExp);
-            return Json(registrationCreativeExp);
+            RegistrationCreativeExp registrationCreativeExpDetail = registrationCreativeExpRepository.GetRegistrationCreativeExpById(Convert.ToInt32(registrationCreativeExp.Id));
+            SendMailService sendMailService = new SendMailService();
+            sendMailService.SendMailToTeacherAsyncRegistrationCreative(registrationCreativeExpDetail);
+            var registrationCreativeExpJson = JsonConvert.SerializeObject(registrationCreativeExp,
+           Formatting.None,
+           new JsonSerializerSettings()
+           {
+               ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           });
+            return Json(registrationCreativeExpJson);
         }
         [Route("getSchoolBySchoolDegreeAndDistrict/{schoolDegreeId}/{districtId}")]
         [HttpGet]

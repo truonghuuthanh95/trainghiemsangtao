@@ -274,7 +274,6 @@
                     $('#errorDateGo').addClass('has-error');
                     $('#errorDateGoMessage').text('Ngày tham gia không hợp lệ');
                 }
-
                 else if ((moment($('#dateGo').val(), 'DD-MM-YYYY').dayOfYear() - moment().dayOfYear()) < 14) {
                     $('#errorDateGo').addClass('has-error');
                     $('#errorDateGoMessage').text('Ngày tham gia phải sau 2 tuần kể từ ngày đăng kí');
@@ -320,8 +319,7 @@
 
             if (!$('#errorActivityTitle').hasClass('has-error') && !$('#errorPhoneNumber').hasClass('has-error') && !$('#errorEmail').hasClass('has-error') && !$('#errorDateGo').hasClass('has-error')) {
                 var date = moment($('#dateGo').val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
-                $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {
-                    console.log(parseInt($('#studentQuantity').val()) > parseInt(data), $('#studentQuantity').val() == '', $('#studentQuantity').val() < 1)                    
+                $.get('/getValidStudentQuantityToRegist/' + $('#activityIdSelected').val() + '/' + $('#sectionADaySlected').val() + '/' + date, function (data, status) {                                  
                     if (parseInt($('#studentQuantity').val()) > parseInt(data) || $('#studentQuantity').val() == '' || $('#studentQuantity').val() < 1) {
                         $('#errorValidStudentQuantity').addClass('has-error');
                         $('#errorValidStudentQuantityMessage').text('Số lượng hoc sinh tham gia không hợp lệ');
@@ -330,7 +328,7 @@
                     else {
                         $('#errorValidStudentQuantity').removeClass('has-error');
                         $('#loader').show();
-                        $('#submitCreativeExp').addClass('disable');
+                        $('#submitCreativeExp').addClass('disabled');
                         $.post('/dangkitrainghiemsangtao', {
                             SchoolId: $('#schoolNameSelected').val(),
                             StudentQuantity: $('#studentQuantity').val(),
@@ -346,10 +344,9 @@
                             ActivitiTitle: $('#activityTitle').val(),
                             __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
                         }, function (data, status) {
-
+                            var registrationCreative = JSON.parse(data);
                             if (status == 'success') {
-                                window.location.replace('/dangkitrainghiemthanhcong/' + data.CodeRegisted);
-
+                                window.location.replace('/dangkitrainghiemthanhcong/' + registrationCreative.CodeRegisted);
                             }
                         })
                     }
