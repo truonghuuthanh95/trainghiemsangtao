@@ -10,13 +10,13 @@
 
 <div class="col-sm-8 col-sm-offset-2">
     @{
-        if (account.RoleId == 2)
+        if (account.RoleId == 2 || account.RoleId == 4)
         {
             <div class="col-sm-12">
                 <a class="btn btn-primary btn-block btn-lg" href="/quanly/trainghiemsangtao/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day/1" role="button">DANH SÁCH TRẢI NGHIỆM SÁNG TẠO</a>
             </div>
         }
-        if (account.RoleId == 2 || account.RoleId == 4)
+        if (account.RoleId == 2 || account.RoleId == 3)
         {
             <div class="col-sm-12">
                 <a class="btn btn-primary btn-block btn-lg" href="/quanly/noidungkhac/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day" role="button">DANH SÁCH NỘI DUNG KHÁC</a>

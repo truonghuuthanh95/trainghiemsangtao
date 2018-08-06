@@ -61,7 +61,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult NoiDungKhac(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }
@@ -74,7 +74,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult GetNoiDungKhacById(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }
@@ -129,7 +129,7 @@ namespace TraiNghiemSangTao.Controllers
         public async Task<ActionResult> ExportExcelRegistration(DateTime dateFrom, DateTime dateTo)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null || account.RoleId != 2)
+            if (account == null || account.RoleId != 2 && account.RoleId != 3)
             {
                 return RedirectToRoute("login");
             }

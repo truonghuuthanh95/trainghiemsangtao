@@ -232,10 +232,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.dll">
-      <publishTime>07/28/2018 10:53:04</publishTime>
+      <publishTime>08/06/2018 14:10:24</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.pdb">
-      <publishTime>07/28/2018 10:53:04</publishTime>
+      <publishTime>08/06/2018 14:10:24</publishTime>
     </File>
     <File Include="bin/Unity.Abstractions.dll">
       <publishTime>04/18/2018 19:15:06</publishTime>
@@ -430,7 +430,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:38:48</publishTime>
     </File>
     <File Include="Views/Manager/Index.cshtml">
-      <publishTime>07/24/2018 16:05:44</publishTime>
+      <publishTime>08/06/2018 14:07:43</publishTime>
     </File>
     <File Include="Views/Manager/NoiDungKhac.cshtml">
       <publishTime>07/28/2018 10:50:33</publishTime>
@@ -454,7 +454,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2018 21:43:27</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/20/2018 20:13:54</publishTime>
+      <publishTime>08/06/2018 13:59:47</publishTime>
     </File>
     <File Include="Views/SocialLifeSkill/CheckCodeRegisted.cshtml">
       <publishTime>07/23/2018 10:56:41</publishTime>
