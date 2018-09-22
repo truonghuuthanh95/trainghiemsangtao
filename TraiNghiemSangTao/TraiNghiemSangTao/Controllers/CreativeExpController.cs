@@ -44,8 +44,8 @@ namespace TraiNghiemSangTao.Controllers
         {
             List<Program> programs = programRepository.GetPrograms();
 
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 2);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(2);
             List<District> districts = districtRepository.GetDistricts();
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();

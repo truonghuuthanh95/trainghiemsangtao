@@ -5,9 +5,10 @@
     var allDay = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 3).Select(s => s.StudentQuantity).Sum();
     var morning = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 1).Select(s => s.StudentQuantity).Sum();
     var evening = Model.RegistrationCreativeExps.Where(s => s.DaySessionId == 2).Select(s => s.StudentQuantity).Sum();
+    TraiNghiemSangTao.Models.DAO.Account account = (TraiNghiemSangTao.Models.DAO.Account)Session[TraiNghiemSangTao.Utils.CommonConstant.USER_SESSION];
 }
 
-<h3 class="text-primary text-center">DANH SÁCH TRẢI NGHIỆM SÁNG TẠO</h3>
+<h3 class="text-primary text-center">DANH SÁCH TIẾT HỌC NGOÀI NHÀ TRƯỜNG</h3>
 
 <form class="form-inline text-center">
 
@@ -24,14 +25,40 @@
             @{
                 foreach (var item in Model.Programs)
                 {
-                    if (item.Id == Model.ProgramId)
+                    if (account.RoleId == 5)
                     {
-                        <option value="@item.Id" selected>@item.Name</option>
+                        if (item.Id == 1)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
+
+                    }
+                    else if (account.RoleId == 6)
+                    {
+                        if (item.Id == 4)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
+                    }
+                    else if (account.RoleId == 7)
+                    {
+                        if (item.Id == 6)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
                     }
                     else
                     {
-                        <option value="@item.Id">@item.Name</option>
+                        if (item.Id == Model.ProgramId)
+                        {
+                            <option value="@item.Id" selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
                     }
+
 
                 }
             }

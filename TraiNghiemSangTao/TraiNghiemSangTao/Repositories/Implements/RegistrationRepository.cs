@@ -183,7 +183,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
             Registration registration = _db.Registrations.Where(s => s.Id == id).FirstOrDefault();
             string[] arraySubject = registrationDTO.SubjectSelected.Split(new char[] { ',' });
             registration.ClassId = registrationDTO.ClassId;
-            registration.CreatedAt = DateTime.Now;
+            registration.UpdatedAt = DateTime.Now;
             registration.Creator = registrationDTO.Creator;
             registration.DateRegisted = registrationDTO.DateRegisted;
             registration.Email = registrationDTO.Email;

@@ -30,6 +30,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
                 foreach (var item in subjectsRegisteds)
                 {
                     _db.SubjectsRegisteds.Remove(item);
+                    _db.SaveChanges();
                 }
                 
             }

@@ -43,11 +43,11 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult Index()
         {
             List<Subject> subjects = subjectRepository.GetSubjects();
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 2);
             List<Province> provinces = provinceRepository.GetProvinces();
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<District> districts = districtRepository.GetDistricts();
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(2);
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();
             NoiDungKhacOneViewModel noiDungKhacOneViewModel = new NoiDungKhacOneViewModel(null, null, schoolDegrees, provinces, schools, classes, jobtitles, subjects, districts);
 

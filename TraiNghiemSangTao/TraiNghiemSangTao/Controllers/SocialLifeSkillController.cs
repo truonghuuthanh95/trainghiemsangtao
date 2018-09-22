@@ -36,10 +36,10 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult Index()
         {
             
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);           
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 2);           
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<District> districts = districtRepository.GetDistricts();
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(2);
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();
             SocialLifeSkillOneViewModel socialLifeSkillOneViewModel = new SocialLifeSkillOneViewModel(null,schoolDegrees, schools, classes, jobtitles, districts);
 

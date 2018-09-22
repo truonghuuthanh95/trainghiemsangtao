@@ -49,14 +49,6 @@ namespace TraiNghiemSangTao.Models.DAO
                 .WithRequired(e => e.Province)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Registration>()
-                .Property(e => e.ViTriKienThuc)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Registration>()
-                .Property(e => e.TomTatNoiDungCT)
-                .IsUnicode(false);
-
             modelBuilder.Entity<SessionADay>()
                 .HasMany(e => e.RegistrationCreativeExps)
                 .WithOptional(e => e.SessionADay)

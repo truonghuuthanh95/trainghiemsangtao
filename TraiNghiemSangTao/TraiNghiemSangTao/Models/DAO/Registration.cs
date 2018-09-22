@@ -63,10 +63,8 @@ namespace TraiNghiemSangTao.Models.DAO
         [StringLength(500)]
         public string PhuongAnChoHsThamGia { get; set; }
 
-        [Column(TypeName = "text")]
         public string ViTriKienThuc { get; set; }
 
-        [Column(TypeName = "text")]
         public string TomTatNoiDungCT { get; set; }
 
         [StringLength(50)]

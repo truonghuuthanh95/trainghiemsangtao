@@ -323,12 +323,12 @@
     <Content Include="Utils\Files\ds-trainghiemsangtao.xlsx" />
     <Content Include="Utils\Files\ds-noidungkhac.xlsx" />
     <Content Include="Utils\Files\ds-kynangsong.xlsx" />
-    <Content Include="Views\UpdateSuccessful\SocialLifeSkill\Index.cshtml" />
+    <Content Include="Views\SocialLifeSkill\Index.cshtml" />
     <Content Include="Views\Manager\SocialLifeSkills.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
-    <Content Include="Views\UpdateSuccessful\SocialLifeSkill\CheckCodeRegisted.cshtml" />
-    <Content Include="Views\UpdateSuccessful\SocialLifeSkill\UpdateSocialLifeSkill.cshtml" />
+    <Content Include="Views\SocialLifeSkill\CheckCodeRegisted.cshtml" />
+    <Content Include="Views\SocialLifeSkill\UpdateSocialLifeSkill.cshtml" />
     <Content Include="Views\UpdateSuccessful\Index.cshtml" />
     <Content Include="Views\Noidungkhac\CheckCodeRegisted.cshtml" />
     <Content Include="Views\Noidungkhac\UpdateNoiDungKhac.cshtml" />
