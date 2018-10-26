@@ -291,6 +291,7 @@ namespace TraiNghiemSangTao.Utils
                     ws.Cells[6, 19].Value = "GVHD";
                     ws.Cells[6, 20].Value = "SDT";
                     ws.Cells[6, 21].Value = "EMAIL";
+                    ws.Cells[6, 22].Value = "FILE";
                     for (int i = 0; i < khkt.Count(); i++)
                     {
                         ws.Cells[i + 7, 1].Value = i + 1;
@@ -317,6 +318,7 @@ namespace TraiNghiemSangTao.Utils
                         ws.Cells[i + 7, 19].Value = khkt.ElementAt(i).KhoaHocKiThuat.GVHD;
                         ws.Cells[i + 7, 20].Value = khkt.ElementAt(i).KhoaHocKiThuat.SDT;
                         ws.Cells[i + 7, 21].Value = khkt.ElementAt(i).KhoaHocKiThuat.Email;
+                        ws.Cells[i + 7, 22].Value = khkt.ElementAt(i).KhoaHocKiThuat.FileTaiLieu;
 
                     }
                     using (ExcelRange rng = ws.Cells["A2:U2"])

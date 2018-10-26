@@ -232,10 +232,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.dll">
-      <publishTime>10/22/2018 09:52:39</publishTime>
+      <publishTime>10/26/2018 15:58:15</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.pdb">
-      <publishTime>10/22/2018 09:52:39</publishTime>
+      <publishTime>10/26/2018 15:58:15</publishTime>
     </File>
     <File Include="bin/Unity.Abstractions.dll">
       <publishTime>04/18/2018 19:15:06</publishTime>
@@ -306,6 +306,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>06/19/2018 10:17:43</publishTime>
     </File>
+    <File Include="Content/dataTables.min.css">
+      <publishTime>10/26/2018 13:45:57</publishTime>
+    </File>
     <File Include="Content/datepicker.css">
       <publishTime>07/03/2018 14:00:55</publishTime>
     </File>
@@ -356,6 +359,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>06/19/2018 10:17:43</publishTime>
+    </File>
+    <File Include="Scripts/dataTables.bootstrap.min.js">
+      <publishTime>10/26/2018 13:48:36</publishTime>
+    </File>
+    <File Include="Scripts/dataTables.min.js">
+      <publishTime>10/26/2018 13:48:43</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
       <publishTime>06/19/2018 10:17:51</publishTime>
@@ -436,7 +445,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2018 15:05:40</publishTime>
     </File>
     <File Include="Views/KhoaHocSangTao/Dangki.cshtml">
-      <publishTime>10/20/2018 20:26:28</publishTime>
+      <publishTime>10/25/2018 16:39:40</publishTime>
     </File>
     <File Include="Views/KhoaHocSangTao/DangNhap.cshtml">
       <publishTime>10/20/2018 20:16:39</publishTime>
@@ -445,7 +454,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2018 14:24:47</publishTime>
     </File>
     <File Include="Views/Manager/DsKhoaHocKiThuat.cshtml">
-      <publishTime>10/19/2018 15:49:20</publishTime>
+      <publishTime>10/26/2018 15:45:11</publishTime>
     </File>
     <File Include="Views/Manager/Index.cshtml">
       <publishTime>10/20/2018 20:36:58</publishTime>
@@ -469,7 +478,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/16/2018 18:36:53</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>07/18/2018 21:43:27</publishTime>
+      <publishTime>10/26/2018 14:20:22</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>10/15/2018 14:58:35</publishTime>
@@ -502,7 +511,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/19/2018 10:17:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/22/2018 09:52:39</publishTime>
+      <publishTime>10/26/2018 15:50:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

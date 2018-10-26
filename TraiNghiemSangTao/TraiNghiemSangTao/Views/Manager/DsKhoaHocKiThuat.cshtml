@@ -3,13 +3,14 @@
     ViewBag.Title = "Danh sách khoa học kỹ thuật";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Styles.Render("~/Content/datatable-css")
+@Scripts.Render("~/bundles/datatable-js")
 <h3 class="text-center text-primary">DANH SÁCH ĐĂNG KÍ KHOA HỌC KỸ THUẬT</h3>
-   <p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
+<p><button class="btn btn-primary" onclick="downloadExcel();"><span class="glyphicon glyphicon-download-alt"></span>  XUẤT EXCEL</button></p>
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="table">
                 <thead>
                     <tr>
                         <th>STT</th>
@@ -28,6 +29,7 @@
                         <th>GVHD</th>
                         <th>SĐT</th>
                         <th>Email</th>
+                        <th>Tài liệu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,36 +37,38 @@
                         int index = 1;
                         foreach (var item in ViewBag.KHKT)
                         {
-                    <tr>
-                        <td>@index</td>
-                        <td>@item.KhoaHocKiThuat.TenDeTai</td>
-                        <td>@item.KHKTLinhVucThamGia.Name</td>
-                        <td>@item.T_DM_HocSinh1.Ho @item.T_DM_HocSinh1.Ten</td>
-                        <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh1.NgaySinh)</td>
-                        <td>@item.T_DM_Truong1.TenTruong</td>
-                        <td>@item.T_DM_Lop1.TenLop</td>
-                        <td>@item.KhoaHocKiThuat.DongGopHs1</td>
-                        @{
-        if (item.KhoaHocKiThuat.HocSinh2 != null)
-        {
-                    <td>@item.T_DM_HocSinh2.Ho @item.T_DM_HocSinh2.Ten</td>
-                    <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh2.NgaySinh)</td>
-                    <td>@item.T_DM_Truong2.TenTruong</td>
-                    <td>@item.T_DM_Lop2.TenLop</td>
-                    <td>@item.KhoaHocKiThuat.DongGopHs2</td>
-}
-else
-{
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-}
-                    <td>@item.KhoaHocKiThuat.GVHD</td>
-                    <td>@item.KhoaHocKiThuat.SDT</td>
-                    <td>@item.KhoaHocKiThuat.Email</td>
-                        }
-                    </tr>
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.KhoaHocKiThuat.TenDeTai</td>
+                                <td>@item.KHKTLinhVucThamGia.Name</td>
+                                <td>@item.T_DM_HocSinh1.Ho @item.T_DM_HocSinh1.Ten</td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh1.NgaySinh)</td>
+                                <td>@item.T_DM_Truong1.TenTruong</td>
+                                <td>@item.T_DM_Lop1.TenLop</td>
+                                <td>@item.KhoaHocKiThuat.DongGopHs1</td>
+                                @{
+                                    if (item.KhoaHocKiThuat.HocSinh2 != null)
+                                    {
+                                        <td>@item.T_DM_HocSinh2.Ho @item.T_DM_HocSinh2.Ten</td>
+                                        <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh2.NgaySinh)</td>
+                                        <td>@item.T_DM_Truong2.TenTruong</td>
+                                        <td>@item.T_DM_Lop2.TenLop</td>
+                                        <td>@item.KhoaHocKiThuat.DongGopHs2</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    }
+                                    <td>@item.KhoaHocKiThuat.GVHD</td>
+                                    <td>@item.KhoaHocKiThuat.SDT</td>
+                                    <td>@item.KhoaHocKiThuat.Email</td>
+                                }
+                                <td><a href="/quanly/taifiletailieukhkt/@item.KhoaHocKiThuat.Id">@item.KhoaHocKiThuat.FileTaiLieu</a></td>
+                            </tr>
                             index++;
                         }
 
@@ -75,7 +79,10 @@ else
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        $('#table').DataTable();
+    });
     function downloadExcel() {
         window.location.href = '/quanly/taidskhoahockithuat';
-        }
+    }
 </script>
