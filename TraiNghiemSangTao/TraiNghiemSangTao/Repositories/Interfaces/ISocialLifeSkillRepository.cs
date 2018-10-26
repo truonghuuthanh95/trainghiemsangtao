@@ -18,5 +18,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         bool CheckValidCodeRegisted(string codeRegisted);
         SocialLifeSkill GetSocialLifeSkillByRegistedCode(string registedCode);
         SocialLifeSkill UpdateSocialLifeSkillFileKeHoachById(int id, string fileKeHoachName);
+        bool DeleteSocialLifeSkill(int id);
     }
 }

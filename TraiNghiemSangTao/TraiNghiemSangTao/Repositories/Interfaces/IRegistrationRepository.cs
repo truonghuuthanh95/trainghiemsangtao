@@ -20,5 +20,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         bool CheckValidCodeRegisted(string codeRegisted);
         Registration GetRegistrationByCodeRegisted(string codeRegisted);
         Registration UpdateFileUpload(string filekehoach, string filebaikiemtra, string filetailieuchohocsinh, int id);
+        bool DeleteRegistration(int id);
     }
 }

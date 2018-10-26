@@ -65,6 +65,14 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return false;
         }
 
+        public bool DeleteRegistration(int id)
+        {
+            Registration registration = GetRegistrationById(id);
+            _db.Registrations.Remove(registration);
+            _db.SaveChanges();
+            return true;
+        }
+
         public Registration GetRegistrationByCodeRegisted(string codeRegisted)
         {
             Registration registration = _db.Registrations
@@ -218,7 +226,6 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return registration;
 
         }
-
-       
+        
     }
 }

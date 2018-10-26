@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\CreativeExpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhoaHocSangTaoController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Controllers\NoidungkhacController.cs" />
     <Compile Include="Controllers\SocialLifeSkillController.cs" />
@@ -196,7 +197,16 @@
     <Compile Include="Models\DAO\Country.cs" />
     <Compile Include="Models\DAO\CreativeExpDB.cs" />
     <Compile Include="Models\DAO\District.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\HCM_EDU_DATA.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_HocSinh.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_Lop.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_PGD.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_DM_Truong.cs" />
+    <Compile Include="Models\DAO\HCM_EDU_DATA\T_User.cs" />
     <Compile Include="Models\DAO\Jobtitle.cs" />
+    <Compile Include="Models\DAO\KHKT\KHKTDB.cs" />
+    <Compile Include="Models\DAO\KHKT\KHKTLinhVucThamGia.cs" />
+    <Compile Include="Models\DAO\KHKT\KhoaHocKiThuat.cs" />
     <Compile Include="Models\DAO\Program.cs" />
     <Compile Include="Models\DAO\Province.cs" />
     <Compile Include="Models\DAO\Registration.cs" />
@@ -211,12 +221,15 @@
     <Compile Include="Models\DAO\Ward.cs" />
     <Compile Include="Models\DTO\CreativeExpDTO.cs" />
     <Compile Include="Models\DTO\CreativeExpOneViewModel.cs" />
+    <Compile Include="Models\DTO\KHKT\KhoaHocKiThuatDetailDTO.cs" />
+    <Compile Include="Models\DTO\KHKT\KhoaHocKithuatDTO.cs" />
     <Compile Include="Models\DTO\ListRegistrationCreativeExpOneViewModel.cs" />
     <Compile Include="Models\DTO\ManagerNoiDungKhacOneViewModel.cs" />
     <Compile Include="Models\DTO\ManagerSocialLifeSkillOneViewModel.cs" />
     <Compile Include="Models\DTO\NoiDungKhacJson.cs" />
     <Compile Include="Models\DTO\NoiDungKhacOneViewModel.cs" />
     <Compile Include="Models\DTO\RegistrationDTO.cs" />
+    <Compile Include="Models\DTO\ReturnFormat.cs" />
     <Compile Include="Models\DTO\ReturnLoginFormat.cs" />
     <Compile Include="Models\DTO\SocialLifeSkillDTO.cs" />
     <Compile Include="Models\DTO\SocialLifeSkillOneViewModel.cs" />
@@ -224,7 +237,13 @@
     <Compile Include="Repositories\Implements\AccountRepository.cs" />
     <Compile Include="Repositories\Implements\ClassesRepository.cs" />
     <Compile Include="Repositories\Implements\DistrictRepository.cs" />
+    <Compile Include="Repositories\Implements\HCMHocSinhRepository.cs" />
+    <Compile Include="Repositories\Implements\HCMLopRepository.cs" />
+    <Compile Include="Repositories\Implements\HCMPGDRepository.cs" />
+    <Compile Include="Repositories\Implements\HCMSchoolRepository.cs" />
     <Compile Include="Repositories\Implements\JobTitleRepository.cs" />
+    <Compile Include="Repositories\Implements\KHHTLinhVucRepository.cs" />
+    <Compile Include="Repositories\Implements\KHKTKhoaHocKiThuatRepository.cs" />
     <Compile Include="Repositories\Implements\ProgramRepository.cs" />
     <Compile Include="Repositories\Implements\ProvinceRepository.cs" />
     <Compile Include="Repositories\Implements\RegistrationCreativeExpRepository.cs" />
@@ -238,7 +257,13 @@
     <Compile Include="Repositories\Interfaces\IAccountRepository.cs" />
     <Compile Include="Repositories\Interfaces\IClassesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IDistrictRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IHCMHocSinhRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IHCMLopRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IHCMPGDRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IHCMSchoolRepository.cs" />
     <Compile Include="Repositories\Interfaces\IJobTitleRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IKHHTLinhVucRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IKHKTKhoaHocKiThuatRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProgramRepository.cs" />
     <Compile Include="Repositories\Interfaces\IProvinceRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRegistrationCreativeExpRepository.cs" />
@@ -261,6 +286,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\images\hoatdongkhac.jpg" />
+    <Content Include="Content\images\khoahockythuat.jpg" />
     <Content Include="Content\images\kynangsong.jpg" />
     <Content Include="Content\images\logo_so.png" />
     <Content Include="Content\images\trainghiemsangtao.jpg" />
@@ -332,9 +358,15 @@
     <Content Include="Views\UpdateSuccessful\Index.cshtml" />
     <Content Include="Views\Noidungkhac\CheckCodeRegisted.cshtml" />
     <Content Include="Views\Noidungkhac\UpdateNoiDungKhac.cshtml" />
+    <Content Include="Views\Contact\TaiLieu.cshtml" />
+    <Content Include="Views\KhoaHocSangTao\Index.cshtml" />
+    <Content Include="Views\KhoaHocSangTao\Dangki.cshtml" />
+    <Content Include="Views\KhoaHocSangTao\DangNhap.cshtml" />
+    <Content Include="Views\Manager\DsKhoaHocKiThuat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\KhoaHocKiThuat\" />
     <Folder Include="UploadedFiles\SocialSkill\" />
   </ItemGroup>
   <ItemGroup>

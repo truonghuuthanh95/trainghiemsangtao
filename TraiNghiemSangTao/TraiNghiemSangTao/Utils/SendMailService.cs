@@ -20,7 +20,22 @@ namespace TraiNghiemSangTao.Utils
             var mail = new MailMessage();
             mail.From = new MailAddress("hotanminh@hcm.edu.vn");
             mail.To.Add(registrationCreativeExp.Email.ToString().Trim());
-            mail.CC.Add("hotanminh@hcm.edu.vn");
+            if (registrationCreativeExp.ProgramId == 1)
+            {
+                mail.CC.Add(new MailAddress("thnnt.sunflowertourist@gmail.com"));
+                mail.CC.Add(new MailAddress("trungtamgiaoducvuonthutcvsg@gmail.com"));             
+            }
+            else if (registrationCreativeExp.ProgramId == 6)
+            {
+                mail.CC.Add(new MailAddress("khusinhthaigiaoducveque@gmail.com"));
+                
+            }
+            else if (registrationCreativeExp.ProgramId == 4)
+            {
+                mail.CC.Add(new MailAddress("trongtai18784@gmail.com"));
+                mail.CC.Add(new MailAddress("thnnt.sunflowertourist@gmail.com"));
+            }
+            mail.CC.Add(new MailAddress("hotanminh@hcm.edu.vn"));
             mail.Subject = "Hoạt động ngoài giờ - Trải nghiệm sáng tạo";
             mail.IsBodyHtml = true;
             string htmlBody = "<h3>Quý thầy cô vừa đăng ký trải nghiệm sáng tạo thành công.</h3>" +
@@ -34,7 +49,7 @@ namespace TraiNghiemSangTao.Utils
                 "<p>- Tên chủ đề đăng kí: " + registrationCreativeExp.ActivitiTitle + "</p>" +
                 "<p>- Tên người phụ trách: " + registrationCreativeExp.Creator + "</p>" +
                 "<p>- Số điện thoại liên hệ: " + registrationCreativeExp.PhoneNumber + "</p>" +
-                "<p>Mọi thắc mắc vui lòng <a href='http://trainghiemthuctien.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
+                "<p>Mọi thắc mắc vui lòng <a href='http://hoatdongtrainghiem.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
             mail.Body = htmlBody;
             smtpClient.Port = 587;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -76,7 +91,7 @@ namespace TraiNghiemSangTao.Utils
                 "<p>- Ngày thực hiện: " + registration.DateRegisted.Value.Day.ToString("d2") + "/" + registration.DateRegisted.Value.Month.ToString("d2") + "/" + registration.DateRegisted.Value.Year + "</p>" +                
                 "<p>- Tên người phụ trách: " + registration.Creator + "</p>" +
                 "<p>- Số điện thoại liên hệ: " + registration.PhoneNumber + "</p>" +
-                "<p>Mọi thắc mắc vui lòng <a href='http://trainghiemthuctien.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
+                "<p>Mọi thắc mắc vui lòng <a href='http://hoatdongtrainghiem.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
             mail.Body = htmlBody;
             smtpClient.Port = 587;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -117,7 +132,7 @@ namespace TraiNghiemSangTao.Utils
                 "<p>- Ngày kết thúc: " + socialLifeSkill.DateTo.Value.Day.ToString("d2") + "/" + socialLifeSkill.DateTo.Value.Month.ToString("d2") + "/" + socialLifeSkill.DateTo.Value.Year + "</p>" +
                 "<p>- Tên người phụ trách: " + socialLifeSkill.Creatot + "</p>" +
                 "<p>- Số điện thoại liên hệ: " + socialLifeSkill.PhoneNumber + "</p>" +
-                "<p>Mọi thắc mắc vui lòng <a href='http://trainghiemthuctien.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
+                "<p>Mọi thắc mắc vui lòng <a href='http://hoatdongtrainghiem.hcm.edu.vn/lienhe'><i>Liên hệ</i></a></p>";
             mail.Body = htmlBody;
             smtpClient.Port = 587;
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;

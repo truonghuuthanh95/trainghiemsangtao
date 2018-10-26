@@ -232,10 +232,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.dll">
-      <publishTime>09/24/2018 14:23:43</publishTime>
+      <publishTime>10/22/2018 09:52:39</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.pdb">
-      <publishTime>09/24/2018 14:23:43</publishTime>
+      <publishTime>10/22/2018 09:52:39</publishTime>
     </File>
     <File Include="bin/Unity.Abstractions.dll">
       <publishTime>04/18/2018 19:15:06</publishTime>
@@ -311,6 +311,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/images/hoatdongkhac.jpg">
       <publishTime>06/30/2018 13:10:36</publishTime>
+    </File>
+    <File Include="Content/images/khoahockythuat.jpg">
+      <publishTime>10/18/2018 15:05:33</publishTime>
     </File>
     <File Include="Content/images/kynangsong.jpg">
       <publishTime>07/13/2018 13:30:54</publishTime>
@@ -409,7 +412,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2018 20:33:45</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
-      <publishTime>07/27/2018 14:45:55</publishTime>
+      <publishTime>10/15/2018 14:54:31</publishTime>
+    </File>
+    <File Include="Views/Contact/TaiLieu.cshtml">
+      <publishTime>10/15/2018 15:05:57</publishTime>
     </File>
     <File Include="Views/CreativeExp/Index.cshtml">
       <publishTime>09/18/2018 15:13:42</publishTime>
@@ -427,10 +433,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 21:10:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/28/2018 10:38:48</publishTime>
+      <publishTime>10/18/2018 15:05:40</publishTime>
+    </File>
+    <File Include="Views/KhoaHocSangTao/Dangki.cshtml">
+      <publishTime>10/20/2018 20:26:28</publishTime>
+    </File>
+    <File Include="Views/KhoaHocSangTao/DangNhap.cshtml">
+      <publishTime>10/20/2018 20:16:39</publishTime>
+    </File>
+    <File Include="Views/KhoaHocSangTao/Index.cshtml">
+      <publishTime>10/18/2018 14:24:47</publishTime>
+    </File>
+    <File Include="Views/Manager/DsKhoaHocKiThuat.cshtml">
+      <publishTime>10/19/2018 15:49:20</publishTime>
     </File>
     <File Include="Views/Manager/Index.cshtml">
-      <publishTime>09/18/2018 16:22:09</publishTime>
+      <publishTime>10/20/2018 20:36:58</publishTime>
     </File>
     <File Include="Views/Manager/NoiDungKhac.cshtml">
       <publishTime>07/28/2018 10:50:33</publishTime>
@@ -454,7 +472,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2018 21:43:27</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/06/2018 13:59:47</publishTime>
+      <publishTime>10/15/2018 14:58:35</publishTime>
     </File>
     <File Include="Views/SocialLifeSkill/CheckCodeRegisted.cshtml">
       <publishTime>07/23/2018 10:56:41</publishTime>
@@ -484,7 +502,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/19/2018 10:17:13</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/16/2018 18:40:25</publishTime>
+      <publishTime>10/22/2018 09:52:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -159,6 +159,23 @@ namespace TraiNghiemSangTao.Controllers
                 return Json("failed");
             }
         }
+        [Route("xoakinangsong/{id}")]
+        [HttpGet]
+        public ActionResult XoaHoatDongKhac(int id)
+        {
+            SocialLifeSkill registrationCreativeExp = socialLifeSkillRepository.GetSocialLifeSkillById(id);
+            if (registrationCreativeExp == null)
+            {
+                return Json("404", JsonRequestBehavior.AllowGet);
+            }
+            bool deleted = socialLifeSkillRepository.DeleteSocialLifeSkill(id);
+            if (deleted == true)
+            {
+                return Json("200");
+            }
+            return Json("400");
         }
-  
+
+    }
+
 }

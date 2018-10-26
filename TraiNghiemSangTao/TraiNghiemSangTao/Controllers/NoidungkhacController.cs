@@ -206,5 +206,22 @@ namespace TraiNghiemSangTao.Controllers
             registrationRepository.UpdateRegistration(registrationDTO, id);
             return Json("200");
         }
+        [Route("xoahoatdongkhac/{id}")]
+        [HttpGet]
+        public ActionResult XoaHoatDongKhac(int id)
+        {
+            Registration registrationCreativeExp = registrationRepository.GetRegistrationById(id);
+            if (registrationCreativeExp == null)
+            {
+                return Json("404", JsonRequestBehavior.AllowGet);
+            }
+            bool deleted = registrationRepository.DeleteRegistration(id);
+            if (deleted == true)
+            {
+                return Json("200");
+            }
+            return Json("400");
+        }
+
     }
 }

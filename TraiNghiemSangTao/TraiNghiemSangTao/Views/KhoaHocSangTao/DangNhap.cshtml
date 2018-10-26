@@ -1,0 +1,137 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng nhập - Hoạt động ngoại khóa</title>
+    <link rel="shortcut icon" href="~/Content/images/logo_so.png">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <div>
+            <div class="col-sm-12 login-box">
+                <h2 class="text-center text-primary text-uppercase">đăng nhập khoa học kỹ thuật</h2>
+                <div class=" col-sm-4 col-sm-offset-4">
+
+                    <div class="panel panel-default">
+                        <form id="Login">
+                            <div class="panel-body">
+                                <div class="text-center">
+                                    <img src="~/Content/images/logo_so.png" class="logo-login">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Đơn vị quản lý</label>
+                                    <select class="form-control" id="dvql">
+                                        @{
+                                        foreach (var item in ViewBag.PGD)
+                                        {
+                                            <option value="@item.PGDID">@item.TenPGD</option>
+                                    }
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Tên trường</label>
+                                    <select class="form-control" id="tentruong">
+                                        @{
+                                        foreach (var item in ViewBag.School)
+                                        {
+                                            <option value="@item.SchoolID">@item.TenTruong</option>
+                                    }
+                                        }
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group has-feedback" id="errorInputUserName">
+                                    <span class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        <input placeholder="Tên đăng nhập" id="Username" name="Username" type="text" class="form-control" value="">
+                                    </span>
+                                    <span class="help-block help-block-true" id="errorUsername"></span>
+                                </div>
+                                <div class="form-group has-feedback" id="errorInputPassword">
+                                    <span class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input placeholder="Mật khẩu" id="Password" name="Password" type="password" class="form-control" value="">
+                                    </span>
+                                    <span class="help-block help-block-true" id="errorPassword"></span>
+                                </div>
+                                <p class="text-center text-danger" id="errorLogin"></p>
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-lg btn-success btn-block" onclick="requestLogin();" id="loginButton">ĐĂNG NHẬP</button>
+                                <span class="loader" hidden id="loader"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <script>
+            $('#dvql').change(function () {
+                $.get('/khoahockythuat/getschoolbypgd/' + $(this).val(), function (data, status) {
+                    $('#tentruong').children().remove().end();
+                    for (var i = 0; i < data.Result.length; i++) {
+
+                        $('#tentruong').append('<option value=' + data.Result[i].SchoolID + '>' + data.Result[i].TenTruong + '</option>')
+                    }
+                })
+            })
+            function requestLogin() {
+                if ($('#Username').val() == '' || $('#Username').val() != 'admin') {
+                    $('#errorInputUserName').addClass('has-error');
+                    $('#errorUsername').text('Sai tên truy cập');
+                }
+                else {
+                    $('#errorInputUserName').removeClass('has-error');
+                    $('#errorUsername').text('');
+                }
+                if ($("#Password").val() == '') {
+                    $('#errorInputPassword').addClass('has-error');
+                    $('#errorPassword').text('Vui lòng nhập mật khẩu');
+
+                }
+                else {
+                    $('#errorInputPassword').removeClass('has-error');
+                    $('#errorPassword').text('');
+                }
+                if ($('#Username').val() !== '' && $('#Username').val() == 'admin' && $("#Password").val() !== '') {
+                    $('#loginButton').hide();
+                    $('#loader').show();
+                    $.post("/khoahockythuat/requestdangnhap", {
+                        schoolId: $('#tentruong').val(),
+                        password: $("#Password").val(),
+                    }, function (data, status) {
+                        if (data.StatusCode == 200) {
+                            window.location.replace('/khoahockythuat/index');
+                        }
+                        else {
+                            $('#loginButton').show();
+                            $('#loader').hide();
+                            $('#errorLogin').text(data.Message)
+                        }
+                    });
+                }
+
+            }
+        </script>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

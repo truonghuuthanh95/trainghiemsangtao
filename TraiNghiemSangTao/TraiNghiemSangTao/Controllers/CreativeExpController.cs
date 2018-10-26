@@ -167,5 +167,21 @@ namespace TraiNghiemSangTao.Controllers
 
             return View();
         }
+        [Route("xoatrainghiemsangtao/{id}")]
+        [HttpGet]
+        public ActionResult XoaTraiNghiemSangTao(int id)
+        {
+            RegistrationCreativeExp registrationCreativeExp = registrationCreativeExpRepository.GetRegistrationCreativeExpById(id);
+            if (registrationCreativeExp == null)
+            {
+                return Json("404", JsonRequestBehavior.AllowGet);
+            }
+            bool deleted = registrationCreativeExpRepository.DeleteRegistrationExp(id);
+            if (deleted == true)
+            {
+                return Json("200");
+            }
+            return Json("400");
+        }
     }
 }

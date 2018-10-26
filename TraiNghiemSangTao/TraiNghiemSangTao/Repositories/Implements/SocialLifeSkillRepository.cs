@@ -166,6 +166,12 @@ namespace TraiNghiemSangTao.Repositories.Implements
             return socialLifeSkill;
         }
 
-        
+        public bool DeleteSocialLifeSkill(int id)
+        {
+            SocialLifeSkill socialLifeSkill = GetSocialLifeSkillById(id);
+            _db.SocialLifeSkills.Remove(socialLifeSkill);
+            _db.SaveChanges();
+            return true;
+        }
     }
 }

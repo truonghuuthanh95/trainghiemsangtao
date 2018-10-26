@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO;
 using TraiNghiemSangTao.Models.DTO;
+using TraiNghiemSangTao.Models.DTO.KHKT;
 using TraiNghiemSangTao.Repositories.Interfaces;
 
 namespace TraiNghiemSangTao.Controllers
@@ -19,15 +20,18 @@ namespace TraiNghiemSangTao.Controllers
         IRegistrationRepository registrationRepository;
         ISubjectRegistedRepository subjectRegistedRepository;
         ISocialLifeSkillRepository socialLifeSkillRepository;
+        IKHKTKhoaHocKiThuatRepository kHKTKhoaHocKiThuatRepository;
 
-        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository, ISocialLifeSkillRepository socialLifeSkillRepository)
+        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository, ISocialLifeSkillRepository socialLifeSkillRepository, IKHKTKhoaHocKiThuatRepository kHKTKhoaHocKiThuatRepository)
         {
             this.registrationCreativeExpRepository = registrationCreativeExpRepository;
             this.programRepository = programRepository;
             this.registrationRepository = registrationRepository;
             this.subjectRegistedRepository = subjectRegistedRepository;
             this.socialLifeSkillRepository = socialLifeSkillRepository;
+            this.kHKTKhoaHocKiThuatRepository = kHKTKhoaHocKiThuatRepository;
         }
+
 
         // GET: Manager 
         [Route("")]
@@ -54,7 +58,7 @@ namespace TraiNghiemSangTao.Controllers
             List<Program> programs = programRepository.GetPrograms();
             ListRegistrationCreativeExpOneViewModel listRegistrationCreativeExpOneViewModel = new ListRegistrationCreativeExpOneViewModel(registrationCreativeExps, programs, dateFrom, dateTo, programId);
             return View(listRegistrationCreativeExpOneViewModel);
-        }       
+        }
 
         [Route("noidungkhac/{dateFrom}/{dateTo}")]
         [HttpGet]
@@ -79,7 +83,7 @@ namespace TraiNghiemSangTao.Controllers
                 return RedirectToRoute("login");
             }
             Registration registration = registrationRepository.GetRegistrationById(id);
-            string subjectRegisted = string.Join(", " ,subjectRegistedRepository.GetSubjectsRegistedsByRegistrationId(registration.Id).Select(s => s.Subject.Name));
+            string subjectRegisted = string.Join(", ", subjectRegistedRepository.GetSubjectsRegistedsByRegistrationId(registration.Id).Select(s => s.Subject.Name));
             NoiDungKhacJson noiDungKhacJson = new NoiDungKhacJson(registration, subjectRegisted);
             var jsonRegistration = JsonConvert.SerializeObject(noiDungKhacJson,
            Formatting.None,
@@ -145,7 +149,7 @@ namespace TraiNghiemSangTao.Controllers
                 {
                     subjectsRegisteds.Add(item01);
                 }
-                
+
             }
             await Utils.ExportExcel.GenerateXLSRegistration(registrations, subjectsRegisteds, dateFrom, dateTo, filePath);
             return File(filePath, "application/vnd.ms-excel", fileName);
@@ -175,8 +179,8 @@ namespace TraiNghiemSangTao.Controllers
             {
                 return RedirectToRoute("login");
             }
-            string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/" + fileName.Trim()+".pdf");
-            return File(filePath, "application/pdf", fileName.Trim()+".pdf");
+            string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/" + fileName.Trim() + ".pdf");
+            return File(filePath, "application/pdf", fileName.Trim() + ".pdf");
         }
         [Route("kynangsong/{dateFrom}/{dateTo}")]
         [HttpGet]
@@ -220,6 +224,36 @@ namespace TraiNghiemSangTao.Controllers
             }
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/SocialSkill/" + fileName.Trim() + ".pdf");
             return File(filePath, "application/pdf", fileName.Trim() + ".pdf");
+        }
+        [Route("dskhoahockithuat")]
+        [HttpGet]
+        public ActionResult DsKhoaHocKiThuat()
+        {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null || account.RoleId != 2 && account.RoleId != 1)
+            {
+                return RedirectToRoute("login");
+            }
+            List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuats();
+            ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+            return View();
+        }
+        [Route("taidskhoahockithuat")]
+        [HttpGet]
+        public async Task<ActionResult> TaoDsKhoaHocKithuat()
+        {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null && account.RoleId != 2 && account.RoleId != 1)
+            {
+                return RedirectToRoute("login");
+            }
+            List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuats();
+            ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+            string fileName = string.Concat("ds-khoahockythuat.xlsx");
+            string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
+            await Utils.ExportExcel.GenerateXLSKhoaHocKiThuat(khoaHocKiThuatDetailDTOs, filePath);
+            return File(filePath, "application/vnd.ms-excel", fileName);
+            
         }
     }
 }

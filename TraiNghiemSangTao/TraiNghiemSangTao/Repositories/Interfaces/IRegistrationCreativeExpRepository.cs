@@ -20,5 +20,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         bool GetValidRegistedCode(string registedCode);
         RegistrationCreativeExp UpdateRegistrationCreativeExp(CreativeExpDTO creativeExpDTO, int id);
         void ResetStudentQuantity(int id);
+        bool DeleteRegistrationExp(int id);
     }
 }

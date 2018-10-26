@@ -76,7 +76,15 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
             return Convert.ToInt16(maxStudent) - (studentJoinedAllDayNumb + studentJoinedHaftDaynumb);
         }
-        
+
+        public bool DeleteRegistrationExp(int id)
+        {
+            RegistrationCreativeExp registrationCreativeExp = GetRegistrationCreativeExpById(id);
+            _db.RegistrationCreativeExps.Remove(registrationCreativeExp);
+            _db.SaveChanges();
+            return true;
+            
+        }
 
         public List<RegistrationCreativeExp> GetAllRegistrationCreativeExpByDateAndProgramId(DateTime dateFrom, DateTime dateTo, int programId)
         {
