@@ -32,6 +32,17 @@ namespace TraiNghiemSangTao.App_Start
             container.RegisterType<ISessionADayRepository, SessionADayRepository>();
             container.RegisterType<ISchoolDegreeRepository, SchoolDegreeRepository>();           
             container.RegisterType<IProgramRepository, ProgramRepository>();
+            container.RegisterType<ISubjectRepository, SubjectRepository>();
+            container.RegisterType<IRegistrationRepository, RegistrationRepository>();
+            container.RegisterType<ISubjectRegistedRepository, SubjectRegistedRepository>();
+            container.RegisterType<ISocialLifeSkillRepository, SocialLifeSkillRepository>();
+            container.RegisterType<IAccountRepository, AccountRepository>();
+            container.RegisterType<IHCMHocSinhRepository, HCMHocSinhRepository>();
+            container.RegisterType<IHCMLopRepository, HCMLopRepository>();
+            container.RegisterType<IHCMPGDRepository, HCMPGDRepository>();
+            container.RegisterType<IHCMSchoolRepository, HCMSchoolRepository>();
+            container.RegisterType<IKHHTLinhVucRepository, KHHTLinhVucRepository>();
+            container.RegisterType<IKHKTKhoaHocKiThuatRepository, KHKTKhoaHocKiThuatRepository>();
         }
     }
 }

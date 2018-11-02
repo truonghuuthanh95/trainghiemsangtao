@@ -8,12 +8,13 @@ namespace TraiNghiemSangTao.Models.DAO
     public partial class CreativeExpDB : DbContext
     {
         public CreativeExpDB()
-            : base("name=CreativeExpDB3")
+            : base("name=CreativeExpDB14")
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
         }
 
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<District> Districts { get; set; }
@@ -22,9 +23,11 @@ namespace TraiNghiemSangTao.Models.DAO
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<RegistrationCreativeExp> RegistrationCreativeExps { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<School> Schools { get; set; }
         public virtual DbSet<SchoolDegree> SchoolDegrees { get; set; }
         public virtual DbSet<SessionADay> SessionADays { get; set; }
+        public virtual DbSet<SocialLifeSkill> SocialLifeSkills { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SubjectsRegisted> SubjectsRegisteds { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
@@ -45,10 +48,6 @@ namespace TraiNghiemSangTao.Models.DAO
                 .HasMany(e => e.Districts)
                 .WithRequired(e => e.Province)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Registration>()
-                .Property(e => e.Creator)
-                .IsFixedLength();
 
             modelBuilder.Entity<SessionADay>()
                 .HasMany(e => e.RegistrationCreativeExps)

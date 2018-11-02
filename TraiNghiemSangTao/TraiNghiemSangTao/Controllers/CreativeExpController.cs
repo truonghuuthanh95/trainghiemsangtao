@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO;
 using TraiNghiemSangTao.Models.DTO;
 using TraiNghiemSangTao.Repositories.Interfaces;
+using TraiNghiemSangTao.Utils;
 
 namespace TraiNghiemSangTao.Controllers
 {
@@ -42,8 +44,8 @@ namespace TraiNghiemSangTao.Controllers
         {
             List<Program> programs = programRepository.GetPrograms();
 
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 2);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(2);
             List<District> districts = districtRepository.GetDistricts();
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();
@@ -56,11 +58,18 @@ namespace TraiNghiemSangTao.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateCreativeExp(CreativeExpDTO creativeExpDTO)
-        {
-            
+        {          
             RegistrationCreativeExp registrationCreativeExp =  registrationCreativeExpRepository.SaveRegistrationCreativeExp(creativeExpDTO);
-            Utils.SendMailService.SendMailToTeacher(registrationCreativeExp);
-            return Json(registrationCreativeExp);
+            RegistrationCreativeExp registrationCreativeExpDetail = registrationCreativeExpRepository.GetRegistrationCreativeExpById(Convert.ToInt32(registrationCreativeExp.Id));
+            SendMailService sendMailService = new SendMailService();
+            sendMailService.SendMailToTeacherAsyncRegistrationCreative(registrationCreativeExpDetail);
+            var registrationCreativeExpJson = JsonConvert.SerializeObject(registrationCreativeExp,
+           Formatting.None,
+           new JsonSerializerSettings()
+           {
+               ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+           });
+            return Json(registrationCreativeExpJson);
         }
         [Route("getSchoolBySchoolDegreeAndDistrict/{schoolDegreeId}/{districtId}")]
         [HttpGet]
@@ -128,8 +137,8 @@ namespace TraiNghiemSangTao.Controllers
             }
             List<Program> programs = programRepository.GetPrograms();
 
-            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(760, 3);
-            List<Class> classes = classesRepository.GetClassBySchoolDegree(3);
+            List<School> schools = schoolRepository.GetSchoolByDistrictAndSchoolDegree(registrationCreativeExp.School.DistrictId, registrationCreativeExp.SchoolDegreeId);
+            List<Class> classes = classesRepository.GetClassBySchoolDegree(registrationCreativeExp.SchoolDegreeId);
             List<District> districts = districtRepository.GetDistricts();
             List<SchoolDegree> schoolDegrees = schoolDegreeRepository.GetSchoolDegrees();
             List<Jobtitle> jobtitles = jobTitleRepository.GetJobtitles();
@@ -142,14 +151,37 @@ namespace TraiNghiemSangTao.Controllers
         [HttpPost]
         public ActionResult PostUpdateCreativeExp(CreativeExpDTO creativeExpDTO, int id)
         {
+            registrationCreativeExpRepository.ResetStudentQuantity(id);
+            int validStudent = registrationCreativeExpRepository.CheckValidQuantityStudent(creativeExpDTO.ProgramId, creativeExpDTO.DaySessionId, creativeExpDTO.DateRegisted);
+            if (creativeExpDTO.StudentQuantity > validStudent)
+            {
+                return Json("Số lượng học sinh đang kí tối đa là: " + validStudent);
+            }
             RegistrationCreativeExp registrationCreativeExp = registrationCreativeExpRepository.UpdateRegistrationCreativeExp(creativeExpDTO, id);
-            return Json(registrationCreativeExp);
+            return Json("200");
         }
         [Route("capnhattrainghiemsangtaothanhcong")]
         [HttpGet]
         public ActionResult UpdateCreativeExpSuccessfull(CreativeExpDTO creativeExpDTO)
         {
+
             return View();
+        }
+        [Route("xoatrainghiemsangtao/{id}")]
+        [HttpGet]
+        public ActionResult XoaTraiNghiemSangTao(int id)
+        {
+            RegistrationCreativeExp registrationCreativeExp = registrationCreativeExpRepository.GetRegistrationCreativeExpById(id);
+            if (registrationCreativeExp == null)
+            {
+                return Json("404", JsonRequestBehavior.AllowGet);
+            }
+            bool deleted = registrationCreativeExpRepository.DeleteRegistrationExp(id);
+            if (deleted == true)
+            {
+                return Json("200");
+            }
+            return Json("400");
         }
     }
 }

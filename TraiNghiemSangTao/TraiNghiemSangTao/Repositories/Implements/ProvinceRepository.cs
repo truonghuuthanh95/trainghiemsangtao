@@ -18,7 +18,8 @@ namespace TraiNghiemSangTao.Repositories.Implements
 
         public List<Province> GetProvinces()
         {
-            throw new NotImplementedException();
+            List<Province> provinces = _db.Provinces.Where(s => s.CountryId == 237).OrderBy(s => s.Name).ToList();
+            return provinces;
         }
     }
 }

@@ -26,6 +26,11 @@ namespace TraiNghiemSangTao
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css", "~/Content/datepicker.css"));
+            bundles.Add(new ScriptBundle("~/bundles/datatable-js").Include(
+                       "~/Scripts/dataTables.min.js",
+                      "~/Scripts/dataTables.bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/Content/datatable-css").Include(
+                    "~/Content/dataTables.min.css"));
         }
     }
 }

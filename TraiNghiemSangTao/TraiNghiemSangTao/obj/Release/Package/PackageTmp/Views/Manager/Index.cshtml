@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Quãn lý";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TraiNghiemSangTao.Models.DAO.Account account = (TraiNghiemSangTao.Models.DAO.Account)Session[TraiNghiemSangTao.Utils.CommonConstant.USER_SESSION];
+
+}
+
+<h2 class="text-center text-primary">QUẢN LÝ CHUNG</h2>
+
+<div class="col-sm-8 col-sm-offset-2">
+    @{
+        if (account.RoleId == 2 || account.RoleId == 4)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/trainghiemsangtao/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day/1" role="button">DANH SÁCH TIẾT HỌC NGOÀI NHÀ TRƯỜNG</a>
+            </div>
+        }
+        if (account.RoleId == 2 || account.RoleId == 3)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/noidungkhac/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day" role="button">DANH SÁCH NỘI DUNG KHÁC</a>
+            </div>
+        }
+        if (account.RoleId == 2 || account.RoleId == 3)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/kynangsong/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day" role="button">DANH SÁCH KỸ NĂNG SỐNG</a>
+            </div>
+        }
+        if (account.RoleId == 5)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/trainghiemsangtao/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day/1" role="button">DANH SÁCH TRẢI NGHIỆM SÁNG TẠO TẠI THẢO CẦM VIÊN</a>
+            </div>
+        }
+        if (account.RoleId == 6)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/trainghiemsangtao/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day/2" role="button">DANH SÁCH KHU NÔNG NGHIỆP CAO</a>
+            </div>
+        }
+        if (account.RoleId == 7)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/trainghiemsangtao/@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day/@DateTime.Now.AddMonths(1).Year-@DateTime.Now.AddMonths(1).Month-@DateTime.Now.AddMonths(1).Day/3" role="button">DANH SÁCH TRẢI NGHIỆM CỦ CHI</a>
+            </div>
+        }
+        if (account.RoleId == 2)
+        {
+            <div class="col-sm-12">
+                <a class="btn btn-primary btn-block btn-lg" href="/quanly/dskhoahockithuat" role="button">DANH SÁCH KHOA HOC HỌC KỸ THUẬT</a>
+            </div>
+        }
+    }
+
+
+
+</div>
+

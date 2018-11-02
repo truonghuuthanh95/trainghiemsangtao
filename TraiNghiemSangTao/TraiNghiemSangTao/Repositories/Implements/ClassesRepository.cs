@@ -16,7 +16,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
             _db = db;
         }
 
-        public List<Class> GetClassBySchoolDegree(int id)
+        public List<Class> GetClassBySchoolDegree(int? id)
         {
             List<Class> classes = _db.Classes.Where(s => s.SchoolDegreeId == id).ToList();
             return classes;

@@ -16,16 +16,16 @@ namespace TraiNghiemSangTao.Repositories.Implements
             _db = db;
         }
 
-        public List<School> GetSchoolByDistrictAndSchoolDegree(int districtId, int schoolDegreeId)
+        public List<School> GetSchoolByDistrictAndSchoolDegree(int? districtId, int? schoolDegreeId)
         {
             List<School> schools = null;
-            if (schoolDegreeId == 4)
+            if (schoolDegreeId == 3)
             {
-                schools = _db.Schools.Where(s => s.SchoolDegreeId == 4 || s.SchoolDegreeId == 7).Where(s => s.DistrictId == districtId).ToList();
+                schools = _db.Schools.Where(s => s.SchoolDegreeId == 3 || s.SchoolDegreeId == 14 || s.SchoolDegreeId == 15 || s.SchoolDegreeId == 13).Where(s => s.DistrictId == districtId).ToList();
             }
-            else if (schoolDegreeId == 5)
+            else if (schoolDegreeId == 4)
             {
-                schools = _db.Schools.Where(s => s.SchoolDegreeId == 5 || s.SchoolDegreeId == 8).Where(s => s.DistrictId == districtId).ToList();
+                schools = _db.Schools.Where(s => s.SchoolDegreeId == 4 || s.SchoolDegreeId == 15 || s.SchoolDegreeId == 13).Where(s => s.DistrictId == districtId).ToList();
             }
             else
             {

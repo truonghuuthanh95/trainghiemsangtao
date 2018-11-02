@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Cập nhật nội dung khác";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-sm-8 col-sm-offset-2">
+    <div>
+        <div class="text-center checkIDBox">
+            <h3 class="text-center text-info">CẬP NHẬT NỘI DUNG KHÁC</h3>
+            <form class="form-inline">
+                <p class="text-warning">Vui lòng nhập mã đăng kí sau đó nhấn xác nhận để hệ thống kiểm tra</p>
+                <p class="text-danger" id="errorRegistedCode"></p>
+                <div class="form-group" id="errorRegistrationId">
+                    <label for="registrationId" class="control-label">Mã đăng kí</label>
+                    <input placeholder="Mã đăng kí" type="text" id="registedCode" class="form-control" value="">
+                </div>
+                <button type="button" class="btn btn-success" onclick="checkValidToUpdate();" id="submitIndentifyCard">XÁC NHẬN</button>
+                <span class="loader" id="loader" hidden=""></span>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function checkValidToUpdate() {
+        if ($('#registedCode').val() == '') {
+            $('#errorRegistedCode').text('Vui lòng nhập mã đăng kí')
+        }
+        else {
+            $.get('/kiemtramadangkinoidungkhac/' + $('#registedCode').val(), function (data, status) {
+                debugger
+                if (data != "True") {
+                    $('#errorRegistedCode').text('Không tìm thấy mã đăng kí. Vui lòng kiểm tra lại');
+                }
+                else {
+                    window.location.replace('/capnhatnoidungkhac/' + $('#registedCode').val());
+                }
+            })
+        }
+    }
+
+</script>
