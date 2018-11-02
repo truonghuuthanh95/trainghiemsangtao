@@ -17,15 +17,15 @@
                         <th>Tên Đề Tài</th>
                         <th>Lĩnh Vực</th>
                         <th>Tên học sinh 1</th>
-                        <th>Ngày sinh</th>
+                        @*<th>Ngày sinh</th>*@
                         <th>Trường</th>
-                        <th>Lớp</th>
-                        <th>Đóng góp</th>
+                        @*<th>Lớp</th>*@
+                        @*<th>Đóng góp</th>*@
                         <th>Tên học sinh 2</th>
-                        <th>Ngày sinh</th>
+                        @*<th>Ngày sinh</th>*@
                         <th>Trường</th>
-                        <th>Lớp</th>
-                        <th>Đóng góp</th>
+                        @*<th>Lớp</th>*@
+                        @*<th>Đóng góp</th>*@
                         <th>GVHD</th>
                         <th>SĐT</th>
                         <th>Email</th>
@@ -42,25 +42,25 @@
                                 <td>@item.KhoaHocKiThuat.TenDeTai</td>
                                 <td>@item.KHKTLinhVucThamGia.Name</td>
                                 <td>@item.T_DM_HocSinh1.Ho @item.T_DM_HocSinh1.Ten</td>
-                                <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh1.NgaySinh)</td>
+                                @*<td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh1.NgaySinh)</td>*@
                                 <td>@item.T_DM_Truong1.TenTruong</td>
-                                <td>@item.T_DM_Lop1.TenLop</td>
-                                <td>@item.KhoaHocKiThuat.DongGopHs1</td>
+                                @*<td>@item.T_DM_Lop1.TenLop</td>*@
+                                @*<td>@item.KhoaHocKiThuat.DongGopHs1</td>*@
                                 @{
                                     if (item.KhoaHocKiThuat.HocSinh2 != null)
                                     {
                                         <td>@item.T_DM_HocSinh2.Ho @item.T_DM_HocSinh2.Ten</td>
-                                        <td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh2.NgaySinh)</td>
+                                        @*<td>@String.Format("{0:dd/MM/yyyy}", item.T_DM_HocSinh2.NgaySinh)</td>*@
                                         <td>@item.T_DM_Truong2.TenTruong</td>
-                                        <td>@item.T_DM_Lop2.TenLop</td>
-                                        <td>@item.KhoaHocKiThuat.DongGopHs2</td>
+                                        @*<td>@item.T_DM_Lop2.TenLop</td>*@
+                                        @*<td>@item.KhoaHocKiThuat.DongGopHs2</td>*@
                                     }
                                     else
                                     {
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        @*<td></td>*@
+                                        @*<td></td>*@
+                                        @*<td></td>*@
                                         <td></td>
                                     }
                                     <td>@item.KhoaHocKiThuat.GVHD</td>

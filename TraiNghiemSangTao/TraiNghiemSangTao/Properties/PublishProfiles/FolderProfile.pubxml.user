@@ -232,10 +232,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.dll">
-      <publishTime>10/26/2018 15:58:15</publishTime>
+      <publishTime>11/02/2018 14:35:14</publishTime>
     </File>
     <File Include="bin/TraiNghiemSangTao.pdb">
-      <publishTime>10/26/2018 15:58:15</publishTime>
+      <publishTime>11/02/2018 14:35:14</publishTime>
     </File>
     <File Include="bin/Unity.Abstractions.dll">
       <publishTime>04/18/2018 19:15:06</publishTime>
@@ -445,16 +445,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/18/2018 15:05:40</publishTime>
     </File>
     <File Include="Views/KhoaHocSangTao/Dangki.cshtml">
-      <publishTime>10/25/2018 16:39:40</publishTime>
+      <publishTime>11/02/2018 14:04:20</publishTime>
     </File>
     <File Include="Views/KhoaHocSangTao/DangNhap.cshtml">
       <publishTime>10/20/2018 20:16:39</publishTime>
     </File>
     <File Include="Views/KhoaHocSangTao/Index.cshtml">
-      <publishTime>10/18/2018 14:24:47</publishTime>
+      <publishTime>11/02/2018 14:24:01</publishTime>
     </File>
     <File Include="Views/Manager/DsKhoaHocKiThuat.cshtml">
-      <publishTime>10/26/2018 15:45:11</publishTime>
+      <publishTime>11/02/2018 14:30:53</publishTime>
     </File>
     <File Include="Views/Manager/Index.cshtml">
       <publishTime>10/20/2018 20:36:58</publishTime>

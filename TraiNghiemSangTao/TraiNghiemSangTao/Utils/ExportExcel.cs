@@ -277,7 +277,7 @@ namespace TraiNghiemSangTao.Utils
                     ws.Cells[6, 5].Value = "TÊN HỌC SINH 1";
                     ws.Cells[6, 6].Value = "NGÀY";
                     ws.Cells[6, 7].Value = "THÁNG";
-                    ws.Cells[6, 7].Value = "NĂM";
+                    ws.Cells[6, 8].Value = "NĂM";
                     ws.Cells[6, 9].Value = "TRƯỜNG";
                     ws.Cells[6, 10].Value = "LỚP";
                     ws.Cells[6, 11].Value = "ĐÓNG GÓP";

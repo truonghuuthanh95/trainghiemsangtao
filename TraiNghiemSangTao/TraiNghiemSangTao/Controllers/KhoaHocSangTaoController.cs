@@ -33,10 +33,6 @@ namespace TraiNghiemSangTao.Controllers
             this.hCMSchoolRepository = hCMSchoolRepository;
         }
 
-
-
-
-
         // GET: KhoaHocSangTao
         [Route("index")]
         public ActionResult Index()
@@ -151,8 +147,7 @@ namespace TraiNghiemSangTao.Controllers
                     }
                     string filename =  khoaHocKiThuat.LinhVucId.ToString() + '-' + khoaHocKiThuat.Id.ToString() + Path.GetExtension(fileTaiLieu.FileName);
                     string _path = Path.Combine(Server.MapPath("~/UploadedFiles/KhoaHocKiThuat"), filename);
-                    fileTaiLieu.SaveAs(_path);
-                    
+                    fileTaiLieu.SaveAs(_path);                    
                     kHKTKhoaHocKiThuatRepository.UpdateFileTaiLieuKhoaHocKiThuat(id, filename.Trim());
                     return Json(new ReturnFormat(200, "success", null), JsonRequestBehavior.AllowGet);
                 }
@@ -161,7 +156,6 @@ namespace TraiNghiemSangTao.Controllers
                     kHKTKhoaHocKiThuatRepository.DeleteKHKT(id);
                     return Json("failed");
                 }
-
 
             }
             catch

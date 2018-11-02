@@ -267,7 +267,15 @@ namespace TraiNghiemSangTao.Controllers
             }
             KhoaHocKiThuat khoaHocKiThuat = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatById(id);           
             string filePath = System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/KhoaHocKiThuat/" + khoaHocKiThuat.FileTaiLieu.Trim());
-            return File(filePath,null, khoaHocKiThuat.FileTaiLieu);
+            if (khoaHocKiThuat.FileTaiLieu.Contains(".docx"))
+            {
+                return File(filePath, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", khoaHocKiThuat.FileTaiLieu);
+            }
+            else if (khoaHocKiThuat.FileTaiLieu.Contains(".xlsx"))
+            {
+                return File(filePath, "application/vnd.ms-excel", khoaHocKiThuat.FileTaiLieu);
+            }
+            return File(filePath, "application/msword", khoaHocKiThuat.FileTaiLieu);
         }
     }
 }

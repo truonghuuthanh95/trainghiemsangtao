@@ -20,6 +20,7 @@
                     <th>Trường</th>
                     <th>Lớp</th>
                     <th>GVHD</th>
+                    <th>Tài liệu</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,42 +28,45 @@
                     int index = 1;
                     foreach (var item in ViewBag.DSKHKT)
                     {
-                <tr>
-                    <td>@index</td>
-                    <td>@item.KhoaHocKiThuat.TenDeTai</td>
-                    <td>@item.KHKTLinhVucThamGia.Name</td>
-                    <td>@item.T_DM_HocSinh1.Ho @item.T_DM_HocSinh1.Ten</td>
-                    <td>@item.T_DM_Truong1.TenTruong</td>
-                    <td>@item.T_DM_Lop1.TenLop</td>
-                    @{
-        if (item.KhoaHocKiThuat.HocSinh2 != null)
-        {
-                <td>@item.T_DM_HocSinh2.Ho @item.T_DM_HocSinh2.Ten</td>
-                <td>@item.T_DM_Truong2.TenTruong</td>
-                <td>@item.T_DM_Lop2.TenLop</td>
-}
-else
-{
-                <td></td>
-                <td></td>
-                <td></td>
-}
+                        <tr>
+                            <td>@index</td>
+                            <td>@item.KhoaHocKiThuat.TenDeTai</td>
+                            <td>@item.KHKTLinhVucThamGia.Name</td>
+                            <td>@item.T_DM_HocSinh1.Ho @item.T_DM_HocSinh1.Ten</td>
+                            <td>@item.T_DM_Truong1.TenTruong</td>
+                            <td>@item.T_DM_Lop1.TenLop</td>
+                            @{
+                                if (item.KhoaHocKiThuat.HocSinh2 != null)
+                                {
+                                    <td>@item.T_DM_HocSinh2.Ho @item.T_DM_HocSinh2.Ten</td>
+                                    <td>@item.T_DM_Truong2.TenTruong</td>
+                                    <td>@item.T_DM_Lop2.TenLop</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                }
+                            }
+                            <td>@item.KhoaHocKiThuat.GVHD</td>
+                            @{
+                                if (@item.KhoaHocKiThuat.FileTaiLieu != null)
+                                {
+                                    <td><label class="label label-success">Đã nộp file</label></td>
+                                }
+                                else
+                                {
+                                    <td><label class="label label-danger">Tải lên thất bại</label></td>
+                                }
+                            }
+
+                        </tr>
+                        index++;
                     }
-
-
-                    <td>@item.KhoaHocKiThuat.GVHD</td>
-                </tr>
-                            index++;
-                        }
                 }
-
-
             </tbody>
         </table>
         <p class="text-right"><a role="button" href="/khoahockythuat/dangki" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> TẠO MỚI</a></p>
     </div>
-
 </div>
-<script>
-
-</script>
