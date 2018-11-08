@@ -37,5 +37,7 @@ namespace TraiNghiemSangTao.Models.DTO.KHKT
         public string Email { get; set; }
 
         public string SDT { get; set; }
+
+        public string DVCongTac { get; set; }
     }
 }

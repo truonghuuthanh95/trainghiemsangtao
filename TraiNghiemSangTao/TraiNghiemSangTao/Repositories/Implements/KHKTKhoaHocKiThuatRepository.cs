@@ -38,17 +38,25 @@ namespace TraiNghiemSangTao.Repositories.Implements
             khoaHocKiThuat.GVHD = khoaHocKithuatDTO.GVHD;
             khoaHocKiThuat.Email = khoaHocKithuatDTO.Email;
             khoaHocKiThuat.SDT = khoaHocKithuatDTO.SDT;
+            khoaHocKiThuat.DVCongTac = khoaHocKithuatDTO.DVCongTac;
             _db.KhoaHocKiThuats.Add(khoaHocKiThuat);
             _db.SaveChanges();
             return khoaHocKiThuat;
         }
 
-        public bool DeleteKHKT(int id)
+
+        public bool DeleteKHKTById(int id)
         {
             KhoaHocKiThuat khoaHocKiThuat = GetKhoaHocKiThuatById(id);
             _db.KhoaHocKiThuats.Remove(khoaHocKiThuat);
             _db.SaveChanges();
             return true;
+        }
+
+        public List<KhoaHocKiThuat> GetKhoaHocKiThuatByDeTaiId(int id)
+        {
+            List<KhoaHocKiThuat> khoaHocKiThuats = _db.KhoaHocKiThuats.Where(s => s.LinhVucId == id).ToList();
+            return khoaHocKiThuats;
         }
 
         public KhoaHocKiThuat GetKhoaHocKiThuatById(int id)
@@ -124,12 +132,10 @@ namespace TraiNghiemSangTao.Repositories.Implements
                         khoaHocKiThuatDetailDTO.T_DM_Lop1 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.LopID).SingleOrDefault();
                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                     }
-                }
-                                
-               
+                    khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
+                }                                              
             }
-            return khoaHocKiThuatDetailDTOs;
-            
+            return khoaHocKiThuatDetailDTOs;            
         }
 
         public KhoaHocKiThuat UpdateFileTaiLieuKhoaHocKiThuat(int id, string tenFile)

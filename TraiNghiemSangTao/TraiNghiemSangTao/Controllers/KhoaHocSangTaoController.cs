@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TraiNghiemSangTao.Models.DAO.HCM_EDU_DATA;
@@ -44,7 +45,7 @@ namespace TraiNghiemSangTao.Controllers
             }
             List<KhoaHocKiThuatDetailDTO> hocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatsBySchoolId(t_User.DonViID);
             ViewBag.DSKHKT = hocKiThuatDetailDTOs;
-
+            
             return View();
         }
         [Route("dangnhap", Name = "khoahockithuatdangnhap")]
@@ -105,6 +106,7 @@ namespace TraiNghiemSangTao.Controllers
                 return Json(new ReturnFormat(403, "Access denied", null), JsonRequestBehavior.AllowGet);
             }
             List<T_DM_HocSinh> t_DM_HocSinhs = hCMHocSinhRepository.GetT_DM_HocSinhsByClassId(lopId.Trim());
+
             return Json(new ReturnFormat(200, "success", t_DM_HocSinhs), JsonRequestBehavior.AllowGet);
         }
         [Route("submitdangki")]
@@ -145,7 +147,7 @@ namespace TraiNghiemSangTao.Controllers
                     {
                         return Json("failed");
                     }
-                    string filename =  khoaHocKiThuat.LinhVucId.ToString() + '-' + khoaHocKiThuat.Id.ToString() + Path.GetExtension(fileTaiLieu.FileName);
+                    string filename =  String.Format("{0:00}", khoaHocKiThuat.LinhVucId) + '-' + khoaHocKiThuat.Id.ToString() + Path.GetExtension(fileTaiLieu.FileName);
                     string _path = Path.Combine(Server.MapPath("~/UploadedFiles/KhoaHocKiThuat"), filename);
                     fileTaiLieu.SaveAs(_path);                    
                     kHKTKhoaHocKiThuatRepository.UpdateFileTaiLieuKhoaHocKiThuat(id, filename.Trim());
@@ -153,16 +155,43 @@ namespace TraiNghiemSangTao.Controllers
                 }
                 else
                 {
-                    kHKTKhoaHocKiThuatRepository.DeleteKHKT(id);
+                    kHKTKhoaHocKiThuatRepository.DeleteKHKTById(id);
                     return Json("failed");
                 }
 
             }
             catch
             {
-                kHKTKhoaHocKiThuatRepository.DeleteKHKT(id);
+                kHKTKhoaHocKiThuatRepository.DeleteKHKTById(id);
                 return Json("failed");
             }
+        }
+        [Route("taidsdangkibyschool")]
+        [HttpGet]
+        public async Task<ActionResult> DownloadFileByTruong()
+        {
+            T_User t_User = (T_User)Session[CommonConstant.KHKT_USER_SESSION];
+            if (t_User == null)
+            {
+                return RedirectToRoute("khoahockithuatdangnhap");
+            }
+            List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatsBySchoolId(t_User.DonViID);
+            ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+            string fileName = string.Concat("ds-khoahockythuat.xlsx");
+            string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Utils/Files/" + fileName);
+            await Utils.ExportExcel.GenerateXLSKhoaHocKiThuat(khoaHocKiThuatDetailDTOs, filePath);
+            return File(filePath, "application/vnd.ms-excel", fileName);
+        }
+        [Route("deletekhktbyid/{id}")]
+        [HttpGet]
+        public ActionResult DeleteKHKTById(int id)
+        {
+            bool deleted = kHKTKhoaHocKiThuatRepository.DeleteKHKTById(id);
+            if (deleted == true)
+            {
+                return Json(new ReturnFormat(200, "success", null), JsonRequestBehavior.AllowGet);
+            }
+            return Json(new ReturnFormat(400, "failed", null), JsonRequestBehavior.AllowGet);
         }
     }
 }

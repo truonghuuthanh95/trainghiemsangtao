@@ -17,7 +17,7 @@ namespace TraiNghiemSangTao.Models.DTO.KHKT
         public T_DM_Truong T_DM_Truong2 { get; set; }
         public T_DM_HocSinh T_DM_HocSinh1 { get; set; }
         public T_DM_HocSinh T_DM_HocSinh2 { get; set; }
-
+        public T_DM_PGD T_DM_PGDTruong { get; set; }
 
     }
 }

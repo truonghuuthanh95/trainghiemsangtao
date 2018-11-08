@@ -16,6 +16,12 @@ namespace TraiNghiemSangTao.Repositories.Implements
             _db = db;
         }
 
+        public KHKTLinhVucThamGia GetHKTLinhVucThamGiaById(int id)
+        {
+            KHKTLinhVucThamGia kHKTLinhVucThamGia = _db.KHKTLinhVucThamGias.Where(s => s.Id == id).SingleOrDefault();
+            return kHKTLinhVucThamGia;
+        }
+
         public List<KHKTLinhVucThamGia> GetKHKTLinhVucThamGias()
         {
             List<KHKTLinhVucThamGia> kHKTLinhVucThamGias = _db.KHKTLinhVucThamGias.Where(s => s.IsActive == true).ToList();

@@ -32,13 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group" id="errorTenDeTai">
-                    <label for="exampleInputEmail1" class="control-label">Tên đề tài</label>
+                    <label for="exampleInputEmail1" class="control-label">Tên đề tài <span style="color: red; font-size: 20px">*</span></label>
                     <input type="email" class="form-control" id="tendetai">
                     <span class="help-block help-block-true" id="errorTenDeTaiMessage"></span>
                 </div>
             </form>
             <label for="exampleInputPassword1">
-                Học sinh tham gia &nbsp;&nbsp;&nbsp;
+                Học sinh tham gia <span style="color: red; font-size: 20px">*</span> &nbsp;&nbsp;&nbsp;
                 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
@@ -61,23 +61,30 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group" id="errorGVHD">
-                        <label for="exampleInputEmail1" class="control-label">Giáo viên hướng dẫn (Ghi rõ họ tên)</label>
+                        <label for="exampleInputEmail1" class="control-label">Giáo viên hướng dẫn (Ghi rõ họ tên) <span style="color: red; font-size: 20px">*</span></label>
                         <input type="email" class="form-control" id="gvhd">
                         <span class="help-block help-block-true" id="errorGVHDMessage"></span>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="form-group" id="errordvct">
+                        <label for="exampleInputEmail1" class="control-label">Đơn vị công tác <span style="color: red; font-size: 20px">*</span></label>
+                        <input type="email" class="form-control" id="dvct">
+                        <span class="help-block help-block-true" id="errorDvctMessage"></span>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group" id="errorEmail">
-                        <label for="exampleInputEmail1" class="control-label">Email</label>
+                        <label for="exampleInputEmail1" class="control-label">Email <span style="color: red; font-size: 20px">*</span></label>
                         <input type="email" class="form-control" id="email">
                         <span class="help-block help-block-true" id="errorEmailMessage"></span>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group" id="errorSdt">
-                        <label for="exampleInputEmail1" class="control-label">Số điện thoại</label>
+                        <label for="exampleInputEmail1" class="control-label">Số điện thoại <span style="color: red; font-size: 20px">*</span></label>
                         <input type="email" class="form-control" id="sdt">
                         <span class="help-block help-block-true" id="errorSdtMessage"></span>
                     </div>
@@ -86,7 +93,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group" id="errorFileTaiLieu">
-                        <label for="exampleInputFile" class="control-label">File tài liệu đề tài</label>
+                        <label for="exampleInputFile" class="control-label">File tài liệu đề tài <span style="color: red; font-size: 20px">*</span></label>
                         <input type="file" id="filetailieu">
                         <p class="help-block text-warning">Dung lượng nhỏ hơn 25M (.doc, .docx, .pdf)</p>
                         <span class="help-block help-block-true" id="errorFileTaiLieuMessage"></span>
@@ -130,6 +137,7 @@
                         <th>Họ</th>
                         <th>Tên</th>
                         <th>Giới tính</th>
+                        @*<th>Ngày sinh</th>*@
                         <th>Thao tác</th>
                     </tr>
                 </thead>
@@ -151,6 +159,7 @@
                                         <td>Nam</td>
                                     }
                                 }
+                                        @*<td>@String.Format("{0:dd/MM/yyyy}", item.NgaySinh)</td>*@
                                 <td><button class="btn btn-primary btn-sm" ho="@item.Ho" ten="@item.Ten" value="@item.HocSinhID" onclick="chonHocSinh(this);">Chọn</button></td>
 
                             </tr>
@@ -278,6 +287,15 @@
             $('#errorGVHD').removeClass("has-error");
             $('#errorGVHDMessage').text("");
         }
+        if ($('#dvct').val() == '') {
+            $('#errordvct').addClass("has-error");
+            $('#errorDvctMessage').text("Vui lòng nhập");
+
+        }
+        else {
+            $('#errordvct').removeClass("has-error");
+            $('#errorDvctMessage').text("");
+        }
         if (hsThamGia.length < 1) {
             $('#errorDangKi').addClass("has-error");
             $('#errorDangKi').text("Vui lòng chọn học sinh tham gia");
@@ -319,7 +337,8 @@
             !$('#errorGVHD').hasClass("has-error") &&
             !$('#errorEmail').hasClass("has-error") &&
             !$('#errorSdt').hasClass("has-error") &&
-            !$('#errorFileTaiLieu').hasClass("has-error")) {
+            !$('#errorFileTaiLieu').hasClass("has-error") &&
+            !$('#errordvct').hasClass("has-error")) {
             var donggopArray = document.getElementsByClassName('donggop');
             $('#loader').show();
             $('#submit').hide();
@@ -337,6 +356,7 @@
                     GVHD: $('#gvhd').val().trim(),
                     Email: $('#email').val().trim(),
                     SDT: $('#sdt').val().trim(),
+                    DVCongTac: $('#dvct').val().trim(),
                 },
                 function (data, status) {
                     if (data.StatusCode == 200 && status == 'success') {

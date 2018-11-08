@@ -9,5 +9,6 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
     public interface IKHHTLinhVucRepository
     {
         List<KHKTLinhVucThamGia> GetKHKTLinhVucThamGias();
+        KHKTLinhVucThamGia GetHKTLinhVucThamGiaById(int id);
     }
 }

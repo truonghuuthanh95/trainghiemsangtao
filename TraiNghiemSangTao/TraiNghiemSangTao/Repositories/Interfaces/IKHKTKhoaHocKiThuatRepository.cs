@@ -13,8 +13,10 @@ namespace TraiNghiemSangTao.Repositories.Interfaces
         List<KhoaHocKiThuatDetailDTO> GetKhoaHocKiThuatsBySchoolId(string schoolId);
         List<KhoaHocKiThuatDetailDTO> GetKhoaHocKiThuats();
         KhoaHocKiThuat UpdateFileTaiLieuKhoaHocKiThuat(int id, string tenFile);
-        KhoaHocKiThuat GetKhoaHocKiThuatById(int id);
-        bool DeleteKHKT(int id);
+        KhoaHocKiThuat GetKhoaHocKiThuatById(int id);        
+        List<KhoaHocKiThuat> GetKhoaHocKiThuatByDeTaiId(int id);
+
+        bool DeleteKHKTById(int id);
 
     }
 }

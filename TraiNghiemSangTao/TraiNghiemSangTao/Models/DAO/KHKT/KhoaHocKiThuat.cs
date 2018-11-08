@@ -54,5 +54,8 @@ namespace TraiNghiemSangTao.Models.DAO.KHKT
 
         [StringLength(100)]
         public string FileTaiLieu { get; set; }
+
+        [StringLength(200)]
+        public string DVCongTac { get; set; }
     }
 }

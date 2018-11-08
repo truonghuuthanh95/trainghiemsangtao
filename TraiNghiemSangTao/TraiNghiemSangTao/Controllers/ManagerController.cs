@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,8 +24,9 @@ namespace TraiNghiemSangTao.Controllers
         ISubjectRegistedRepository subjectRegistedRepository;
         ISocialLifeSkillRepository socialLifeSkillRepository;
         IKHKTKhoaHocKiThuatRepository kHKTKhoaHocKiThuatRepository;
+        IKHHTLinhVucRepository kHHTLinhVucRepository;
 
-        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository, ISocialLifeSkillRepository socialLifeSkillRepository, IKHKTKhoaHocKiThuatRepository kHKTKhoaHocKiThuatRepository)
+        public ManagerController(IRegistrationCreativeExpRepository registrationCreativeExpRepository, IProgramRepository programRepository, IRegistrationRepository registrationRepository, ISubjectRegistedRepository subjectRegistedRepository, ISocialLifeSkillRepository socialLifeSkillRepository, IKHKTKhoaHocKiThuatRepository kHKTKhoaHocKiThuatRepository, IKHHTLinhVucRepository kHHTLinhVucRepository)
         {
             this.registrationCreativeExpRepository = registrationCreativeExpRepository;
             this.programRepository = programRepository;
@@ -31,7 +34,9 @@ namespace TraiNghiemSangTao.Controllers
             this.subjectRegistedRepository = subjectRegistedRepository;
             this.socialLifeSkillRepository = socialLifeSkillRepository;
             this.kHKTKhoaHocKiThuatRepository = kHKTKhoaHocKiThuatRepository;
+            this.kHHTLinhVucRepository = kHHTLinhVucRepository;
         }
+
 
 
         // GET: Manager 
@@ -235,8 +240,10 @@ namespace TraiNghiemSangTao.Controllers
             {
                 return RedirectToRoute("login");
             }
+            List<KHKTLinhVucThamGia> linhVucThamGias = kHHTLinhVucRepository.GetKHKTLinhVucThamGias();
             List<KhoaHocKiThuatDetailDTO> khoaHocKiThuatDetailDTOs = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuats();
             ViewBag.KHKT = khoaHocKiThuatDetailDTOs;
+            ViewBag.LinhVucs = linhVucThamGias;
             return View();
         }
         [Route("taidskhoahockithuat")]
@@ -261,7 +268,7 @@ namespace TraiNghiemSangTao.Controllers
         public ActionResult TaiFileTaiLieuKHKT(int id)
         {
             Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
-            if (account == null && account.RoleId != 2 && account.RoleId != 1)
+            if (account == null || account.RoleId != 2 && account.RoleId != 1)
             {
                 return RedirectToRoute("login");
             }
@@ -276,6 +283,33 @@ namespace TraiNghiemSangTao.Controllers
                 return File(filePath, "application/vnd.ms-excel", khoaHocKiThuat.FileTaiLieu);
             }
             return File(filePath, "application/msword", khoaHocKiThuat.FileTaiLieu);
+        }
+        [Route("downloadzipfile/{deTaiId}")]
+        [HttpGet]
+        public ActionResult DownloadZipFile(int detaiId)
+        {
+            Account account = (Account)Session[Utils.CommonConstant.USER_SESSION];
+            if (account == null || account.RoleId != 2 && account.RoleId != 1)
+            {
+                return RedirectToRoute("login");
+            }
+            KHKTLinhVucThamGia kHKTLinhVucThamGia = kHHTLinhVucRepository.GetHKTLinhVucThamGiaById(detaiId);
+            List<KhoaHocKiThuat> khoaHocKiThuats = kHKTKhoaHocKiThuatRepository.GetKhoaHocKiThuatByDeTaiId(detaiId);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    for (int i = 0; i < khoaHocKiThuats.Count; i++)
+                    {
+                        if (khoaHocKiThuats[i].FileTaiLieu != null)
+                        {
+                            ziparchive.CreateEntryFromFile(System.Web.HttpContext.Current.Server.MapPath("~/UploadedFiles/KhoaHocKiThuat/" + khoaHocKiThuats[i].FileTaiLieu), khoaHocKiThuats[i].FileTaiLieu);
+                        }                       
+                    }
+                }
+                return File(memoryStream.ToArray(), "application/zip", kHKTLinhVucThamGia.Name.Trim() + ".zip");
+            }
         }
     }
 }
