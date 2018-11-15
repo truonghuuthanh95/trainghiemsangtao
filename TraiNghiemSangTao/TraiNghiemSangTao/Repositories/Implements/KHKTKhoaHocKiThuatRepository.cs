@@ -84,6 +84,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
                         khoaHocKiThuatDetailDTO.T_DM_Truong2 = _dbHCM.T_DM_Truong.Where(s => s.SchoolID == khoaHocKiThuatDetailDTO.T_DM_HocSinh2.SchoolID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop1 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.LopID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop2 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh2.LopID).SingleOrDefault();
+                        khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                     }
                     else
@@ -93,6 +94,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
                         khoaHocKiThuatDetailDTO.T_DM_HocSinh1 = _dbHCM.T_DM_HocSinh.Where(s => s.HocSinhID == item.HocSinh1).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Truong1 = _dbHCM.T_DM_Truong.Where(s => s.SchoolID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.SchoolID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop1 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.LopID).SingleOrDefault();
+                        khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                     }
                 }
@@ -121,6 +123,7 @@ namespace TraiNghiemSangTao.Repositories.Implements
                         khoaHocKiThuatDetailDTO.T_DM_Truong2 = _dbHCM.T_DM_Truong.Where(s => s.SchoolID == khoaHocKiThuatDetailDTO.T_DM_HocSinh2.SchoolID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop1 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.LopID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop2 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh2.LopID).SingleOrDefault();
+                        khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                     }
                     else
@@ -130,9 +133,10 @@ namespace TraiNghiemSangTao.Repositories.Implements
                         khoaHocKiThuatDetailDTO.T_DM_HocSinh1 = _dbHCM.T_DM_HocSinh.Where(s => s.HocSinhID == item.HocSinh1).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Truong1 = _dbHCM.T_DM_Truong.Where(s => s.SchoolID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.SchoolID).SingleOrDefault();
                         khoaHocKiThuatDetailDTO.T_DM_Lop1 = _dbHCM.T_DM_Lop.Where(s => s.LopID == khoaHocKiThuatDetailDTO.T_DM_HocSinh1.LopID).SingleOrDefault();
+                        khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
                         khoaHocKiThuatDetailDTOs.Add(khoaHocKiThuatDetailDTO);
                     }
-                    khoaHocKiThuatDetailDTO.T_DM_PGDTruong = _dbHCM.T_DM_PGD.Where(s => s.PGDID == khoaHocKiThuatDetailDTO.T_DM_Truong1.PGDID).SingleOrDefault();
+                    
                 }                                              
             }
             return khoaHocKiThuatDetailDTOs;            

@@ -293,7 +293,7 @@ namespace TraiNghiemSangTao.Utils
                     ws.Cells[6, 21].Value = "EMAIL";
                     ws.Cells[6, 22].Value = "ĐƠN VỊ CÔNG TÁC";
                     ws.Cells[6, 23].Value = "MÃ TÀI LIỆU";
-                    ws.Cells[6, 23].Value = "MÃ TÀI LIỆU";
+                    ws.Cells[6, 24].Value = "PGD";
                     for (int i = 0; i < khkt.Count(); i++)
                     {
                         ws.Cells[i + 7, 1].Value = i + 1;
@@ -322,30 +322,30 @@ namespace TraiNghiemSangTao.Utils
                         ws.Cells[i + 7, 21].Value = khkt.ElementAt(i).KhoaHocKiThuat.Email;                      
                         ws.Cells[i + 7, 22].Value = khkt.ElementAt(i).KhoaHocKiThuat.DVCongTac;
                         ws.Cells[i + 7, 23].Value = String.Format("{0:00}", khkt.ElementAt(i).KHKTLinhVucThamGia.Id) + "-" + khkt.ElementAt(i).KhoaHocKiThuat.Id;
-
+                        ws.Cells[i + 7, 24].Value = khkt.ElementAt(i).T_DM_PGDTruong.TenPGD;
                     }
-                    using (ExcelRange rng = ws.Cells["A2:W2"])
+                    using (ExcelRange rng = ws.Cells["A2:X2"])
                     {
                         rng.Style.Font.Bold = true;
                         rng.Style.Font.Size = 18;
                         rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         rng.Style.Font.Color.SetColor(Color.Red);
                     }
-                    using (ExcelRange rng = ws.Cells["A3:W3"])
+                    using (ExcelRange rng = ws.Cells["A3:X3"])
                     {
                         rng.Style.Font.Bold = true;
                         rng.Style.Font.Size = 14;
                         rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         rng.Style.Font.Color.SetColor(Color.Red);
                     }
-                    using (ExcelRange rng = ws.Cells["A4:W4"])
+                    using (ExcelRange rng = ws.Cells["A4:X4"])
                     {
                         rng.Style.Font.Bold = true;
                         rng.Style.Font.Size = 14;
                         rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         rng.Style.Font.Color.SetColor(Color.Red);
                     }
-                    using (ExcelRange rng = ws.Cells["A6:W6"])
+                    using (ExcelRange rng = ws.Cells["A6:X6"])
                     {
                         rng.Style.Font.Bold = true;
                         rng.Style.Fill.PatternType = ExcelFillStyle.Solid;        //Set Pattern for the background to Solid 
